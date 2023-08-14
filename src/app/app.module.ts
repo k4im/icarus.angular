@@ -11,12 +11,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { TablesComponent } from './components/tables/tables.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
-    DashboardComponent
+    DashboardComponent,
+    TablesComponent
   ],
   imports: [
     BrowserModule,
