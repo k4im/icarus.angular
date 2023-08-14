@@ -2,8 +2,8 @@ import { Component, OnInit} from '@angular/core';
 
 export interface Projeto {
   Name: string;
-  DataInicio: number
-  DataEntrega: number;
+  DataInicio: string
+  DataEntrega: string;
   Status: string;
   Valor: any;
 }
@@ -15,9 +15,9 @@ export interface Projeto {
 
 export class TablesComponent implements OnInit {
   Projetos: Projeto[] = [];
-  objetoProducao: Projeto = {Name: "teste", DataInicio: new Date().getDate(), DataEntrega: new Date().getDate(), Status: "Produção", Valor: 1550.00};
-  objetoPendente: Projeto = {Name: "teste", DataInicio: new Date().getDate(), DataEntrega: new Date().getDate(), Status: "Pendente", Valor: 1550.00};
-  objetoAtrasado: Projeto = {Name: "teste", DataInicio: new Date().getDate(), DataEntrega: new Date().getDate(), Status: "Atrasado", Valor: 1550.00};
+  objetoProducao: Projeto = {Name: "teste", DataInicio: new Date().toLocaleDateString('en-GB'), DataEntrega: new Date().toLocaleDateString('en-GB'), Status: "Produção", Valor: 1550.00};
+  objetoPendente: Projeto = {Name: "teste", DataInicio: new Date().toLocaleDateString('en-GB'), DataEntrega: new Date().toLocaleDateString('en-GB'), Status: "Pendente", Valor: 1550.00};
+  objetoAtrasado: Projeto = {Name: "teste", DataInicio: new Date().toLocaleDateString('en-GB'), DataEntrega: new Date().toLocaleDateString('en-GB'), Status: "Atrasado", Valor: 1550.00};
 
   constructor() {}
   
