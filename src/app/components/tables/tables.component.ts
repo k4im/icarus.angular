@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalsComponent } from '../modals/modals.component';
+import { EventEmitter } from '@angular/core';
 
 export interface Projeto {
   Name: string;
@@ -14,6 +17,8 @@ export interface Projeto {
 })
 
 export class TablesComponent implements OnInit {
+  @Output() eventoIdProjeto = new EventEmitter<string>();
+
   Projetos: Projeto[] = [];
   objetoProducao: Projeto = { Name: "teste", DataInicio: new Date().toLocaleDateString('en-GB'), DataEntrega: new Date().toLocaleDateString('en-GB'), Status: "Produção", Valor: 1550.00 };
   objetoPendente: Projeto = { Name: "teste", DataInicio: new Date().toLocaleDateString('en-GB'), DataEntrega: new Date().toLocaleDateString('en-GB'), Status: "Pendente", Valor: 1550.00 };
@@ -21,7 +26,8 @@ export class TablesComponent implements OnInit {
   totalDepaginas: number = 5
   totalPaginas: number[] = [1, 2, 3, 4];
   paginaAtual: number = 1;
-  constructor() { }
+
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
     for (let index = 0; index < 3; index++) {
@@ -41,4 +47,13 @@ export class TablesComponent implements OnInit {
     this.paginaAtual = event;
   }
 
+  openDialog(eventoClick: Projeto): void {
+    const dialogRef = this.dialog.open(ModalsComponent, {
+      data: { id: 1, nome: eventoClick.Name }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }

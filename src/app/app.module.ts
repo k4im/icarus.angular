@@ -8,12 +8,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { TablesComponent } from './components/tables/tables.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ModalsComponent } from './components/modals/modals.component';
 
 
 
@@ -23,6 +25,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     NavigationComponent,
     DashboardComponent,
     TablesComponent,
+    ModalsComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
     NgxPaginationModule
   ],
   providers: [],
