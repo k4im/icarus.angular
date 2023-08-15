@@ -1,4 +1,3 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
@@ -20,13 +19,10 @@ $icarus-front-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$icarus-front-theme: mat.define-light-theme((
-  color: (
-    primary: $icarus-front-primary,
-    accent: $icarus-front-accent,
-    warn: $icarus-front-warn,
-  )
-));
+$icarus-front-theme: mat.define-light-theme((color: (primary: $icarus-front-primary,
+        accent: $icarus-front-accent,
+        warn: $icarus-front-warn,
+      )));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -36,6 +32,14 @@ $icarus-front-theme: mat.define-light-theme((
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import '~bootstrap/dist/css/bootstrap.min.css';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

@@ -1,4 +1,4 @@
-.container_main{
+.container_main {
     min-width: 100%;
     min-height: 100%;
     display: flex;
@@ -7,8 +7,9 @@
     flex-direction: column;
     gap: 2.5rem;
 }
-.container_table{
-    min-width: 85%;
+
+.container_table {
+    min-width: 95%;
     height: 100%;
     background-color: rgb(255, 255, 255);
     padding: 3rem;
@@ -16,8 +17,42 @@
     position: relative;
 }
 
+.container__header__table {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15px;
+    color: white;
+    padding: 15px;
+    border-radius: 4px;
+    transition: .5s ease-in-out;
+    box-shadow: 5px 15px 15px -11px rgba(0, 0, 0, 0.75);
     position: absolute;
-    top: 4%;
+    top: 6%;
     right: 2%;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 10px 15px 29px -11px rgba(0, 0, 0, 0.75);
+}
+
+.button:active {
+    transform: translateY(0);
+    box-shadow: 13px 13px 29px -11px rgba(0, 0, 0, 0.75);
+}
+
+.btn-green {
+    background-color: #1dd1a1;
+}
+
+.btn-blue {
+    background-color: #48dbfb;
 }
