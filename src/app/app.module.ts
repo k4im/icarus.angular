@@ -13,9 +13,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { TablesComponent } from './components/tables/tables.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ModalsComponent } from './components/modals/modals.component';
+
 
 
 
@@ -23,8 +22,6 @@ import { ModalsComponent } from './components/modals/modals.component';
   declarations: [
     AppComponent,
     NavigationComponent,
-    DashboardComponent,
-    TablesComponent,
     ModalsComponent,
   ],
   imports: [
