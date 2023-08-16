@@ -14,7 +14,7 @@ import { ProjetosService } from 'src/app/services/projetos.service';
 export class ProjetosComponent {
   
   paginaAtual: number = 1;
-  Projetos: Projetos = {data: [], paginaAtual: 0, totalDePaginas: 0};
+  Projetos: Projetos = {data: [], paginaAtual: 0, totalDePaginas: 0, totalItens: 0};
   constructor(public dialog: MatDialog, private projetoService : ProjetosService) { }
   
   ngOnInit(): void {
