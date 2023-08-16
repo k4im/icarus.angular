@@ -11,5 +11,6 @@ export interface Projeto {
 export interface Projetos {
     data: Projeto[],
     totalDePaginas: number,
-    paginaAtual: number
+    paginaAtual: number,
+    totalItens: number
 }
