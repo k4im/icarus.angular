@@ -29,7 +29,7 @@
                   <tr class="border-b transition duration-300 ease-in-out hover:bg-gray-200"
                     *ngFor="let projeto of Projetos.data | paginate: { itemsPerPage: 5,
                       currentPage: Projetos.paginaAtual,
-                      totalItems: Projetos.totalDePaginas}">
+                      totalItems: 60}">
                     <td class="whitespace-nowrap px-6 py-4">{{projeto.nome}}</td>
                     <td class="whitespace-nowrap px-6 py-4">{{projeto.dataInicio}}</td>
                     <td class="whitespace-nowrap px-6 py-4">{{projeto.dataEntrega}}</td>
