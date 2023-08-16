@@ -15,7 +15,6 @@ export class ProjetosComponent {
   
   paginaAtual: number = 1;
   Projetos: Projetos = {data: [], paginaAtual: 0, totalDePaginas: 0};
-  
   constructor(public dialog: MatDialog, private projetoService : ProjetosService) { }
   
   ngOnInit(): void {
@@ -47,5 +46,9 @@ export class ProjetosComponent {
     this.projetoService.buscarProjetos(pagina).subscribe(
       (result) => {this.Projetos = result}
     );
+  }
+
+  gerarArray(iterator: any){
+    return new Array(iterator);
   }
 }
