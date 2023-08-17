@@ -9,12 +9,16 @@
 }
 
 .container_table {
-    min-width: 95%;
+    width: 95%;
     height: 100%;
     background-color: rgb(255, 255, 255);
     padding: 3rem;
     border-radius: .4rem;
     position: relative;
+}
+
+.table__container {
+    min-width: 90%;
 }
 
 .container__header__table {
