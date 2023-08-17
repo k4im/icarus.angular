@@ -9,14 +9,14 @@ import { ProjetosService } from 'src/app/services/projetos.service';
 
 
 @Component({
-  selector: 'app-modals',
-  templateUrl: './modals.component.html',
-  styleUrls: ['./modals.component.scss'],
+  selector: 'app-remover-projeto',
+  templateUrl: './remover-projeto.component.html',
+  styleUrls: ['./remover-projeto.component.scss']
 })
-export class ModalsComponent {
+export class RemoverProjetoComponent {
   nome: string = "";
   ProjetoId: number = 0;
-  constructor(public dialogRef: MatDialogRef<ModalsComponent>,
+  constructor(public dialogRef: MatDialogRef<RemoverProjetoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private projetosService: ProjetosService) { }
 

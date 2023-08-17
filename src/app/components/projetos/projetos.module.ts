@@ -12,10 +12,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { ProjetosComponent } from './projetos.component';
+import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.component';
+import { ProjetosService } from 'src/app/services/projetos.service';
 
 @NgModule({
   declarations: [
-    ProjetosComponent
+    ProjetosComponent,
+    RemoverProjetoComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +31,7 @@ import { ProjetosComponent } from './projetos.component';
     MatDialogModule,
     HttpClientModule,
     NgxPaginationModule
-  ]
+  ],
+  providers: [ProjetosService]
 })
 export class ProjetosModule { }

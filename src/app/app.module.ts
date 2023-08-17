@@ -13,17 +13,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { ModalsComponent } from './components/modals/modals.component';
 import { ProjetosService } from './services/projetos.service';
-
-
-
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
-    ModalsComponent,
   ],
   imports: [
     BrowserModule,

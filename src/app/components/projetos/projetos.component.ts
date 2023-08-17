@@ -1,8 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalsComponent } from '../modals/modals.component';
 import { Projeto, Projetos } from 'src/app/Interfaces/IProjetos';
 import { ProjetosService } from 'src/app/services/projetos.service';
+import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.component';
 
 
 @Component({
@@ -32,7 +32,7 @@ export class ProjetosComponent {
   }
 
   abrirDialog(eventoClick: Projeto): void {
-    const dialogRef = this.dialog.open(ModalsComponent, {
+    const dialogRef = this.dialog.open(RemoverProjetoComponent, {
       data: { id: eventoClick.id, nome: eventoClick.nome }
     });
 
