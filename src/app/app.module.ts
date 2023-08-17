@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ModalsComponent } from './components/modals/modals.component';
+import { ProjetosService } from './services/projetos.service';
 
 
 
@@ -36,7 +37,7 @@ import { ModalsComponent } from './components/modals/modals.component';
     MatDialogModule,
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [ProjetosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

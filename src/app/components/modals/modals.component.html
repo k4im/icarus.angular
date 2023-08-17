@@ -2,6 +2,6 @@
     Você deseja deletar o projeto: {{nome}}?
 </h1>
 <div mat-dialog-actions style="justify-content: center; gap: 8px;">
-    <button class="btn btn-danger" (click)="closeDialog()">Cancelar</button>
-    <button class="btn btn-success" cdkFocusInitial>Ok</button>
+    <button class="btn btn-danger" (click)="fecharDialog()">Cancelar</button>
+    <button class="btn btn-success" cdkFocusInitial (click)="removerProjeto()">Ok</button>
 </div>
