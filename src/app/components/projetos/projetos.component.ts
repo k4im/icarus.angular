@@ -55,8 +55,12 @@ export class ProjetosComponent {
   }
 
   atualizarPagina(pagina: number) {
-    this.projetoService.buscarProjetos(pagina).subscribe(
-      (result) => { this.Projetos = result }
-    );
+    if(this.Projetos.data.length == 1){
+      pagina = pagina - 1;
+      this.projetoService.buscarProjetos(pagina).subscribe(
+        (result) => { this.Projetos = result }
+      );
+    }  
+
   }
 }
