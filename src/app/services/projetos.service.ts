@@ -18,7 +18,8 @@ export class ProjetosService {
   buscarProjeto(id: number): Observable<Projeto> {
     return this.http.get<Projeto>(`${this.urlProjetos}/projeto/${id}`)
   }
-  remover(id: number): void {
-    this.http.delete(`${this.urlProjetos}/delete/${id}`)
+  remover(id: string): Observable<number> {
+    let httpHeader = new HttpHeaders().set('Content-type', 'application/Json')
+    return this.http.delete<number>(`${this.urlProjetos}/delete/${id}`, { headers: httpHeader })
   }
 }

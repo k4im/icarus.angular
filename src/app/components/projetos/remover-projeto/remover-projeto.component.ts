@@ -29,8 +29,10 @@ export class RemoverProjetoComponent {
     this.dialogRef.close();
   }
 
-  removerProjeto() {
-    this.projetosService.remover(this.ProjetoId);
+  removerProjeto(id: number) {
+    let param: string = id.toString();
+    this.projetosService.remover(param).subscribe();
+    this.dialogRef.close();
   }
 
 }
