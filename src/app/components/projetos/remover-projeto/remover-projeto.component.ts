@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, EventEmitter, Output } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ProjetosService } from 'src/app/services/projetos.service';
-
 
 @Component({
   selector: 'app-remover-projeto',
@@ -29,10 +28,11 @@ export class RemoverProjetoComponent {
     this.dialogRef.close();
   }
 
-  removerProjeto(id: number) {
-    let param: string = id.toString();
+  deletarProjeto(id: number) {
+    let param = id.toString();
     this.projetosService.remover(param).subscribe();
-    this.dialogRef.close();
+    this.projetosService.filterSub('Projeto Deletado');
+    this.fecharDialog();
   }
 
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Projeto, Projetos } from '../Interfaces/IProjetos';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 
 @Injectable({
@@ -21,5 +21,13 @@ export class ProjetosService {
   remover(id: string): Observable<number> {
     let httpHeader = new HttpHeaders().set('Content-type', 'application/Json')
     return this.http.delete<number>(`${this.urlProjetos}/delete/${id}`, { headers: httpHeader })
+  }
+
+  private _listerner = new Subject<any>();
+  listen() : Observable<any> {
+    return this._listerner.asObservable();
+  }
+  filterSub(filter: string){
+    this._listerner.next(filter);
   }
 }

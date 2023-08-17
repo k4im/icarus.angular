@@ -13,9 +13,16 @@ import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.compo
 export class ProjetosComponent {
 
   paginaAtual: number = 1;
-  Projetos: Projetos = { data: [], paginaAtual: 0, totalDePaginas: 0, totalItens: 0 };
+  Projetos: Projetos = { data:  [], paginaAtual: 0, totalDePaginas: 0, totalItens: 0 };
 
-  constructor(public dialog: MatDialog, private projetoService: ProjetosService) { }
+  constructor(public dialog: MatDialog, private projetoService: ProjetosService) {
+    this.projetoService.listen().subscribe((m: any) => {
+      console.log(m);
+      let teste = this.paginaAtual - 1;
+      this.atualizarPagina(teste)
+    })
+   }
+  
   ngOnInit(): void {
     this.buscarProjetos(this.paginaAtual);
   }
@@ -37,11 +44,17 @@ export class ProjetosComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log(result);
     });
   }
 
   buscarProjetos(pagina: number) {
+    this.projetoService.buscarProjetos(pagina).subscribe(
+      (result) => { this.Projetos = result }
+    );
+  }
+
+  atualizarPagina(pagina: number) {
     this.projetoService.buscarProjetos(pagina).subscribe(
       (result) => { this.Projetos = result }
     );
