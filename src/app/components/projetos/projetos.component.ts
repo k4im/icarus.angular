@@ -4,6 +4,7 @@ import { Projeto, Projetos } from 'src/app/Interfaces/IProjetos';
 import { ProjetosService } from 'src/app/services/projetos.service';
 import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.component';
 import { timeout } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class ProjetosComponent {
   Projetos: Projetos = { data: [], paginaAtual: 0, totalDePaginas: 0, totalItens: 0 };
   aguardandoDados : boolean = true;
 
-  constructor(public dialog: MatDialog, private projetoService: ProjetosService) {
+  constructor(public dialog: MatDialog, private projetoService: ProjetosService,) {
     this.projetoService.listen().subscribe((m: any) => {
       console.log("Removido projeto: " + m);
       this.atualizarPagina(m);
@@ -51,8 +52,10 @@ export class ProjetosComponent {
 
   buscarProjetos(pagina: number) {
     this.projetoService.buscarProjetos(pagina).subscribe(
-      (result) => { this.Projetos = result 
-      this.aguardandoDados = false
+      (result) => { 
+        this.Projetos = result
+        this.paginaAtual = result.paginaAtual 
+        this.aguardandoDados = false
     }
     );
   }
