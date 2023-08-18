@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-editar',
@@ -6,4 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./editar.component.scss']
 })
 export class EditarComponent {
+
+  constructor(private router: Router) { }
+
+  redirecionar() {
+    this.router.navigate(["/projetos"])
+  }
 }
