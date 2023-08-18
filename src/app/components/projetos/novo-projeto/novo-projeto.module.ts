@@ -16,6 +16,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 
 import { NovoProjetoComponent } from './novo-projeto.component';
+import { ProjetosService } from 'src/app/services/projetos.service';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { NovoProjetoComponent } from './novo-projeto.component';
     MatDatepickerModule, 
     MatNativeDateModule, 
     MatDialogModule,
-  ]
+  ],
+  providers: [ProjetosService]
 })
 export class NovoProjetoModule { }

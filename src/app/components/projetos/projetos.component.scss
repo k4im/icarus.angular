@@ -11,7 +11,6 @@
 .container_table {
     width: 95%;
     height: 100%;
-    box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.55);
     padding: 3rem;
     border-radius: .4rem;
     position: relative;
@@ -38,7 +37,6 @@
     padding: 15px;
     border-radius: 4px;
     transition: .5s ease-in-out;
-    box-shadow: 5px 15px 15px -11px rgba(0, 0, 0, 0.75);
     position: absolute;
     top: 6%;
     right: 2%;
@@ -46,16 +44,18 @@
 
 .button:hover {
     transform: translateY(-2px);
-    box-shadow: 10px 15px 29px -11px rgba(0, 0, 0, 0.75);
 }
 
 .button:active {
     transform: translateY(0);
-    box-shadow: 13px 13px 29px -11px rgba(0, 0, 0, 0.75);
 }
 
+.paginator::ng-deep .ngx-pagination a {
+    border-radius: 15px;
+}
 .paginator::ng-deep .ngx-pagination .current {
     background-color: red;
     border-radius: 15px;
     text-align: center;
 }
+

@@ -19,8 +19,11 @@ export class ProjetosService {
     return this.http.get<Projeto>(`${this.urlProjetos}/projeto/${id}`)
   }
   remover(id: string): Observable<number> {
-    let httpHeader = new HttpHeaders().set('Content-type', 'application/Json')
-    return this.http.delete<number>(`${this.urlProjetos}/delete/${id}`, { headers: httpHeader })
+    let httpHeader = new HttpHeaders({
+      'Content-type': 'application/Json',
+      'Access-Control-Allow-Origin' : '*'
+    })
+    return this.http.delete<number>(`${this.urlProjetos}/delete/${id}`, { headers: httpHeader})
   }
 
   private _listerner = new Subject<any>();

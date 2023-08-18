@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Projeto, Projetos } from 'src/app/Interfaces/IProjetos';
 import { ProjetosService } from 'src/app/services/projetos.service';
 import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.component';
+import { timeout } from 'rxjs';
 
 
 @Component({
@@ -13,12 +14,12 @@ import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.compo
 export class ProjetosComponent {
 
   paginaAtual: number = 1;
-  Projetos: Projetos = { data: [], paginaAtual: 0, totalDePaginas: 0, totalItens: 0 };
+  Projetos: Projetos = { data: [{id: 1, nome: "", dataInicio: "",dataEntrega: "", status: "", valor: 0}], paginaAtual: 0, totalDePaginas: 0, totalItens: 0 };
 
   constructor(public dialog: MatDialog, private projetoService: ProjetosService) {
     this.projetoService.listen().subscribe((m: any) => {
       console.log(m);
-      this.atualizarPagina(this.paginaAtual)
+      this.atualizarPagina(m);
     })
   }
 
@@ -53,17 +54,8 @@ export class ProjetosComponent {
     );
   }
 
-  atualizarPagina(pagina: number) {
-    if (this.Projetos.data.length == 1) {
-      pagina = pagina - 1;
-      this.projetoService.buscarProjetos(pagina).subscribe(
-        (result) => { this.Projetos = result }
-      );
-      window.location.reload();
-    }
-    this.projetoService.buscarProjetos(pagina).subscribe(
-      (result) => { this.Projetos = result }
-    );
-    window.location.reload();
+  atualizarPagina(id: string) {
+    let param = parseInt(id);
+    this.Projetos.data = this.Projetos.data.filter((p: Projeto) => p.id !== param)
   }
 }

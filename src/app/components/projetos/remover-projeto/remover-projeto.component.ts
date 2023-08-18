@@ -31,7 +31,7 @@ export class RemoverProjetoComponent {
   deletarProjeto(id: number) {
     let param = id.toString();
     this.projetosService.remover(param).subscribe();
-    this.projetosService.filterSub('Projeto Deletado');
+    this.projetosService.filterSub(param);
     this.fecharDialog();
   }
 
