@@ -60,23 +60,43 @@
             <!-- Final nome projeto -->
 
             <div class="col-span-6 relative">
-                <div class="relative max-w-full">
-                    <select id="countries"
-                        class=" border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected>Status projeto</option>
-                        <option value="MDF branca">Produção</option>
-                        <option value="MDF preta">Pendente</option>
-                        <option value="MDF cinza">Atrasado</option>
-                        <option value="MDF gelo">Cancelado</option>
-                    </select>
-                </div>
+                <select
+                
+                class="border text-black 
+                text-sm rounded-lg 
+                focus:ring-blue-500 
+                focus:border-blue-500 block 
+                w-full p-2.5 
+                dark:placeholder-gray-400 
+                dark:text-white 
+                dark:focus:ring-blue-500 
+                dark:focus:border-blue-500" 
+                [(ngModel)]="statusDefault"
+                (ngModelChange)=" selectStatus = $event"
+                (change)="statusSelecionado()">
+                    <option selected>{{statusDefault}}</option>
+                    <option [ngValue]="stats.status" *ngFor="let stats of Status">{{stats.status}}</option>
+                </select>
             </div>
 
 
             <div class="col-span-6 relative">
-                <select *ngFor="let produto of ProdutosEmEstoque" class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Produto utilizado</option>
-                    <option>{{produto.nome}}</option>
+                <select
+                *ngIf="!aguardandoDados"
+                [(ngModel)]="produtoDefault"
+                (ngModelChange)="selectProduto = $event"
+                (change)="produtoSelecionado()"
+                class="border text-black 
+                text-sm rounded-lg 
+                focus:ring-blue-500 
+                focus:border-blue-500 block 
+                w-full p-2.5 
+                dark:placeholder-gray-400 
+                dark:text-white 
+                dark:focus:ring-blue-500 
+                dark:focus:border-blue-500">
+                <option selected>{{produtoDefault}}</option>
+                <option [ngValue]="produto.id" *ngFor="let produto of ProdutosEmEstoque">{{produto.nome}}</option>
                 </select>
                 <ngx-skeleton-loader class="line-bigger" *ngIf="aguardandoDados" count="1" appearance="line"></ngx-skeleton-loader>
             </div>

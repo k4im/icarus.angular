@@ -18,7 +18,7 @@ import { NgxSkeletonLoaderComponent, NgxSkeletonLoaderModule } from 'ngx-skeleto
 import { NovoProjetoComponent } from './novo-projeto.component';
 import { ProjetosService } from 'src/app/services/projetos.service';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,6 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatNativeDateModule, 
     NgxSkeletonLoaderModule,
     HttpClientModule,
+    FormsModule,
     MatDialogModule,
   ],
   providers: [ProjetosService]
