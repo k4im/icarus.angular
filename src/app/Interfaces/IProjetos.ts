@@ -14,3 +14,8 @@ export interface Projetos {
     paginaAtual: number,
     totalItens: number
 }
+export interface Produto {
+    id: number,
+    nome: string,
+    quantidade: number
+}

@@ -17,6 +17,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { NgxSkeletonLoaderComponent, NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { NovoProjetoComponent } from './novo-projeto.component';
 import { ProjetosService } from 'src/app/services/projetos.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { ProjetosService } from 'src/app/services/projetos.service';
     MatDatepickerModule, 
     MatNativeDateModule, 
     NgxSkeletonLoaderModule,
+    HttpClientModule,
     MatDialogModule,
   ],
   providers: [ProjetosService]
