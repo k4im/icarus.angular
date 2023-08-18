@@ -2,6 +2,43 @@
     <h4 class="flex text-black p-3 text-[22px]">Novo projeto</h4>
     <div class="bg-white rounded pb-2 shadow-md">
         <div class="md:grid grid-cols-12 flex flex-col md:items-center gap-4 p-4">
+            <!-- Data inicio -->
+            <div class="col-span-6 relative">   
+                <label for="dataIncio">Data Inico</label>
+                <div class="relative max-w-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                        </svg>
+                    </div>
+                    <input name="dataIncio" datepicker type="date"
+                        class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Data de inicio">
+                </div>
+            </div>
+            <!-- Data inicio final -->
+
+            <!-- Data entrega -->
+            <div class="col-span-6 relative">
+                <label for="dataEntrega">Data Entrega</label>
+                <div class="relative max-w-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                        </svg>
+                    </div>
+                    <input name="dataEntrega" datepicker type="date"
+                        class=" input border text-black text-sm rounded-lg block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white "
+                        placeholder="Data de entrega">
+                </div>
+            </div>
+            <!-- Data entrega final -->
+            
+            <!-- Nome porojeto -->
             <div class="col-span-6 relative">
                 <div class="relative max-w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
@@ -20,37 +57,7 @@
                         placeholder="Nome do projeto">
                 </div>
             </div>
-
-            <div class="col-span-6 relative">
-                <div class="relative max-w-full">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                        </svg>
-                    </div>
-                    <input datepicker type="date"
-                        class=" input border text-black text-sm rounded-lg block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white "
-                        placeholder="Data de entrega">
-                </div>
-            </div>
-
-            <div class="col-span-6 relative">
-                <div class="relative max-w-full">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                        </svg>
-                    </div>
-                    <input datepicker type="date"
-                        class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Data de inicio">
-                </div>
-            </div>
-
+            <!-- Final nome projeto -->
 
             <div class="col-span-6 relative">
                 <div class="relative max-w-full">
