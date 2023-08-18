@@ -14,11 +14,12 @@ import { timeout } from 'rxjs';
 export class ProjetosComponent {
 
   paginaAtual: number = 1;
-  Projetos: Projetos = { data: [{id: 1, nome: "", dataInicio: "",dataEntrega: "", status: "", valor: 0}], paginaAtual: 0, totalDePaginas: 0, totalItens: 0 };
+  Projetos: Projetos = { data: [], paginaAtual: 0, totalDePaginas: 0, totalItens: 0 };
+  aguardandoDados : boolean = true;
 
   constructor(public dialog: MatDialog, private projetoService: ProjetosService) {
     this.projetoService.listen().subscribe((m: any) => {
-      console.log(m);
+      console.log("Removido projeto: " + m);
       this.atualizarPagina(m);
     })
   }
@@ -50,7 +51,9 @@ export class ProjetosComponent {
 
   buscarProjetos(pagina: number) {
     this.projetoService.buscarProjetos(pagina).subscribe(
-      (result) => { this.Projetos = result }
+      (result) => { this.Projetos = result 
+      this.aguardandoDados = false
+    }
     );
   }
 

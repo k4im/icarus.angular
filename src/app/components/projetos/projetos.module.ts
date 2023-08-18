@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { ProjetosComponent } from './projetos.component';
 import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.component';
@@ -30,6 +30,7 @@ import { ProjetosService } from 'src/app/services/projetos.service';
     MatButtonModule,
     MatDialogModule,
     HttpClientModule,
+    NgxSkeletonLoaderModule,
     NgxPaginationModule
   ],
   providers: [ProjetosService]
