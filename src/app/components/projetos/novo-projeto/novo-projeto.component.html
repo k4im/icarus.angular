@@ -74,14 +74,11 @@
 
 
             <div class="col-span-6 relative">
-                <select id="countries"
-                    class=" border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select *ngFor="let p of ProdutosEmEstoque" class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Produto utilizado</option>
-                    <option value="MDF branca">Chapa MDF branca</option>
-                    <option value="MDF preta">Chapa MDF preta</option>
-                    <option value="MDF cinza">Chapa MDF cinza</option>
-                    <option value="MDF gelo">Chapa MDF gelo</option>
+                    <option value="MDF gelo">{{p.nome}}</option>
                 </select>
+                <ngx-skeleton-loader class="line-bigger" *ngIf="aguardandoDados" count="1" appearance="line"></ngx-skeleton-loader>
             </div>
 
 
