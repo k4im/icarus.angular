@@ -1,9 +1,13 @@
 <div class="container_main ">
-  <div class="container_table">
+  <div class="container_table bg-white	">
 
     <!-- Button criar projetos -->
     <div class=" container__header__table">
-      <button class="button btn-blue">
+      <button class="button bg-green-500 hover:bg-green-400" routerLink="novo">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
         Adicionar projeto
       </button>
     </div>
@@ -26,9 +30,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  class="border-b transition duration-300 ease-in-out hover:bg-red-500 hover:text-white hover:cursor-pointer"
-                  *ngFor="let projeto of Projetos.data | paginate: { itemsPerPage: 5,
+                <tr class="border-b transition duration-300 ease-in-out hover:bg-stone-50  hover:cursor-pointer" *ngFor="let projeto of Projetos.data | paginate: { itemsPerPage: 5,
                       currentPage: Projetos.paginaAtual,
                       totalItems: Projetos.totalItens}">
                   <td class="whitespace-nowrap px-6 py-4">{{projeto.nome}}</td>
@@ -70,7 +72,7 @@
       <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <nav>
-            <pagination-controls nextLabel="" previousLabel=""
+            <pagination-controls class="paginator" nextLabel="" previousLabel=""
               (pageChange)="mudarDePagina($event)"></pagination-controls>
           </nav>
         </div>

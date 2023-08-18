@@ -59,9 +59,11 @@ export class ProjetosComponent {
       this.projetoService.buscarProjetos(pagina).subscribe(
         (result) => { this.Projetos = result }
       );
+      window.location.reload();
     }
     this.projetoService.buscarProjetos(pagina).subscribe(
       (result) => { this.Projetos = result }
     );
+    window.location.reload();
   }
 }
