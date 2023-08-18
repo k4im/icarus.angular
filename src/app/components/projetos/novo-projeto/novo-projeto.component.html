@@ -74,7 +74,7 @@
                 [(ngModel)]="statusDefault"
                 (ngModelChange)=" selectStatus = $event"
                 (change)="statusSelecionado()">
-                    <option selected>{{statusDefault}}</option>
+                    <option [selected]="statusDefault">{{statusDefault}}</option>
                     <option [ngValue]="stats.status" *ngFor="let stats of Status">{{stats.status}}</option>
                 </select>
             </div>
@@ -96,7 +96,7 @@
                 dark:focus:ring-blue-500 
                 dark:focus:border-blue-500">
                 <option selected>{{produtoDefault}}</option>
-                <option [ngValue]="produto.id" *ngFor="let produto of ProdutosEmEstoque">{{produto.nome}}</option>
+                <option [ngValue]="produto.nome" *ngFor="let produto of ProdutosEmEstoque">{{produto.nome}}</option>
                 </select>
                 <ngx-skeleton-loader class="line-bigger" *ngIf="aguardandoDados" count="1" appearance="line"></ngx-skeleton-loader>
             </div>
