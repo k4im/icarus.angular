@@ -14,13 +14,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProjetosComponent } from './projetos.component';
 import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.component';
 import { ProjetosService } from 'src/app/services/projetos.service';
-import { EditarComponent } from './editar/editar.component';
 
 @NgModule({
   declarations: [
     ProjetosComponent,
     RemoverProjetoComponent,
-    EditarComponent
   ],
   imports: [
     CommonModule,

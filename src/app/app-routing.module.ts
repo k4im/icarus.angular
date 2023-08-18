@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EditarComponent } from './components/projetos/editar/editar.component';
 
 const routes: Routes = [
   { path: 'dashboard', loadChildren: () => import('./components/dashboard/dashboard.module').then(m => m.DashboardModule) },
-  { path: 'projetos/novo', component: EditarComponent },
   { path: 'projetos', loadChildren: () => import('./components/projetos/projetos.module').then(m => m.ProjetosModule) },
+  { path: 'projetos/novo', loadChildren: () => import('./components/projetos/novo-projeto/novo-projeto.module').then(m => m.NovoProjetoModule) },
   {
     path: '',
     redirectTo: '/dashboard',
