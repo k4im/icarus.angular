@@ -19,3 +19,14 @@ export interface Produto {
     nome: string,
     quantidade: number
 }
+
+export interface CriarProjetoDTO {
+    nome: string,
+    status: string,
+    dataInicio: Date,
+    dataEntrega: Date,
+    produtoUtilizadoId: number,
+    quantidadeUtilizado: number,
+    descricao: string,
+    valor: number
+}

@@ -16,7 +16,7 @@ export class ProjetosComponent {
 
   paginaAtual: number = 1;
   Projetos: Projetos = { data: [], paginaAtual: 0, totalDePaginas: 0, totalItens: 0 };
-  aguardandoDados : boolean = true;
+  aguardandoDados: boolean = true;
 
   constructor(public dialog: MatDialog, private projetoService: ProjetosService,) {
     this.projetoService.listen().subscribe((m: any) => {
@@ -52,11 +52,26 @@ export class ProjetosComponent {
 
   buscarProjetos(pagina: number) {
     this.projetoService.buscarProjetos(pagina).subscribe(
-      (result) => { 
+      (result) => {
         this.Projetos = result
-        this.paginaAtual = result.paginaAtual 
+        this.paginaAtual = result.paginaAtual
         this.aguardandoDados = false
-    }
+      },
+      erro => {
+        if (erro.status === 0) {
+          console.log("Não foi possivel realizar a comunicação!")
+        }
+
+        if (erro.status === 400) {
+          console.log("O dado enviado é invalido!")
+        }
+        if (erro.status === 404) {
+          console.log("Nenhum projeto foi encontrado!")
+        }
+        if (erro.status === 500) {
+          console.log("Houve um erro no servidor!")
+        }
+      }
     );
   }
 

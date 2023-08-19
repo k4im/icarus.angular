@@ -3,8 +3,8 @@
     <div class="bg-white rounded pb-2 shadow-md">
         <div class="md:grid grid-cols-12 flex flex-col md:items-center gap-4 p-4">
             <!-- Data inicio -->
-            <div class="col-span-6 relative">   
-                <label for="dataIncio">Data Inico</label>
+            <div class="col-span-6 relative">
+                <label for="dataIncio" class="pb-2 pr-2">Data Inico</label>
                 <div class="relative max-w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -15,14 +15,14 @@
                     </div>
                     <input name="dataIncio" datepicker type="date"
                         class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Data de inicio">
+                        placeholder="Data de inicio" [(ngModel)]="dataInicio" (ngModelChange)="print()">
                 </div>
             </div>
             <!-- Data inicio final -->
 
             <!-- Data entrega -->
             <div class="col-span-6 relative">
-                <label for="dataEntrega">Data Entrega</label>
+                <label for="dataEntrega" class="pb-2 pr-2">Data Entrega</label>
                 <div class="relative max-w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -33,13 +33,14 @@
                     </div>
                     <input name="dataEntrega" datepicker type="date"
                         class=" input border text-black text-sm rounded-lg block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white "
-                        placeholder="Data de entrega">
+                        placeholder="Data de entrega" [(ngModel)]="dataEntrega" (ngModelChange)="print()">
                 </div>
             </div>
             <!-- Data entrega final -->
-            
+
             <!-- Nome porojeto -->
             <div class="col-span-6 relative">
+                <label for="p" class="pb-2 pr-2">Nome do projeto</label>
                 <div class="relative max-w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -60,9 +61,8 @@
             <!-- Final nome projeto -->
 
             <div class="col-span-6 relative">
-                <select
-                
-                class="border text-black 
+                <label for="p" class="pb-2 pr-2">Status do projeto</label>
+                <select class="border text-black 
                 text-sm rounded-lg 
                 focus:ring-blue-500 
                 focus:border-blue-500 block 
@@ -70,23 +70,17 @@
                 dark:placeholder-gray-400 
                 dark:text-white 
                 dark:focus:ring-blue-500 
-                dark:focus:border-blue-500" 
-                [(ngModel)]="statusDefault"
-                (ngModelChange)=" selectStatus = $event"
-                (change)="statusSelecionado()">
-                    <option [selected]="statusDefault">{{statusDefault}}</option>
+                dark:focus:border-blue-500" [(ngModel)]="selectStatus" (ngModelChange)=" selectStatus = $event"
+                    (change)="statusSelecionado()">
                     <option [ngValue]="stats.status" *ngFor="let stats of Status">{{stats.status}}</option>
                 </select>
             </div>
 
 
             <div class="col-span-6 relative">
-                <select
-                *ngIf="!aguardandoDados"
-                [(ngModel)]="produtoDefault"
-                (ngModelChange)="selectProduto = $event"
-                (change)="produtoSelecionado()"
-                class="border text-black 
+                <label for="p" class="pb-2 pr-2">Produto utilizado no projeto</label>
+                <select *ngIf="!aguardandoDados" [(ngModel)]="selectProduto" (ngModelChange)="selectProduto = $event"
+                    (change)="produtoSelecionado()" class="border text-black 
                 text-sm rounded-lg 
                 focus:ring-blue-500 
                 focus:border-blue-500 block 
@@ -95,15 +89,16 @@
                 dark:text-white 
                 dark:focus:ring-blue-500 
                 dark:focus:border-blue-500">
-                <option selected>{{produtoDefault}}</option>
-                <option [ngValue]="produto.nome" *ngFor="let produto of ProdutosEmEstoque">{{produto.nome}}</option>
+                    <option [value]="produto.id" *ngFor="let produto of ProdutosEmEstoque">{{produto.nome}}</option>
                 </select>
-                <ngx-skeleton-loader class="line-bigger" *ngIf="aguardandoDados" count="1" appearance="line"></ngx-skeleton-loader>
+                <ngx-skeleton-loader class="line-bigger" *ngIf="aguardandoDados" count="1"
+                    appearance="line"></ngx-skeleton-loader>
             </div>
 
 
 
             <div class="col-span-6">
+                <label for="p" class="pb-2 pr-2">Quantidade de produtos utilizados</label>
                 <div class="max-w-full">
                     <input datepicker type="number"
                         class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -114,6 +109,7 @@
 
 
             <div class="col-span-6 relative">
+                <label for="p" class="pb-2 pr-2">Quantidade de produtos utilizados</label>
                 <div class="relative max-w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
