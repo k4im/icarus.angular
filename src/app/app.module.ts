@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ProjetosService } from './services/projetos.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,8 @@ import { ProjetosService } from './services/projetos.service';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgxPaginationModule
   ],
   providers: [ProjetosService],

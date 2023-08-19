@@ -1,146 +1,181 @@
 <div class="h-screen py-5 px-3 items-center">
     <h4 class="flex text-black p-3 text-[22px]">Novo projeto</h4>
     <div class="bg-white rounded pb-2 shadow-md">
-        <div class="md:grid grid-cols-12 flex flex-col md:items-center gap-4 p-4">
-            <!-- Data inicio -->
-            <div class="col-span-6 relative">
-                <label for="dataIncio" class="pb-2 pr-2">Data Inico</label>
-                <div class="relative max-w-full">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                        </svg>
+        <form #formDir="ngForm" [formGroup]="formGroupProjetos" (ngSubmit)="submitProjeto()">
+            <div class="md:grid grid-cols-12 flex flex-col md:items-center gap-4 p-4">
+                <!-- Data inicio -->
+                <div class="col-span-6 relative">
+                    <label for="dataIncio" class="pb-2 pr-2">Data Inico</label>
+                    <div class="relative max-w-full">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                            </svg>
+                        </div>
+                        <input formControlName="dataInicio" name=" dataInicio" datepicker type="date"
+                            class="border border-red-500 focus:outilne-none text-black text-sm rounded-lg  block w-full pl-10 p-2.5 "
+                            placeholder="Data de inicio">
                     </div>
-                    <input name="dataIncio" datepicker type="date"
-                        class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Data de inicio" [(ngModel)]="dataInicio" (ngModelChange)="print()">
+                    <p class="text-red-500 pl-2 pt-1"
+                        *ngIf="formDir.submitted && !dataInicioGetter.errors?.['pattern']">
+                        A data de incio
+                        precisa ser preenchida</p>
                 </div>
-            </div>
-            <!-- Data inicio final -->
+                <!-- Data inicio final -->
 
-            <!-- Data entrega -->
-            <div class="col-span-6 relative">
-                <label for="dataEntrega" class="pb-2 pr-2">Data Entrega</label>
-                <div class="relative max-w-full">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                        </svg>
+                <!-- Data entrega -->
+                <div class="col-span-6 relative">
+                    <label for="dataEntrega" class="pb-2 pr-2">Data Entrega</label>
+                    <div class="relative max-w-full">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                            </svg>
+                        </div>
+                        <input formControlName="dataEntrega" datepicker type="date"
+                            class=" input border text-black text-sm rounded-lg block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white "
+                            placeholder="Data de entrega" name="entrega">
                     </div>
-                    <input name="dataEntrega" datepicker type="date"
-                        class=" input border text-black text-sm rounded-lg block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white "
-                        placeholder="Data de entrega" [(ngModel)]="dataEntrega" (ngModelChange)="print()">
+                    <p class="text-red-500 pl-2 pt-1"
+                        *ngIf="formDir.submitted && !dataEntregaGetter.errors?.['pattern']">
+                        A data de incio
+                        precisa ser preenchida</p>
                 </div>
-            </div>
-            <!-- Data entrega final -->
+                <!-- Data entrega final -->
 
-            <!-- Nome porojeto -->
-            <div class="col-span-6 relative">
-                <label for="p" class="pb-2 pr-2">Nome do projeto</label>
-                <div class="relative max-w-full">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            class="w-4 h-4 text-gray-500 dark:text-gray-400">
-                            <path fill-rule="evenodd"
-                                d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625zM7.5 15a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 017.5 15zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H8.25z"
-                                clip-rule="evenodd" />
-                            <path
-                                d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
-                        </svg>
+                <!-- Nome porojeto -->
+                <div class="col-span-6 relative">
+                    <label for="p" class="pb-2 pr-2">Nome do projeto</label>
+                    <div class="relative max-w-full">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-gray-500 dark:text-gray-400">
+                                <path fill-rule="evenodd"
+                                    d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625zM7.5 15a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 017.5 15zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H8.25z"
+                                    clip-rule="evenodd" />
+                                <path
+                                    d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
+                            </svg>
 
+                        </div>
+                        <input datepicker type="text"
+                            class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Nome do projeto" formControlName="nome">
                     </div>
-                    <input datepicker type="text"
-                        class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Nome do projeto">
+                    <p class="text-red-500 pl-2 pt-1" *ngIf="formDir.submitted && nomeGetter.errors?.['required']">
+                        O nome do projeto precisa ser inserido</p>
                 </div>
-            </div>
-            <!-- Final nome projeto -->
+                <!-- Final nome projeto -->
 
-            <div class="col-span-6 relative">
-                <label for="p" class="pb-2 pr-2">Status do projeto</label>
-                <select class="border text-black 
-                text-sm rounded-lg 
-                focus:ring-blue-500 
-                focus:border-blue-500 block 
-                w-full p-2.5 
-                dark:placeholder-gray-400 
-                dark:text-white 
-                dark:focus:ring-blue-500 
-                dark:focus:border-blue-500" [(ngModel)]="selectStatus" (ngModelChange)=" selectStatus = $event"
-                    (change)="statusSelecionado()">
-                    <option [ngValue]="stats.status" *ngFor="let stats of Status">{{stats.status}}</option>
-                </select>
-            </div>
-
-
-            <div class="col-span-6 relative">
-                <label for="p" class="pb-2 pr-2">Produto utilizado no projeto</label>
-                <select *ngIf="!aguardandoDados" [(ngModel)]="selectProduto" (ngModelChange)="selectProduto = $event"
-                    (change)="produtoSelecionado()" class="border text-black 
-                text-sm rounded-lg 
-                focus:ring-blue-500 
-                focus:border-blue-500 block 
-                w-full p-2.5 
-                dark:placeholder-gray-400 
-                dark:text-white 
-                dark:focus:ring-blue-500 
-                dark:focus:border-blue-500">
-                    <option [value]="produto.id" *ngFor="let produto of ProdutosEmEstoque">{{produto.nome}}</option>
-                </select>
-                <ngx-skeleton-loader class="line-bigger" *ngIf="aguardandoDados" count="1"
-                    appearance="line"></ngx-skeleton-loader>
-            </div>
-
-
-
-            <div class="col-span-6">
-                <label for="p" class="pb-2 pr-2">Quantidade de produtos utilizados</label>
-                <div class="max-w-full">
-                    <input datepicker type="number"
-                        class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Quantidade utilizada">
+                <!-- Statuso utilizado -->
+                <div class="col-span-6 relative">
+                    <label for="p" class="pb-2 pr-2">Status do projeto</label>
+                    <select formControlName="status" class="border text-black 
+                    text-sm rounded-lg 
+                    focus:ring-blue-500 
+                    focus:border-blue-500 block 
+                    w-full p-2.5 
+                    dark:placeholder-gray-400 
+                    dark:text-white 
+                    dark:focus:ring-blue-500 
+                    dark:focus:border-blue-500">
+                        <option [ngValue]="stats.status" *ngFor="let stats of Status">{{stats.status}}</option>
+                    </select>
+                    <p class="text-red-500 pl-2 pt-1" *ngIf="formDir.submitted && statusGetter.errors?.['required']">
+                        O status do projeto precisa ser inserido</p>
                 </div>
-            </div>
+                <!-- Status utilizado final -->
 
+                <!-- Produto utilizado -->
+                <div class="col-span-6 relative">
+                    <label for="p" class="pb-2 pr-2">Produto utilizado no projeto</label>
+                    <select formControlName="produto" *ngIf="!aguardandoDados" class="border text-black 
+                    text-sm rounded-lg 
+                    focus:ring-blue-500 
+                    focus:border-blue-500 block 
+                    w-full p-2.5 
+                    dark:placeholder-gray-400 
+                    dark:text-white 
+                    dark:focus:ring-blue-500 
+                    dark:focus:border-blue-500">
+                        <option [value]="produto.id" *ngFor="let produto of ProdutosEmEstoque">{{produto.nome}}</option>
+                    </select>
+                    <ngx-skeleton-loader class="line-bigger" *ngIf="aguardandoDados" count="1"
+                        appearance="line"></ngx-skeleton-loader>
+                    <p class="text-red-500 pl-2 pt-1" *ngIf="formDir.submitted && produtoGetter.errors?.['required']">
+                        O produto utilizado no projeto precisa ser inserido</p>
+                </div>
+                <!-- Produto utilizado final -->
 
-
-            <div class="col-span-6 relative">
-                <label for="p" class="pb-2 pr-2">Quantidade de produtos utilizados</label>
-                <div class="relative max-w-full">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            class="w-4 h-4 text-gray-500 dark:text-gray-400">
-                            <path
-                                d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 01-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004zM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 01-.921.42z" />
-                            <path fill-rule="evenodd"
-                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v.816a3.836 3.836 0 00-1.72.756c-.712.566-1.112 1.35-1.112 2.178 0 .829.4 1.612 1.113 2.178.502.4 1.102.647 1.719.756v2.978a2.536 2.536 0 01-.921-.421l-.879-.66a.75.75 0 00-.9 1.2l.879.66c.533.4 1.169.645 1.821.75V18a.75.75 0 001.5 0v-.81a4.124 4.124 0 001.821-.749c.745-.559 1.179-1.344 1.179-2.191 0-.847-.434-1.632-1.179-2.191a4.122 4.122 0 00-1.821-.75V8.354c.29.082.559.213.786.393l.415.33a.75.75 0 00.933-1.175l-.415-.33a3.836 3.836 0 00-1.719-.755V6z"
-                                clip-rule="evenodd" />
-                        </svg>
-
+                <!-- Quantidade de produtos utilizados -->
+                <div class="col-span-6">
+                    <label for="p" class="pb-2 pr-2">Quantidade de produtos utilizados</label>
+                    <div class="max-w-full">
+                        <input datepicker type="number"
+                            class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Quantidade utilizada" formControlName="quantidade">
                     </div>
-                    <input datepicker type="number"
-                        class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Valor do projeto">
+                    <p class="text-red-500 pl-2 pt-1"
+                        *ngIf="formDir.submitted && quantidadeGetter.errors?.['required']">
+                        A quantidade de produtos precisa ser inserida</p>
+                </div>
+                <!-- Qutnidade de produtos utilizados final -->
+
+                <!-- Valor projeto -->
+                <div class="col-span-6 relative">
+                    <label for="p" class="pb-2 pr-2">Valor total do projeto</label>
+                    <div class="relative max-w-full">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-gray-500 dark:text-gray-400">
+                                <path
+                                    d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 01-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004zM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 01-.921.42z" />
+                                <path fill-rule="evenodd"
+                                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v.816a3.836 3.836 0 00-1.72.756c-.712.566-1.112 1.35-1.112 2.178 0 .829.4 1.612 1.113 2.178.502.4 1.102.647 1.719.756v2.978a2.536 2.536 0 01-.921-.421l-.879-.66a.75.75 0 00-.9 1.2l.879.66c.533.4 1.169.645 1.821.75V18a.75.75 0 001.5 0v-.81a4.124 4.124 0 001.821-.749c.745-.559 1.179-1.344 1.179-2.191 0-.847-.434-1.632-1.179-2.191a4.122 4.122 0 00-1.821-.75V8.354c.29.082.559.213.786.393l.415.33a.75.75 0 00.933-1.175l-.415-.33a3.836 3.836 0 00-1.719-.755V6z"
+                                    clip-rule="evenodd" />
+                            </svg>
+
+                        </div>
+                        <input datepicker type="number"
+                            class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Valor do projeto" formControlName="valor">
+                    </div>
+                    <p class="text-red-500 pl-2 pt-1"
+                        *ngIf="formDir.submitted && quantidadeGetter.errors?.['required']">
+                        O valor do projeto precisa ser inserido</p>
+                </div>
+                <!-- Final valor projeto -->
+
+                <!-- Descrição projeto -->
+                <div class="col-span-6 relative">
+                    <label for="p" class="pb-2 pr-2">Descrição do projeto</label>
+                    <div class="relative max-w-full">
+                        <textarea type="text"
+                            class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            formControlName="descricao"></textarea>
+                    </div>
+                    <p class="text-red-500 pl-2 pt-1" *ngIf="formDir.submitted && descricaoGetter.errors?.['required']">
+                        A descrição precisa ser informada</p>
                 </div>
             </div>
+            <!-- Final descrição -->
 
-        </div>
-
-        <!-- Button de salvar edição -->
-        <div class="px-4 text-right py-2 flex">
-            <button class="h-10 w-32 rounded shadow-md text-white text-[16px] hover:bg-green-600 bg-green-500 mr-3"
-                (click)="redirecionar()">
-                Salvar
-            </button>
-            <button class="h-10 w-32 rounded shadow-md text-white text-[16px] hover:bg-red-600 bg-red-500"
-                (click)="redirecionar()">
-                Cancelar
-            </button>
-        </div>
-        <!-- End Button de salvar edição -->
+            <!-- Button de salvar edição -->
+            <div class="px-4 text-right py-2 flex">
+                <button class="h-10 w-32 rounded shadow-md text-white text-[16px] hover:bg-green-600 bg-green-500 mr-3"
+                    (click)="formDir">
+                    Salvar
+                </button>
+                <button class="h-10 w-32 rounded shadow-md text-white text-[16px] hover:bg-red-600 bg-red-500"
+                    (click)="redirecionar()">
+                    Cancelar
+                </button>
+            </div>
+            <!-- End Button de salvar edição -->
+        </form>
     </div>
 </div>

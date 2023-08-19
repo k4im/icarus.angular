@@ -23,8 +23,8 @@ export interface Produto {
 export interface CriarProjetoDTO {
     nome: string,
     status: string,
-    dataInicio: Date,
-    dataEntrega: Date,
+    dataInicio: string | null,
+    dataEntrega: string | null,
     produtoUtilizadoId: number,
     quantidadeUtilizado: number,
     descricao: string,
