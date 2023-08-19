@@ -16,6 +16,7 @@ import { NovoProjetoComponent } from './novo-projeto.component';
 import { ProjetosService } from 'src/app/services/projetos.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgToastModule } from 'ng-angular-popup' // to be added
 
 
 
@@ -41,6 +42,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    NgToastModule
   ],
   providers: [ProjetosService, DatePipe]
 })

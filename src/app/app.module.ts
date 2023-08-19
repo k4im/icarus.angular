@@ -9,6 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NgToastModule } from 'ng-angular-popup' // to be added
 
 
 import { AppComponent } from './app.component';
@@ -33,6 +34,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
+    NgToastModule,
     NgxPaginationModule
   ],
   providers: [ProjetosService],

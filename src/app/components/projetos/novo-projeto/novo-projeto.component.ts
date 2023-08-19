@@ -5,6 +5,7 @@ import { CriarProjetoDTO, Produto, Projeto } from 'src/app/Interfaces/IProjetos'
 import { ProjetosService } from 'src/app/services/projetos.service';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, Validators, FormControlOptions } from '@angular/forms';
+import { NgToastService } from 'ng-angular-popup';
 @Component({
   selector: 'app-novo-projeto',
   templateUrl: './novo-projeto.component.html',
@@ -25,7 +26,8 @@ export class NovoProjetoComponent implements OnInit {
   constructor(private router: Router,
     private projetoService: ProjetosService,
     private pipe: DatePipe,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private toast: NgToastService) { }
 
   ngOnInit(): void {
     this.buscarProdutos();
@@ -53,7 +55,6 @@ export class NovoProjetoComponent implements OnInit {
     }
     if (this.validarCampos()) {
       this.criarProjeto(projeto);
-      this.router.navigate(['/projetos'])
     }
   }
 
@@ -96,7 +97,10 @@ export class NovoProjetoComponent implements OnInit {
     return value;
   }
   criarProjeto(projeto: CriarProjetoDTO) {
-    this.projetoService.novoProjeto(projeto).subscribe((result) => { console.log("Projeto criado com sucesso") },
+    this.projetoService.novoProjeto(projeto).subscribe((result) => {
+      console.log("Projeto criado com sucesso")
+      this.toast.success({ detail: "SUCCESS", summary: 'Your Success Message', duration: 5000 });
+    },
       error => {
         console.log(error);
       }
