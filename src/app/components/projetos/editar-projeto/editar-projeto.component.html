@@ -12,14 +12,14 @@
             </svg>
 
         </div>
-        <label for="status">Nome do projeto</label>
-        <input datepicker type="text"
+        <label for="nome">Nome do projeto</label>
+        <input datepicker type="text" id="nome"
             class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Nome do projeto" formControlName="nome" value="{{nome}}" disabled>
     </div>
 
     <div class="pl-5 pr-5 relative">
-        <label for="dataEntrega" class="pb-2 pr-2">Data Incio</label>
+        <label for="dataInicio" class="pb-2 pr-2">Data Incio</label>
         <div class="relative max-w-full">
             <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                 <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -28,7 +28,7 @@
                         d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                 </svg>
             </div>
-            <input formControlName="dataEntrega" datepicker type="text"
+            <input formControlName="dataEntrega" id="dataInicio" datepicker type="text"
                 class=" input border text-black text-sm rounded-lg block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white "
                 placeholder="Data de entrega" name="entrega" [value]="inicio" disabled>
         </div>
@@ -44,7 +44,7 @@
                         d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                 </svg>
             </div>
-            <input formControlName="dataEntrega" datepicker type="text"
+            <input formControlName="dataEntrega" id="dataEntrega" datepicker type="text"
                 class=" input border text-black text-sm rounded-lg block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white "
                 placeholder="Data de entrega" name="entrega" [value]="entrega" disabled>
         </div>
@@ -65,7 +65,7 @@
                 </svg>
 
             </div>
-            <input datepicker type="text"
+            <input datepicker type="text" id="valor"
                 class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Valor do projeto" formControlName="valor" [value]="'RS ' + valor" disabled>
         </div>
@@ -73,7 +73,7 @@
 
     <div class="pl-5 pr-5 relative">
         <label for="status">Novo Status</label>
-        <select formControlName="status" class="border text-black 
+        <select id="status" formControlName="status" class="border text-black 
         text-sm rounded-lg 
         focus:ring-blue-500 
         focus:border-blue-500 block 
