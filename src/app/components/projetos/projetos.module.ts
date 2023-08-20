@@ -14,6 +14,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ProjetosComponent } from './projetos.component';
 import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.component';
 import { ProjetosService } from 'src/app/services/projetos.service';
+import { NgToastModule } from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ProjetosService } from 'src/app/services/projetos.service';
     MatButtonModule,
     MatDialogModule,
     HttpClientModule,
+    NgToastModule,
     NgxSkeletonLoaderModule,
     NgxPaginationModule
   ],

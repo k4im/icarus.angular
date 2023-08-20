@@ -19,15 +19,6 @@ export class ProjetosService {
   // Metodo que estará realizando chamada do projeto pelo id
   buscarProjeto(id: number): Observable<Projeto> {
     return this.http.get<Projeto>(`${this.urlProjetos}/projeto/${id}`)
-      .pipe(
-        catchError(
-          (err) => {
-            console.log("Um erro ocorreu ao tentar requisitar o backend");
-            console.error(err);
-            return throwError(err);
-          }
-        )
-      )
   }
   // Metodo que relaiza chamada a api para relaizar operação de delete.
   remover(id: string): Observable<number> {

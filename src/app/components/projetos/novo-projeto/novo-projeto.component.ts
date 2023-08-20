@@ -68,22 +68,10 @@ export class NovoProjetoComponent implements OnInit {
       (result) => {
         this.ProdutosEmEstoque = result
         this.aguardandoDados = false
-
+        this.toast.success({ detail: "✔️ Sucesso", summary: 'Produtos carregados com sucesso!', duration: 760 })
       },
       erro => {
-        if (erro.status === 0) {
-          console.log("Não foi possivel realizar a comunicação!")
-        }
-
-        if (erro.status === 400) {
-          console.log("O dado enviado é invalido!")
-        }
-        if (erro.status === 404) {
-          console.log("Nenhum projeto foi encontrado!")
-        }
-        if (erro.status === 500) {
-          console.log("Houve um erro no servidor!")
-        }
+        this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel carregar os produtos', duration: 1000 })
       }
 
     )
@@ -99,10 +87,10 @@ export class NovoProjetoComponent implements OnInit {
   criarProjeto(projeto: CriarProjetoDTO) {
     this.projetoService.novoProjeto(projeto).subscribe((result) => {
       console.log("Projeto criado com sucesso")
-      this.toast.success({ detail: "SUCCESS", summary: 'Your Success Message', duration: 5000 });
+      this.toast.success({ detail: "✔️ Sucesso", summary: 'Produto criado com sucesso!', duration: 5000 });
     },
       error => {
-        console.log(error);
+        this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel cadastrar o produto', duration: 5000 })
       }
     );
   }

@@ -5,6 +5,7 @@ import { ProjetosService } from 'src/app/services/projetos.service';
 import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.component';
 import { timeout } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class ProjetosComponent {
   Projetos: Projetos = { data: [], paginaAtual: 0, totalDePaginas: 0, totalItens: 0 };
   aguardandoDados: boolean = true;
 
-  constructor(public dialog: MatDialog, private projetoService: ProjetosService,) {
+  constructor(public dialog: MatDialog, private projetoService: ProjetosService, private toast: NgToastService) {
     this.projetoService.listen().subscribe((m: any) => {
       console.log("Removido projeto: " + m);
       this.atualizarPagina(m);
@@ -56,19 +57,20 @@ export class ProjetosComponent {
         this.Projetos = result
         this.paginaAtual = result.paginaAtual
         this.aguardandoDados = false
+        this.toast.success({ detail: "✔️ Sucesso", summary: 'Projetos carregados com sucesso!', duration: 750 })
       },
       erro => {
         if (erro.status === 0) {
           console.log("Não foi possivel realizar a comunicação!")
+          this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel carregar os Projetos!', duration: 950 })
         }
 
-        if (erro.status === 400) {
-          console.log("O dado enviado é invalido!")
-        }
         if (erro.status === 404) {
           console.log("Nenhum projeto foi encontrado!")
+          this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto encontrado!', duration: 750 })
         }
         if (erro.status === 500) {
+          this.toast.error({ detail: " ❌ Erro", summary: 'O servidor não conseguiu carregar os projetos!', duration: 1000 })
           console.log("Houve um erro no servidor!")
         }
       }
@@ -78,5 +80,6 @@ export class ProjetosComponent {
   atualizarPagina(id: string) {
     let param = parseInt(id);
     this.Projetos.data = this.Projetos.data.filter((p: Projeto) => p.id !== param)
+    this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Projeto deletado com sucesso!', duration: 750 })
   }
 }
