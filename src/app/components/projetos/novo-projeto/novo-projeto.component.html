@@ -7,7 +7,7 @@
             <div class="md:grid grid-cols-12 flex flex-col md:items-center gap-4 p-4">
                 <!-- Data inicio -->
                 <div class="col-span-6 relative">
-                    <label for="dataIncio" class="pb-2 pr-2">Data Inico</label>
+                    <label for="dataInicio" class="pb-2 pr-2">Data Inicio</label>
                     <div class="relative max-w-full">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -16,7 +16,7 @@
                                     d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                             </svg>
                         </div>
-                        <input formControlName="dataInicio" name=" dataInicio" datepicker type="date"
+                        <input formControlName="dataInicio" id=" dataInicio" datepicker type="date"
                             class="border border-red-500 focus:outilne-none text-black text-sm rounded-lg  block w-full pl-10 p-2.5 "
                             placeholder="Data de inicio">
                     </div>
@@ -29,7 +29,7 @@
 
                 <!-- Data entrega -->
                 <div class="col-span-6 relative">
-                    <label for="dataEntrega" class="pb-2 pr-2">Data Entrega</label>
+                    <label for="entrega" class="pb-2 pr-2">Data Entrega</label>
                     <div class="relative max-w-full">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -40,7 +40,7 @@
                         </div>
                         <input formControlName="dataEntrega" datepicker type="date"
                             class=" input border text-black text-sm rounded-lg block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white "
-                            placeholder="Data de entrega" name="entrega">
+                            placeholder="Data de entrega" id="entrega">
                     </div>
                     <p class="text-red-500 pl-2 pt-1"
                         *ngIf="formDir.submitted && !dataEntregaGetter.errors?.['pattern']">
@@ -51,7 +51,7 @@
 
                 <!-- Nome porojeto -->
                 <div class="col-span-6 relative">
-                    <label for="p" class="pb-2 pr-2">Nome do projeto</label>
+                    <label for="name" class="pb-2 pr-2">Nome do projeto</label>
                     <div class="relative max-w-full">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -66,7 +66,7 @@
                         </div>
                         <input datepicker type="text"
                             class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Nome do projeto" formControlName="nome">
+                            placeholder="Nome do projeto" id="name" formControlName="nome">
                     </div>
                     <p class="text-red-500 pl-2 pt-1" *ngIf="formDir.submitted && nomeGetter.errors?.['required']">
                         O nome do projeto precisa ser inserido</p>
@@ -75,8 +75,8 @@
 
                 <!-- Statuso utilizado -->
                 <div class="col-span-6 relative">
-                    <label for="p" class="pb-2 pr-2">Status do projeto</label>
-                    <select formControlName="status" class="border text-black 
+                    <label for="stats" class="pb-2 pr-2">Status do projeto</label>
+                    <select id="stats" formControlName="status" class="border text-black 
                     text-sm rounded-lg 
                     focus:ring-blue-500 
                     focus:border-blue-500 block 
@@ -94,8 +94,8 @@
 
                 <!-- Produto utilizado -->
                 <div class="col-span-6 relative">
-                    <label for="p" class="pb-2 pr-2">Produto utilizado no projeto</label>
-                    <select formControlName="produto" *ngIf="!aguardandoDados" class="border text-black 
+                    <label for="utilizado" class="pb-2 pr-2">Produto utilizado no projeto</label>
+                    <select id="utilizado" formControlName="produto" *ngIf="!aguardandoDados" class="border text-black 
                     text-sm rounded-lg 
                     focus:ring-blue-500 
                     focus:border-blue-500 block 
@@ -115,9 +115,9 @@
 
                 <!-- Quantidade de produtos utilizados -->
                 <div class="col-span-6">
-                    <label for="p" class="pb-2 pr-2">Quantidade de produtos utilizados</label>
+                    <label for="qtd" class="pb-2 pr-2">Quantidade de produtos utilizados</label>
                     <div class="max-w-full">
-                        <input datepicker type="number"
+                        <input datepicker type="number" id="qtd"
                             class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Quantidade utilizada" formControlName="quantidade">
                     </div>
@@ -129,7 +129,7 @@
 
                 <!-- Valor projeto -->
                 <div class="col-span-6 relative">
-                    <label for="p" class="pb-2 pr-2">Valor total do projeto</label>
+                    <label for="valorProjeto" class="pb-2 pr-2">Valor total do projeto</label>
                     <div class="relative max-w-full">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -142,7 +142,7 @@
                             </svg>
 
                         </div>
-                        <input datepicker type="number"
+                        <input datepicker type="number" id="valorProjeto"
                             class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Valor do projeto" formControlName="valor">
                     </div>
@@ -154,9 +154,9 @@
 
                 <!-- Descrição projeto -->
                 <div class="col-span-6 relative">
-                    <label for="p" class="pb-2 pr-2">Descrição do projeto</label>
+                    <label for="desc" class="pb-2 pr-2">Descrição do projeto</label>
                     <div class="relative max-w-full">
-                        <textarea type="text"
+                        <textarea type="text" id="desc"
                             class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             formControlName="descricao"></textarea>
                     </div>
