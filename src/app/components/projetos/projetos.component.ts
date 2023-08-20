@@ -6,6 +6,7 @@ import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.compo
 import { timeout } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
+import { EditarProjetoComponent } from './editar-projeto/editar-projeto.component';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class ProjetosComponent {
     this.aoMudarDePagina(event);
   }
 
-  abrirDialog(eventoClick: Projeto): void {
+  abrirDialogDelete(eventoClick: Projeto): void {
     const dialogRef = this.dialog.open(RemoverProjetoComponent, {
       data: { id: eventoClick.id, nome: eventoClick.nome }
     });
@@ -51,6 +52,22 @@ export class ProjetosComponent {
     });
   }
 
+  abrirDialogEdit(eventoClick: Projeto): void {
+    const dialogRef = this.dialog.open(EditarProjetoComponent, {
+      data: {
+        id: eventoClick.id,
+        nome: eventoClick.nome,
+        status: eventoClick.status,
+        inicio: eventoClick.dataInicio,
+        entrega: eventoClick.dataEntrega,
+        valor: eventoClick.valor
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
   private buscarProjetos(pagina: number) {
     this.projetoService.buscarProjetos(pagina).subscribe(
       (result) => {

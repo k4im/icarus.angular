@@ -17,7 +17,7 @@ export class ProjetosService {
     return this.http.get<Projetos>(`${this.urlProjetos}/projetos/${pagina}`)
   }
   // Metodo que estará realizando chamada do projeto pelo id
-  buscarProjeto(id: number): Observable<Projeto> {
+  buscarProjeto(id: string): Observable<Projeto> {
     return this.http.get<Projeto>(`${this.urlProjetos}/projeto/${id}`)
   }
   // Metodo que relaiza chamada a api para relaizar operação de delete.

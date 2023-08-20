@@ -15,11 +15,13 @@ import { ProjetosComponent } from './projetos.component';
 import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.component';
 import { ProjetosService } from 'src/app/services/projetos.service';
 import { NgToastModule } from 'ng-angular-popup';
+import { EditarProjetoComponent } from './editar-projeto/editar-projeto.component';
 
 @NgModule({
   declarations: [
     ProjetosComponent,
     RemoverProjetoComponent,
+    EditarProjetoComponent,
   ],
   imports: [
     CommonModule,
