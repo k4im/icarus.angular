@@ -53,9 +53,47 @@
 .paginator::ng-deep .ngx-pagination a {
     border-radius: 15px;
 }
+
 .paginator::ng-deep .ngx-pagination .current {
     background-color: red;
     border-radius: 15px;
     text-align: center;
 }
 
+@media (max-width: 500px) {
+    .container-table th {
+        display: none;
+    }
+
+    .container-table td {
+        display: block;
+    }
+
+    .container-table {
+        flex-direction: column;
+    }
+
+    .button {
+        top: 0.5%;
+        right: 2%;
+    }
+
+    .header-name {
+        display: none;
+    }
+
+    .paginator::ng-deep .ngx-pagination a {
+        border-radius: 15px;
+    }
+
+    .paginator::ng-deep .ngx-pagination .current {
+        background-color: red;
+        border-radius: 15px;
+        text-align: center;
+    }
+
+    .container-pagination::ng-deep {
+        width: 100%;
+        display: block;
+    }
+}

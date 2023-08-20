@@ -38,7 +38,7 @@ export class ProjetosComponent {
 
   mudarDePagina(event: any) {
     this.paginaAtual = event;
-    this.buscarProjetos(event);
+    this.aoMudarDePagina(event);
   }
 
   abrirDialog(eventoClick: Projeto): void {
@@ -51,7 +51,7 @@ export class ProjetosComponent {
     });
   }
 
-  buscarProjetos(pagina: number) {
+  private buscarProjetos(pagina: number) {
     this.projetoService.buscarProjetos(pagina).subscribe(
       (result) => {
         this.Projetos = result
@@ -77,9 +77,33 @@ export class ProjetosComponent {
     );
   }
 
-  atualizarPagina(id: string) {
+  private atualizarPagina(id: string) {
     let param = parseInt(id);
     this.Projetos.data = this.Projetos.data.filter((p: Projeto) => p.id !== param)
     this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Projeto deletado com sucesso!', duration: 750 })
+  }
+  private aoMudarDePagina(pagina: number) {
+    this.projetoService.buscarProjetos(pagina).subscribe(
+      (result) => {
+        this.Projetos = result
+        this.paginaAtual = result.paginaAtual
+        this.aguardandoDados = false
+      },
+      erro => {
+        if (erro.status === 0) {
+          console.log("Não foi possivel realizar a comunicação!")
+          this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel carregar os Projetos!', duration: 950 })
+        }
+
+        if (erro.status === 404) {
+          console.log("Nenhum projeto foi encontrado!")
+          this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto encontrado!', duration: 750 })
+        }
+        if (erro.status === 500) {
+          this.toast.error({ detail: " ❌ Erro", summary: 'O servidor não conseguiu carregar os projetos!', duration: 1000 })
+          console.log("Houve um erro no servidor!")
+        }
+      }
+    );
   }
 }

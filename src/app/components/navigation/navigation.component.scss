@@ -2,3 +2,14 @@
     width: 100%;
     overflow-y: auto;
 }
+
+@media (max-width: 500px) {
+
+    .container-navigation .container-sidebar {
+        width: 80px;
+    }
+
+    .container-navigation .container-sidebar .text-side-menu {
+        display: none;
+    }
+}
