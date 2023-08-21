@@ -15,33 +15,44 @@ import { EditarProjetoComponent } from './editar-projeto/editar-projeto.componen
   styleUrls: ['./projetos.component.scss'],
 })
 export class ProjetosComponent {
-
+  
+  /** Variaveis mutaveis pelos dados da api */
   paginaAtual: number = 1;
   Projetos: Projetos = { data: [], paginaAtual: 0, totalDePaginas: 0, totalItens: 0 };
   aguardandoDados: boolean = true;
-
+  /** Final das Variaveis */
+  
+  /** Construtor */
   constructor(public dialog: MatDialog, private projetoService: ProjetosService, private toast: NgToastService) {
     this.projetoService.listen().subscribe((m: any) => {
       console.log("Removido projeto: " + m);
       this.atualizarPagina(m);
     })
   }
+  /** Final construtor */
 
+  /** Operações realizadas ao inicilizar component */
   ngOnInit(): void {
     this.buscarProjetos(this.paginaAtual);
   }
+  /** Final Operações realizadas */
 
+  /** Validar status do projeto para adicionar adequadamente as classes ao status */
   validarStatus(projeto: Projeto): string {
     if (projeto.status === "Produção") return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
     if (projeto.status === "Pendente") return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300";
     return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
   }
+  /** Final validação */
 
+  /** Chamada publica ao evento de click ao mudar de pagina */
   mudarDePagina(event: any) {
     this.paginaAtual = event;
     this.aoMudarDePagina(event);
   }
+  /** Final chamada publica */
 
+  /** Metodo para abrir modal de remoção do projeto */
   abrirDialogDelete(eventoClick: Projeto): void {
     const dialogRef = this.dialog.open(RemoverProjetoComponent, {
       data: { id: eventoClick.id, nome: eventoClick.nome }
@@ -51,7 +62,9 @@ export class ProjetosComponent {
       console.log(result);
     });
   }
+  /** Final metodo de remoção ao projeto */
 
+  /** Metodo para abrir modal de Edição */
   abrirDialogEdit(eventoClick: Projeto): void {
     const dialogRef = this.dialog.open(EditarProjetoComponent, {
       data: {
@@ -68,6 +81,9 @@ export class ProjetosComponent {
       console.log(result);
     });
   }
+  /** Final abrir modal edit */
+
+  /** Metodos de chamadas ao serviço */
   private buscarProjetos(pagina: number) {
     this.projetoService.buscarProjetos(pagina).subscribe(
       (result) => {
@@ -123,4 +139,5 @@ export class ProjetosComponent {
       }
     );
   }
+  /** Final metodos de chamadas ao serviço */
 }

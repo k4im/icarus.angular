@@ -5,12 +5,15 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NgToastService } from 'ng-angular-popup';
 import { ProjetosService } from 'src/app/services/projetos.service';
 
+
 @Component({
   selector: 'app-editar-projeto',
   templateUrl: './editar-projeto.component.html',
   styleUrls: ['./editar-projeto.component.scss']
 })
 export class EditarProjetoComponent {
+  
+  /** Variaveis inicilizadas por dados partindo da abertura do modal  */
   nome!: string;
   stats!: string;
   valor!: string;
@@ -18,14 +21,18 @@ export class EditarProjetoComponent {
   inicio!: string;
   ProjetoId: number = 0;
   formEdit!: FormGroup;
-  
   Status: { status: string }[] = [{ status: "Produção" }, { status: "Pendente" }, { status: "Atrasado" }, { status: "Cancelado" },]
+  /** Final variaveis inicializadas partindo da abertura da modal */
+
+  /**Construtor  */
   constructor(public dialogRef: MatDialogRef<EditarProjetoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private projetosService: ProjetosService,
     private toast: NgToastService,
     private formBuilder : FormBuilder) { }
-
+  /**Final construtor */
+  
+  /**Metodo de inicalização do objeto */
   ngOnInit(): void {
     this.nome = this.data.nome;
     this.stats = this.data.status
@@ -37,28 +44,34 @@ export class EditarProjetoComponent {
       novoStatus: [null, [Validators.required]]
     })
   }
-
+  /**Final metodo de inicalização do objeto */
+  
+  /** Fechamento de modal */
   fecharDialog() {
     this.dialogRef.close();
   }
-
+  /** Final fechamento de modal */
+  
+  /** Metodo de atualização de projeto (NÃO FUNCIONAL AINDA) */
   atualizarProjeto(){
-      console.log("Status é: " + this.statusGetter?.value)
-      this.projetosService.novoStatus(this.statusGetter?.value, this.data.id).subscribe(
+      let statusValue: string = this.statusGetter?.value;
+      this.projetosService.novoStatus(statusValue, this.data.id).subscribe(
         (result) => {
           console.log(result)
         },
         (error: HttpErrorResponse) => {
-          if (error.status === 500){
-            console.log("Erro 500")
+          if (error.status === 400){
+            this.projetosService.filterSub("BadModel");
           }
         }
       )
     
   }
+  /** Final metodo de atualização */
 
+  /** Getters das forms */
   get statusGetter() {
     return this.formEdit.get('novoStatus');
   }
-
+  /**Final Getters */
 }
