@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import { CriarProjetoDTO, Produto, Projeto, Projetos } from '../Interfaces/IProjetos';
 import { Observable, Subject, catchError, throwError } from 'rxjs';
 
@@ -44,7 +44,8 @@ export class ProjetosService {
 
   //Metodo para update de status
   novoStatus(status: string, id: number): Observable<string>{
-    return this.http.put<string>(`${this.urlProjetos}/update/${id}?model=`, status);
+    let parames = new HttpParams().set("model", status);
+    return this.http.put<string>(`${this.urlProjetos}/update/${id}`, {params: parames});
   }
 
   // Realizado a criação de um observable.
