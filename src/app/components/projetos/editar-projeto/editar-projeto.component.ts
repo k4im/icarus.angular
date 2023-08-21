@@ -46,7 +46,7 @@ export class EditarProjetoComponent {
       console.log("Status é: " + this.statusGetter?.value)
       this.projetosService.novoStatus(this.statusGetter?.value, this.data.id).subscribe(
         (result) => {
-          console.log("Realizado update do status")
+          console.log(result)
         },
         (error: HttpErrorResponse) => {
           if (error.status === 500){

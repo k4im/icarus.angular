@@ -37,15 +37,16 @@ export class ProjetosService {
     })
     return this.http.get<Produto[]>(`${this.urlProjetos}/produtosEmEstoque`, { headers: httpHeader })
   }
+
   // Metodo para realizar a criação de um novo projeto.
   novoProjeto(projeto: CriarProjetoDTO): Observable<CriarProjetoDTO> {
     return this.http.post<CriarProjetoDTO>(`${this.urlProjetos}/Create`, projeto);
   }
 
   //Metodo para update de status
-  novoStatus(status: string, id: number): Observable<string>{
-    let parames = new HttpParams().set("model", status);
-    return this.http.put<string>(`${this.urlProjetos}/update/${id}`, {params: parames});
+  novoStatus(status: string, id: number){
+    let parames = new HttpParams().append("model", status);
+    return this.http.put(`${this.urlProjetos}/update/${id}`, {params: parames});
   }
 
   // Realizado a criação de um observable.
