@@ -16,6 +16,7 @@ import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.compo
 import { ProjetosService } from 'src/app/services/projetos.service';
 import { NgToastModule } from 'ng-angular-popup';
 import { EditarProjetoComponent } from './editar-projeto/editar-projeto.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,8 @@ import { EditarProjetoComponent } from './editar-projeto/editar-projeto.componen
     MatDialogModule,
     HttpClientModule,
     NgToastModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgxSkeletonLoaderModule,
     NgxPaginationModule
   ],

@@ -28,6 +28,7 @@ export class ProjetosService {
     })
     return this.http.delete<number>(`${this.urlProjetos}/delete/${id}`, { headers: httpHeader })
   }
+
   //Metodo de busca para produtos que irão ser disponibilizados na pagina de cirar produtos.  
   buscarTodosProdutos(): Observable<Produto[]> {
     let httpHeader = new HttpHeaders({
@@ -36,10 +37,17 @@ export class ProjetosService {
     })
     return this.http.get<Produto[]>(`${this.urlProjetos}/produtosEmEstoque`, { headers: httpHeader })
   }
+  // Metodo para realizar a criação de um novo projeto.
   novoProjeto(projeto: CriarProjetoDTO): Observable<CriarProjetoDTO> {
     return this.http.post<CriarProjetoDTO>(`${this.urlProjetos}/Create`, projeto);
   }
-  // Realizado criação de listener e filter para futuramente observar
+
+  //Metodo para update de status
+  novoStatus(status: string, id: number): Observable<string>{
+    return this.http.put<string>(`${this.urlProjetos}/update/${id}?model=`, status);
+  }
+
+  // Realizado a criação de um observable.
   private _listerner = new Subject<any>();
   listen(): Observable<any> {
     return this._listerner.asObservable();
