@@ -57,7 +57,7 @@ export class EditarProjetoComponent {
       let statusValue: string = this.statusGetter?.value;
       this.projetosService.novoStatus(statusValue, this.data.id).subscribe(
         (result) => {
-          console.log(result)
+          
         },
         (error: HttpErrorResponse) => {
           if (error.status === 400){
