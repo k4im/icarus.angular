@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
-import { CriarProjetoDTO, Produto, Projeto, Projetos } from '../Interfaces/IProjetos';
+import { CriarProjetoDTO, Produto, Projeto, ProjetoUnico, Projetos } from '../Interfaces/IProjetos';
 import { Observable, Subject, catchError, throwError } from 'rxjs';
 
 
@@ -25,8 +25,8 @@ export class ProjetosService {
     return this.http.get<Projetos>(`${this.urlProjetos}/projetos/${pagina}`)
   }
 
-  buscarProjeto(id: string): Observable<Projeto> {
-    return this.http.get<Projeto>(`${this.urlProjetos}/projeto/${id}`)
+  buscarProjeto(id: string): Observable<ProjetoUnico> {
+    return this.http.get<ProjetoUnico>(`${this.urlProjetos}/projeto/${id}`)
   }
   remover(id: string): Observable<number> {
     return this.http.delete<number>(`${this.urlProjetos}/delete/${id}`, { headers: this.httpHeader })

@@ -10,6 +10,7 @@ const routes: Routes = [
     redirectTo: '/dashboard',
     pathMatch: 'full'
   },
+  { path: 'editar/:id', loadChildren: () => import('./components/projetos/edit-projeto/edit-projeto.module').then(m => m.EditProjetoModule) },
 
 ];
 

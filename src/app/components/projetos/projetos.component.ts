@@ -3,10 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Projeto, Projetos } from 'src/app/Interfaces/IProjetos';
 import { ProjetosService } from 'src/app/services/projetos.service';
 import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.component';
-import { timeout } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { EditarProjetoComponent } from './editar-projeto/editar-projeto.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +12,7 @@ import { EditarProjetoComponent } from './editar-projeto/editar-projeto.componen
   templateUrl: './projetos.component.html',
   styleUrls: ['./projetos.component.scss'],
 })
-export class ProjetosComponent {
+export class ProjetosComponent implements OnInit {
   
   /** Variaveis mutaveis pelos dados da api */
   paginaAtual: number = 1;
@@ -23,7 +21,11 @@ export class ProjetosComponent {
   /** Final das Variaveis */
   
   /** Construtor */
-  constructor(public dialog: MatDialog, private projetoService: ProjetosService, private toast: NgToastService) {
+  constructor(
+    public dialog: MatDialog, 
+    private projetoService: ProjetosService, 
+    private toast: NgToastService,
+    private route: Router) {
     this.projetoService.listen().subscribe((m: any) => {
       console.log("Removido projeto: " + m);
       this.atualizarPagina(m);
@@ -65,21 +67,8 @@ export class ProjetosComponent {
   /** Final metodo de remoção ao projeto */
 
   /** Metodo para abrir modal de Edição */
-  abrirDialogEdit(eventoClick: Projeto): void {
-    const dialogRef = this.dialog.open(EditarProjetoComponent, {
-      data: {
-        id: eventoClick.id,
-        nome: eventoClick.nome,
-        status: eventoClick.status,
-        inicio: eventoClick.dataInicio,
-        entrega: eventoClick.dataEntrega,
-        valor: eventoClick.valor
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
+  editarProjeto(eventoClick: Projeto): void {
+    this.route.navigate(["/editar", eventoClick.id])
   }
   /** Final abrir modal edit */
 
