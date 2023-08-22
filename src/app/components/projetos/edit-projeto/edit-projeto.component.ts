@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { Projeto, ProjetoUnico } from 'src/app/Interfaces/IProjetos';
+import { ProjetoUnico } from 'src/app/Interfaces/IProjetos';
 import { ProjetosService } from 'src/app/services/projetos.service';
 
 @Component({
@@ -38,7 +38,7 @@ export class EditProjetoComponent  implements OnInit{
       {novoStatus: [null, [Validators.required]]}
     );
   }
-    /** Finalizando chamada ao inicializar o component */
+  /** Finalizando chamada ao inicializar o component */
 
   /** Metodo privado para busca de projeto */
   private buscarProjeto(id: number){
