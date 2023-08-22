@@ -66,7 +66,7 @@
 
                 <!-- Statuso utilizado -->
                 <div class="col-span-6 relative">
-                    <label for="stats" class="pb-2 pr-2">Status atual do projeto: <span class="text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full" ngClass="{{validar(Projeto.status)}}">{{stats}}</span></label>
+                    <label for="stats" class="pb-2 pr-2">Status atual do projeto: <span class="text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full" ngClass="{{validar(Projeto.status)}}" id="statusId">{{stats}}</span></label>
                     <select id="stats" formControlName="novoStatus" class="border text-black 
                     text-sm rounded-lg 
                     focus:ring-blue-500 

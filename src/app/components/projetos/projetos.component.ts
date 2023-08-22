@@ -41,9 +41,18 @@ export class ProjetosComponent implements OnInit {
 
   /** Validar status do projeto para adicionar adequadamente as classes ao status */
   validarStatus(projeto: Projeto): string {
-    if (projeto.status === "Produção") return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
-    if (projeto.status === "Pendente") return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300";
-    return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
+    switch (projeto.status) {
+      case "Pendente":
+        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300"
+      case "Produção":
+        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
+      case "Cancelado": 
+        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
+      case "Atrasado":
+        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
+      default:
+        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
+    }
   }
   /** Final validação */
 
