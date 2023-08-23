@@ -18,6 +18,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   /** Variaveis mutaveis pelos dados da api */
   deleteSub!: Subscription;
   paginaAtual: number = 1;
+  ItensPorPagina: number = 5;
   Projetos: Projetos = { data: [], paginaAtual: 0, totalDePaginas: 0, totalItens: 0 };
   aguardandoDados: boolean = true;
   /** Final das Variaveis */
@@ -40,7 +41,9 @@ export class ProjetosComponent implements OnInit, OnDestroy {
     this.buscarProjetos(this.paginaAtual);
   }
   /** Final Operações realizadas */
-
+  print(evento: any) {
+    console.log(evento)
+  }
   /** Validar status do projeto para adicionar adequadamente as classes ao status */
   validarStatus(projeto: Projeto): string {
     switch (projeto.status) {
