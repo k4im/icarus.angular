@@ -68,10 +68,13 @@ export class NovoProjetoComponent implements OnInit {
       (result) => {
         this.ProdutosEmEstoque = result
         this.aguardandoDados = false
-        this.toast.success({ detail: "✔️ Sucesso", summary: 'Produtos carregados com sucesso!', duration: 760 })
       },
       erro => {
-        this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel carregar os produtos', duration: 1000 })
+        this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel carregar os produtos', duration: 2500 })
+      },
+      () => {
+        this.toast.success({ detail: "✔️ Sucesso", summary: 'Produtos carregados com sucesso!', duration: 760 })
+
       }
 
     )
@@ -87,11 +90,13 @@ export class NovoProjetoComponent implements OnInit {
   criarProjeto(projeto: CriarProjetoDTO) {
     this.projetoService.novoProjeto(projeto).subscribe((result) => {
       console.log("Projeto criado com sucesso")
-      this.toast.success({ detail: "✔️ Sucesso", summary: 'Produto criado com sucesso!', duration: 5000 });
     },
-      error => {
-        this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel cadastrar o produto', duration: 5000 })
-      }
+    error => {
+      this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel cadastrar o produto', duration: 5000 })
+    },
+    () =>  {
+      this.toast.success({ detail: "✔️ Sucesso", summary: 'Produto criado com sucesso!', duration: 5000 });
+    }
     );
   }
   /** Getters dos campos propridades do formulário */
