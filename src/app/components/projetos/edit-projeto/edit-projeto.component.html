@@ -34,7 +34,7 @@
                                     d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                             </svg>
                         </div>
-                        <input  datepicker type="text"
+                        <input datepicker type="text"
                             class=" input border text-black text-sm rounded-lg block w-full pl-10 p-2.5 dark:placeholder-gray-400 dark:text-white "
                             placeholder="Data de entrega" id="entrega" [value]="Projeto.dataEntrega" disabled>
                     </div>
@@ -66,7 +66,9 @@
 
                 <!-- Statuso utilizado -->
                 <div class="col-span-6 relative">
-                    <label for="stats" class="pb-2 pr-2">Status atual do projeto: <span class="text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full" ngClass="{{validar(Projeto.status)}}" id="statusId">{{stats}}</span></label>
+                    <label for="stats" class="pb-2 pr-2">Status atual do projeto: <span
+                            class="text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full"
+                            ngClass="{{validar(Projeto.status)}}" id="statusId">{{stats}}</span></label>
                     <select id="stats" formControlName="novoStatus" class="border text-black 
                     text-sm rounded-lg 
                     focus:ring-blue-500 
@@ -93,7 +95,7 @@
                     dark:text-white 
                     dark:focus:ring-blue-500 
                     dark:focus:border-blue-500" disabled>
-                        <option >{{Projeto.produtoUtilizado.nome}}</option>
+                        <option>{{Projeto.produtoUtilizado.nome}}</option>
                     </select>
                 </div>
                 <!-- Produto utilizado final -->
@@ -137,7 +139,7 @@
                     <div class="relative max-w-full">
                         <textarea type="text" id="desc"
                             class="border text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                             [value]="Projeto.descricao" disabled></textarea>
+                            [value]="Projeto.descricao" disabled></textarea>
                     </div>
                 </div>
             </div>

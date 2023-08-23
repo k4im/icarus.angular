@@ -11,37 +11,49 @@ import { ProjetosService } from 'src/app/services/projetos.service';
   templateUrl: './edit-projeto.component.html',
   styleUrls: ['./edit-projeto.component.scss']
 })
-export class EditProjetoComponent  implements OnInit{
+export class EditProjetoComponent implements OnInit {
 
   /** Variaveis inicializadas */
-  selectId! : any;
-  Projeto!: ProjetoUnico;
+  selectId!: any;
+  Projeto: ProjetoUnico = {
+    id: 0,
+    dataEntrega: "",
+    dataInicio: "",
+    descricao: "",
+    nome: "",
+    produtoUtilizado: { id: 0, nome: "", quantidade: 0 },
+    quantidadeUtilizado: 0,
+    status: "",
+    valor: 0
+  };
   formProjeto!: FormGroup;
   stats!: string;
   Status: { status: string }[] = [{ status: "Produção" }, { status: "Pendente" }, { status: "Atrasado" }, { status: "Cancelado" },]
   /** Final variaveis */
-  
+
   /**Inicializado construtor para injeção de depdenciais */
   constructor(
-    private routerActive : ActivatedRoute,
+    private routerActive: ActivatedRoute,
     private route: Router,
     private toast: NgToastService,
     private projetoService: ProjetosService,
-    private builder: FormBuilder) {}
+    private builder: FormBuilder) { }
   /** Final construtor de injeção de dependencias */
 
   /** Realizando chamada ao serviço ao inicializar o component */
   ngOnInit(): void {
-    this.selectId = this.routerActive.snapshot.params['id'];
+    this.routerActive.params.subscribe(
+      (params) => { this.selectId = params['id']; }
+    );
     this.buscarProjeto(this.selectId);
     this.formProjeto = this.builder.group(
-      {novoStatus: [null, [Validators.required]]}
+      { novoStatus: [null, [Validators.required]] }
     );
   }
   /** Finalizando chamada ao inicializar o component */
 
   /** Metodo privado para busca de projeto */
-  private buscarProjeto(id: number){
+  private buscarProjeto(id: number) {
     this.projetoService.buscarProjeto(this.selectId).subscribe(
       (result) => {
         this.Projeto = result;
@@ -68,12 +80,12 @@ export class EditProjetoComponent  implements OnInit{
   /** Final de metodo privado */
 
   /**Metodos vinculados aos botões de cancelar e atualizar*/
-  submitProjeto(){
+  submitProjeto() {
     let status: string = this.statusGetter?.value;
     this.validar(status);
     this.projetoService.novoStatus(status, this.selectId).subscribe(
       (result) => {
-        this.toast.success({detail: "Sucesso", summary: "Status do projeto atualizado com sucesso!", duration: 950})
+        this.toast.success({ detail: "Sucesso", summary: "Status do projeto atualizado com sucesso!", duration: 950 })
         this.stats = status;
         this.route.navigate(["/projetos"])
       },
@@ -96,9 +108,9 @@ export class EditProjetoComponent  implements OnInit{
     )
 
   }
-  
-  redirecionar(){
-      this.route.navigate(["/projetos"])
+
+  redirecionar() {
+    this.route.navigate(["/projetos"])
   }
   /** Final metodos vinculados */
 
@@ -108,7 +120,7 @@ export class EditProjetoComponent  implements OnInit{
     return this.formProjeto.get("novoStatus")
   }
   /** Final getter de novo status */
-  
+
   /** Validar status projeto */
   validar(status: string) {
     switch (status) {
@@ -116,7 +128,7 @@ export class EditProjetoComponent  implements OnInit{
         return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300"
       case "Produção":
         return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
-      case "Cancelado": 
+      case "Cancelado":
         return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
       case "Atrasado":
         return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
@@ -125,5 +137,5 @@ export class EditProjetoComponent  implements OnInit{
     }
   }
   /** Final validar status */
-  
+
 }
