@@ -85,7 +85,6 @@ export class EditProjetoComponent implements OnInit {
     this.validar(status);
     this.projetoService.novoStatus(status, this.selectId).subscribe(
       (result) => {
-        this.toast.success({ detail: "Sucesso", summary: "Status do projeto atualizado com sucesso!", duration: 950 })
         this.stats = status;
         this.route.navigate(["/projetos"])
       },
@@ -100,10 +99,16 @@ export class EditProjetoComponent implements OnInit {
           case 400:
             this.toast.error({ detail: " ❌ Erro", summary: 'O valor enviado não supre os valores necessários!', duration: 950 })
             break;
+          case 409:
+            this.toast.error({ detail: " ❌ Erro", summary: 'O projeto já foi edito por outro usuario!', duration: 950 })
+            break;
           default:
             this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel atualizar o status!', duration: 950 })
             break;
         }
+      },
+      () =>  {
+        this.toast.success({ detail: "Sucesso", summary: "Status do projeto atualizado com sucesso!", duration: 950 })
       }
     )
 
