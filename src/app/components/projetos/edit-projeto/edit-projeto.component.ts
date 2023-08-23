@@ -81,7 +81,7 @@ export class EditProjetoComponent implements OnInit {
 
   /**Metodos vinculados aos botões de cancelar e atualizar*/
   submitProjeto() {
-    let status: string = this.statusGetter?.value;
+    let status: string = this.statusGetter.value;
     this.validar(status);
     this.projetoService.novoStatus(status, this.selectId).subscribe(
       (result) => {
@@ -117,7 +117,7 @@ export class EditProjetoComponent implements OnInit {
 
   /** Getter do campo de novo status */
   get statusGetter() {
-    return this.formProjeto.get("novoStatus")
+    return this.formProjeto.get("novoStatus")!
   }
   /** Final getter de novo status */
 
