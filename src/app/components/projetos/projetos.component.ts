@@ -45,6 +45,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   }
   /** Final Operações realizadas */
   atualizarItensPorPagina(evento: any) {
+    this.loading = true;
     this.buscarProjetos(this.paginaAtual, evento)
   }
   /** Validar status do projeto para adicionar adequadamente as classes ao status */
