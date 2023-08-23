@@ -6,14 +6,19 @@
   <div class="container_table bg-white shadow-md">
     <!-- Button criar projetos -->
     <div class=" container__header__table">
-      <button class="button bg-green-500 hover:bg-green-700 shadow-md hover:shadow-lg" [routerLink]="['novo']">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-          class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-        </svg>
-        Adicionar projeto
-      </button>
-    </div>
+      <div class="container_options">
+        
+      </div>    
+      <div class="container_button">
+        <button class="button bg-green-500 hover:bg-green-700 shadow-md hover:shadow-lg" [routerLink]="['novo']">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          Adicionar projeto
+        </button>
+      </div>
+      </div>
     <!-- End button criar projetos -->
 
     <!-- Tabela -->
@@ -21,30 +26,30 @@
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8 container-table">
           <div class="overflow-hidden rounded">
-            <table class="min-w-full text-left text-sm font-light table-auto	">
+            <table class="min-w-full text-left text-sm font-light table-auto">
               <thead class="border-b border-red-300 font-medium ">
                 <tr>
-                  <th scope="col" class="px-6 py-4 text-zinc-800">Nome</th>
-                  <th scope="col" class="px-6 py-4 text-zinc-800">Data Inicial</th>
-                  <th scope="col" class="px-6 py-4 text-zinc-800">Data Entrega</th>
-                  <th scope="col" class="px-6 py-4 text-zinc-800">Status</th>
-                  <th scope="col" class="px-6 py-4 text-zinc-800">Valor</th>
-                  <th scope="col" class="px-6 py-4 text-zinc-800"></th>
+                  <th scope="col" class="px-3 py-1 bg-red-400 text-white">Nome</th>
+                  <th scope="col" class="px-3 py-1 bg-red-400 text-white">Data Inicial</th>
+                  <th scope="col" class="px-3 py-1 bg-red-400 text-white">Data Entrega</th>
+                  <th scope="col" class="px-3 py-1 bg-red-400 text-white">Status</th>
+                  <th scope="col" class="px-3 py-1 bg-red-400 text-white">Valor</th>
+                  <th scope="col" class="px-3 py-1 bg-red-400 text-white"></th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="border-b transition duration-300 ease-in-out hover:bg-stone-50  hover:cursor-pointer" *ngFor="let projeto of Projetos.data | paginate: { itemsPerPage: 5,
                       currentPage: Projetos.paginaAtual,
                       totalItems: Projetos.totalItens}">
-                  <td class="whitespace-nowrap px-6 py-4">{{projeto.nome}}</td>
-                  <td class="whitespace-nowrap px-6 py-4">{{projeto.dataInicio}}</td>
-                  <td class="whitespace-nowrap px-6 py-4">{{projeto.dataEntrega}}</td>
-                  <td class="whitespace-nowrap px-6 py-4">
+                  <td class="whitespace-nowrap px-3 py-3">{{projeto.nome}}</td>
+                  <td class="whitespace-nowrap px-3 py-3">{{projeto.dataInicio}}</td>
+                  <td class="whitespace-nowrap px-3 py-3">{{projeto.dataEntrega}}</td>
+                  <td class="whitespace-nowrap px-3 py-3">
                     <span [ngClass]="validarStatus(projeto)"
                       class="text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">{{projeto.status}}</span>
                   </td>
-                  <td class="whitespace-nowrap px-6 py-4">R$ {{projeto.valor}}</td>
-                  <td class="whitespace-nowrap px-6 py-4 flex gap-3">
+                  <td class="whitespace-nowrap px-3 py-3">R$ {{projeto.valor}}</td>
+                  <td class="whitespace-nowrap px-3 py-3 flex gap-3">
                     <button (click)="abrirDialogDelete(projeto)">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6 stroke-red-600 cursor-pointer"

@@ -22,7 +22,10 @@ export class ProjetosService {
   constructor(private http: HttpClient) { }
 
   buscarProjetos(pagina: number, resultado?: number): Observable<Projetos> {
-    return this.http.get<Projetos>(`${this.urlProjetos}/projetos/${pagina}`)
+    if(resultado === undefined) {
+      return this.http.get<Projetos>(`${this.urlProjetos}/projetos/${pagina}`)
+    }
+    return this.http.get<Projetos>(`${this.urlProjetos}/projetos/${pagina}/${resultado}`)
   }
 
   buscarProjeto(id: string): Observable<ProjetoUnico> {
