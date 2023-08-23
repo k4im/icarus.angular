@@ -6,6 +6,7 @@ import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.compo
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   aguardandoDados: boolean = true;
   loading: boolean = false;
   primeiraRequisicao: boolean = true;
+  formSearch!: FormGroup
   /** Final das Variaveis */
   
   /** Construtor */
@@ -30,7 +32,8 @@ export class ProjetosComponent implements OnInit, OnDestroy {
     public dialog: MatDialog, 
     private projetoService: ProjetosService, 
     private toast: NgToastService,
-    private route: Router) {
+    private route: Router,
+    private buider: FormBuilder) {
     this.deleteSub = this.projetoService.listen().subscribe((m: any) => {
       console.log("Removido projeto: " + m);
       this.atualizarPagina(m);
@@ -42,6 +45,9 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.primeiraRequisicao = false;
     this.buscarProjetos(this.paginaAtual);
+    this.formSearch = this.buider.group({
+      searchInput: [null, [Validators.required]]
+    })
   }
   /** Final Operações realizadas */
   atualizarItensPorPagina(evento: any) {
@@ -163,6 +169,13 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   }
   /** Final metodos de chamadas ao serviço */
 
+  filtrarTabela() {
+    console.log(this.searchFilter.value);
+  }
+
+  get searchFilter() {
+   return this.formSearch.get("searchInput")!  
+  }
   /** Metodo executado quando o componente é destruido */
   ngOnDestroy(): void {
     this.deleteSub.unsubscribe();

@@ -6,14 +6,14 @@
   <div class="container_table bg-white shadow-md">
     <!-- Button criar projetos -->
     <div class=" container__header__table">
-      <div class="container_options">
+      <div class="container_options flex content-center justify-center">
         <div class="container_select flex gap-1">
-          <label for="itensPerPage">Resultados por pagina:</label>
+          <label for="itensPerPage" class="pt-1">Resultados por pagina:</label>
           <select id="itensPerPage" [(ngModel)]="ItensPorPagina" (ngModelChange)="atualizarItensPorPagina($event)" class="border text-black 
           text-sm rounded-lg 
           focus:ring-blue-500 
           focus:border-blue-500 block 
-          w-10 p-1 
+          w-10 h-8 p-1 
           dark:placeholder-gray-400 
           dark:text-white 
           dark:focus:ring-blue-500 
@@ -22,7 +22,17 @@
               <option value="10">10</option>
               <option value="50">50</option>
           </select>
-        </div>        
+          <form formDir="ngForm" (ngSubmit)="filtrarTabela()" [formGroup]="formSearch" class="flex gap-2">
+            <input type="text" formControlName="searchInput" class="rounded border w-60 h-8 input-field">
+            <button type="submit" class="btn bg-blue-500 rounded h-8 shadow-sm hover:shadow-md hover:bg-blue-600 ">
+                <div class="container">
+                  <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                </svg>
+                </div>
+            </button>  
+          </form>
+        </div>
       </div>    
       <div class="container_button">
         <button class="button bg-green-500 hover:bg-green-700 shadow-md hover:shadow-lg" [routerLink]="['novo']">
@@ -44,12 +54,12 @@
             <table class="min-w-full text-left text-sm font-light table-auto">
               <thead class="border-b border-red-300 font-medium ">
                 <tr>
-                  <th scope="col" class="px-3 py-1 bg-red-400 text-white">Nome</th>
-                  <th scope="col" class="px-3 py-1 bg-red-400 text-white">Data Inicial</th>
-                  <th scope="col" class="px-3 py-1 bg-red-400 text-white">Data Entrega</th>
-                  <th scope="col" class="px-3 py-1 bg-red-400 text-white">Status</th>
-                  <th scope="col" class="px-3 py-1 bg-red-400 text-white">Valor</th>
-                  <th scope="col" class="px-3 py-1 bg-red-400 text-white"></th>
+                  <th scope="col" class="px-3 py-1 bg-red-500 text-white">Nome</th>
+                  <th scope="col" class="px-3 py-1 bg-red-500 text-white">Data Inicial</th>
+                  <th scope="col" class="px-3 py-1 bg-red-500 text-white">Data Entrega</th>
+                  <th scope="col" class="px-3 py-1 bg-red-500 text-white">Status</th>
+                  <th scope="col" class="px-3 py-1 bg-red-500 text-white">Valor</th>
+                  <th scope="col" class="px-3 py-1 bg-red-500 text-white"></th>
                 </tr>
               </thead>
               <tbody>
