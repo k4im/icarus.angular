@@ -1,10 +1,11 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Projeto, Projetos } from 'src/app/Interfaces/IProjetos';
 import { ProjetosService } from 'src/app/services/projetos.service';
 import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.component';
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,9 +13,10 @@ import { Router } from '@angular/router';
   templateUrl: './projetos.component.html',
   styleUrls: ['./projetos.component.scss'],
 })
-export class ProjetosComponent implements OnInit {
+export class ProjetosComponent implements OnInit, OnDestroy {
   
   /** Variaveis mutaveis pelos dados da api */
+  deleteSub!: Subscription;
   paginaAtual: number = 1;
   Projetos: Projetos = { data: [], paginaAtual: 0, totalDePaginas: 0, totalItens: 0 };
   aguardandoDados: boolean = true;
@@ -26,7 +28,7 @@ export class ProjetosComponent implements OnInit {
     private projetoService: ProjetosService, 
     private toast: NgToastService,
     private route: Router) {
-    this.projetoService.listen().subscribe((m: any) => {
+    this.deleteSub = this.projetoService.listen().subscribe((m: any) => {
       console.log("Removido projeto: " + m);
       this.atualizarPagina(m);
     })
@@ -88,22 +90,24 @@ export class ProjetosComponent implements OnInit {
         this.Projetos = result
         this.paginaAtual = result.paginaAtual
         this.aguardandoDados = false
-        this.toast.success({ detail: "✔️ Sucesso", summary: 'Projetos carregados com sucesso!', duration: 750 })
       },
       erro => {
         if (erro.status === 0) {
+          this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
           console.log("Não foi possivel realizar a comunicação!")
-          this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel carregar os Projetos!', duration: 950 })
         }
 
         if (erro.status === 404) {
+          this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto foi encontrado!', duration: 2500 })
           console.log("Nenhum projeto foi encontrado!")
-          this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto encontrado!', duration: 750 })
         }
         if (erro.status === 500) {
-          this.toast.error({ detail: " ❌ Erro", summary: 'O servidor não conseguiu carregar os projetos!', duration: 1000 })
+          this.toast.error({ detail: " ❌ Erro", summary: 'O servidor não conseguiu carregar os projetos!', duration: 2500 })
           console.log("Houve um erro no servidor!")
         }
+      },
+      () => {
+        this.toast.success({ detail: "✔️ Sucesso", summary: 'Projetos carregados com sucesso!', duration: 750 })
       }
     );
   }
@@ -138,4 +142,10 @@ export class ProjetosComponent implements OnInit {
     );
   }
   /** Final metodos de chamadas ao serviço */
+
+  /** Metodo executado quando o componente é destruido */
+  ngOnDestroy(): void {
+    this.deleteSub.unsubscribe();
+  }
+ /** Final metodo de destruição */
 }
