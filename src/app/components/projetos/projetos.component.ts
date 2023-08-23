@@ -21,6 +21,8 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   ItensPorPagina: number = 5;
   Projetos: Projetos = { data: [], paginaAtual: 0, totalDePaginas: 0, totalItens: 0 };
   aguardandoDados: boolean = true;
+  loading: boolean = false;
+  primeiraRequisicao: boolean = true;
   /** Final das Variaveis */
   
   /** Construtor */
@@ -38,10 +40,11 @@ export class ProjetosComponent implements OnInit, OnDestroy {
 
   /** Operações realizadas ao inicilizar component */
   ngOnInit(): void {
+    this.primeiraRequisicao = false;
     this.buscarProjetos(this.paginaAtual);
   }
   /** Final Operações realizadas */
-  print(evento: any) {
+  atualizarItensPorPagina(evento: any) {
     this.buscarProjetos(this.paginaAtual, evento)
   }
   /** Validar status do projeto para adicionar adequadamente as classes ao status */
@@ -64,7 +67,9 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   /** Chamada publica ao evento de click ao mudar de pagina */
   mudarDePagina(event: any) {
     this.paginaAtual = event;
-    this.buscarProjetos(event, this.ItensPorPagina);
+    this.primeiraRequisicao = false;
+    this.loading = true;
+    this.buscarProjetos(this.paginaAtual, this.ItensPorPagina);
   }
   /** Final chamada publica */
 
@@ -94,6 +99,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
         this.Projetos = result
         this.paginaAtual = result.paginaAtual
         this.aguardandoDados = false
+        this.loading = false;
       },
       erro => {
         if (erro.status === 0) {
@@ -122,6 +128,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
         this.paginaAtual = result.paginaAtual
         this.ItensPorPagina = resultado
         this.aguardandoDados = false
+        this.loading = false;
       },
       erro => {
         if (erro.status === 0) {
@@ -139,7 +146,9 @@ export class ProjetosComponent implements OnInit, OnDestroy {
         }
       },
       () => {
-        this.toast.success({ detail: "✔️ Sucesso", summary: 'Projetos carregados com sucesso!', duration: 750 })
+        if(this.primeiraRequisicao) {
+          this.toast.success({ detail: "✔️ Sucesso", summary: 'Projetos carregados com sucesso!', duration: 750 })
+        }
       }
     );
    }
