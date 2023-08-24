@@ -61,6 +61,10 @@
     padding-left: 8px;
 }
 
+::ng-deep .mdc-switch .mdc-switch--selected .mdc-switch--checked {
+    background-color: red;
+}
+
 @media (max-width: 500px) {
     .container-table th {
         display: none;

@@ -37,10 +37,6 @@
             </button>
           </form>
         </div>
-        <div class="container__toggle ml-16  mt-1 flex gap-3">
-          <mat-slide-toggle [color]="">Status atrasados!</mat-slide-toggle>
-          <mat-slide-toggle>Status pendentes!</mat-slide-toggle>
-        </div>
       </div>
       <div class="container_button">
         <button class="button bg-green-500 hover:bg-green-700 shadow-md hover:shadow-lg" [routerLink]="['novo']">
@@ -101,7 +97,7 @@
                 </tr>
               </tbody>
             </table>
-            <ngx-skeleton-loader *ngIf="aguardandoDados" count="10" appearance="line"></ngx-skeleton-loader>
+            <ngx-skeleton-loader *ngIf="aguardandoDados" count="9" appearance="line"></ngx-skeleton-loader>
           </div>
         </div>
       </div>

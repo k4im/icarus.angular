@@ -27,7 +27,6 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   primeiraRequisicao: boolean = true;
   formSearch!: FormGroup
   dataInical!: Date;
-  color = '#22c55e';
   /** Final das Variaveis */
 
   /** Construtor */
