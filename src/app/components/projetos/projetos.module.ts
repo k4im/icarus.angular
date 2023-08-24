@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { ProjetosComponent } from './projetos.component';
 import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.component';
@@ -33,6 +34,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     HttpClientModule,
     NgToastModule,
+    MatSlideToggleModule,
     FormsModule,
     ReactiveFormsModule,
     NgxSkeletonLoaderModule,

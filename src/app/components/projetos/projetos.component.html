@@ -5,7 +5,7 @@
   </div>
   <div class="container_table bg-white shadow-md">
     <!-- Button criar projetos -->
-    <div class=" container__header__table">
+    <div class=" container__header__table mb-3">
       <div class="container_options flex content-center justify-center">
         <div class="container_select flex gap-1">
           <label for="itensPerPage" class="pt-1">Resultados por pagina:</label>
@@ -24,7 +24,8 @@
             <option value="50">50</option>
           </select>
           <form formDir="ngForm" (ngSubmit)="filtrarTabela()" [formGroup]="formSearch" class="flex gap-2">
-            <input type="text" formControlName="searchInput" class="rounded border w-60 h-8 input-field">
+            <input type="text" formControlName="searchInput" placeholder="Pesquise por nome ou status"
+              class="rounded border w-60 h-8 input-field">
             <button type="submit" class="btn bg-blue-500 rounded h-8 shadow-sm hover:shadow-md hover:bg-blue-600 ">
               <div class="container">
                 <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -35,6 +36,10 @@
               </div>
             </button>
           </form>
+        </div>
+        <div class="container__toggle ml-16  mt-1 flex gap-3">
+          <mat-slide-toggle [color]="">Status atrasados!</mat-slide-toggle>
+          <mat-slide-toggle>Status pendentes!</mat-slide-toggle>
         </div>
       </div>
       <div class="container_button">
@@ -50,7 +55,7 @@
     <!-- End button criar projetos -->
 
     <!-- Tabela -->
-    <div class="flex flex-col table__container table-auto	">
+    <div class="flex flex-col table__container table-auto h-96">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8 container-table">
           <div class="overflow-hidden rounded">
@@ -70,8 +75,8 @@
                       currentPage: Projetos.paginaAtual,
                       totalItems: Projetos.totalItens}">
                   <td class="whitespace-nowrap px-3 py-3">{{projeto.nome}}</td>
-                  <td class="whitespace-nowrap px-3 py-3">{{projeto.dataInicio}}</td>
-                  <td class="whitespace-nowrap px-3 py-3">{{projeto.dataEntrega}}</td>
+                  <td class="whitespace-nowrap px-3 py-3">{{projeto.dataInicio | date }}</td>
+                  <td class="whitespace-nowrap px-3 py-3">{{projeto.dataEntrega | date }}</td>
                   <td class="whitespace-nowrap px-3 py-3">
                     <span [ngClass]="validarStatus(projeto)"
                       class="text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">{{projeto.status}}</span>
@@ -121,7 +126,7 @@
           </p>
           <div role="status">
             <svg aria-hidden="true" [ngClass]="{'hidden': !loading}"
-              class="inline w-4 h-4 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+              class="inline w-4 h-4 mb-2 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
               viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"

@@ -7,6 +7,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ThemePalette } from '@angular/material/core';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./projetos.component.scss'],
 })
 export class ProjetosComponent implements OnInit, OnDestroy {
-  
+
   /** Variaveis mutaveis pelos dados da api */
   deleteSub!: Subscription;
   paginaAtual: number = 1;
@@ -25,12 +26,14 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   loading: boolean = false;
   primeiraRequisicao: boolean = true;
   formSearch!: FormGroup
+  dataInical!: Date;
+  color = '#22c55e';
   /** Final das Variaveis */
-  
+
   /** Construtor */
   constructor(
-    public dialog: MatDialog, 
-    private projetoService: ProjetosService, 
+    public dialog: MatDialog,
+    private projetoService: ProjetosService,
     private toast: NgToastService,
     private route: Router,
     private buider: FormBuilder) {
@@ -61,7 +64,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
         return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300"
       case "Produção":
         return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
-      case "Cancelado": 
+      case "Cancelado":
         return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
       case "Atrasado":
         return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
@@ -99,67 +102,67 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   /** Final abrir modal edit */
 
   /** Metodos de chamadas ao serviço */
-  private buscarProjetos(pagina: number, resultado? :number) {
-   if(resultado === undefined) {
-    this.projetoService.buscarProjetos(pagina).subscribe(
-      (result) => {
-        this.Projetos = result
-        this.paginaAtual = result.paginaAtual
-        this.aguardandoDados = false
-        this.loading = false;
-      },
-      erro => {
-        if (erro.status === 0) {
-          this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
-          console.log("Não foi possivel realizar a comunicação!")
-        }
+  private buscarProjetos(pagina: number, resultado?: number) {
+    if (resultado === undefined) {
+      this.projetoService.buscarProjetos(pagina).subscribe(
+        (result: Projetos) => {
+          this.Projetos = result
+          this.paginaAtual = result.paginaAtual
+          this.aguardandoDados = false
+          this.loading = false;
+        },
+        erro => {
+          if (erro.status === 0) {
+            this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
+            console.log("Não foi possivel realizar a comunicação!")
+          }
 
-        if (erro.status === 404) {
-          this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto foi encontrado!', duration: 2500 })
-          console.log("Nenhum projeto foi encontrado!")
-        }
-        if (erro.status === 500) {
-          this.toast.error({ detail: " ❌ Erro", summary: 'O servidor não conseguiu carregar os projetos!', duration: 2500 })
-          console.log("Houve um erro no servidor!")
-        }
-      },
-      () => {
-        this.toast.success({ detail: "✔️ Sucesso", summary: 'Projetos carregados com sucesso!', duration: 750 })
-      }
-    );
-   }
-   else {
-    this.projetoService.buscarProjetos(pagina, resultado).subscribe(
-      (result) => {
-        this.Projetos = result
-        this.paginaAtual = result.paginaAtual
-        this.ItensPorPagina = resultado
-        this.aguardandoDados = false
-        this.loading = false;
-      },
-      erro => {
-        if (erro.status === 0) {
-          this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
-          console.log("Não foi possivel realizar a comunicação!")
-        }
-
-        if (erro.status === 404) {
-          this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto foi encontrado!', duration: 2500 })
-          console.log("Nenhum projeto foi encontrado!")
-        }
-        if (erro.status === 500) {
-          this.toast.error({ detail: " ❌ Erro", summary: 'O servidor não conseguiu carregar os projetos!', duration: 2500 })
-          console.log("Houve um erro no servidor!")
-        }
-      },
-      () => {
-        if(this.primeiraRequisicao) {
+          if (erro.status === 404) {
+            this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto foi encontrado!', duration: 2500 })
+            console.log("Nenhum projeto foi encontrado!")
+          }
+          if (erro.status === 500) {
+            this.toast.error({ detail: " ❌ Erro", summary: 'O servidor não conseguiu carregar os projetos!', duration: 2500 })
+            console.log("Houve um erro no servidor!")
+          }
+        },
+        () => {
           this.toast.success({ detail: "✔️ Sucesso", summary: 'Projetos carregados com sucesso!', duration: 750 })
         }
-      }
-    );
-   }
-   
+      );
+    }
+    else {
+      this.projetoService.buscarProjetos(pagina, resultado).subscribe(
+        (result) => {
+          this.Projetos = result
+          this.paginaAtual = result.paginaAtual
+          this.ItensPorPagina = resultado
+          this.aguardandoDados = false
+          this.loading = false;
+        },
+        erro => {
+          if (erro.status === 0) {
+            this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
+            console.log("Não foi possivel realizar a comunicação!")
+          }
+
+          if (erro.status === 404) {
+            this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto foi encontrado!', duration: 2500 })
+            console.log("Nenhum projeto foi encontrado!")
+          }
+          if (erro.status === 500) {
+            this.toast.error({ detail: " ❌ Erro", summary: 'O servidor não conseguiu carregar os projetos!', duration: 2500 })
+            console.log("Houve um erro no servidor!")
+          }
+        },
+        () => {
+          if (this.primeiraRequisicao) {
+            this.toast.success({ detail: "✔️ Sucesso", summary: 'Projetos carregados com sucesso!', duration: 750 })
+          }
+        }
+      );
+    }
+
   }
 
   private atualizarPagina(id: string) {
@@ -171,14 +174,17 @@ export class ProjetosComponent implements OnInit, OnDestroy {
 
   filtrarTabela() {
     console.log(this.searchFilter.value);
+    let str = "2023-08-16T18:49:03.297";
+    let data = new Date(str);
+    console.log(data.toLocaleDateString('pt-br'));
   }
 
   get searchFilter() {
-   return this.formSearch.get("searchInput")!  
+    return this.formSearch.get("searchInput")!
   }
   /** Metodo executado quando o componente é destruido */
   ngOnDestroy(): void {
     this.deleteSub.unsubscribe();
   }
- /** Final metodo de destruição */
+  /** Final metodo de destruição */
 }
