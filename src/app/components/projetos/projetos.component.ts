@@ -18,6 +18,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ProjetosComponent implements OnInit, OnDestroy {
 
   /** Variaveis mutaveis pelos dados da api */
+  filtro!: string;
   deleteSub!: Subscription;
   paginaAtual: number = 1;
   ItensPorPagina: number = 5;
@@ -106,6 +107,21 @@ export class ProjetosComponent implements OnInit, OnDestroy {
         }
       );
     }
+    else if (this.filtro !== null){
+      console.log("Bateu")
+      this.projetoService.FiltrarBusca(this.filtro, pagina, resultado).subscribe(
+        (result) => {
+          this.Projetos = result
+          this.paginaAtual = result.paginaAtual
+          this.ItensPorPagina = resultado
+          this.aguardandoDados = false
+          this.loading = false;
+        },
+        (erro : HttpErrorResponse) => {
+          this.validarResponse(erro)
+        },
+      )
+    }
     else {
       this.projetoService.buscarProjetos(pagina, resultado).subscribe(
         (result) => {
@@ -136,7 +152,17 @@ export class ProjetosComponent implements OnInit, OnDestroy {
 
   /** Metodo utilizado para realizar consulta em status e nome */
   filtrarTabela() {
-    console.log('Este é o valor inserido no searchbar' + this.searchFilter.value);
+    this.filtro = this.searchFilter.value;
+    console.log('Filtro: ' + this.filtro);
+    console.log('Pagina:' + this.paginaAtual);
+    console.log('Itens por Pagina: ' + this.ItensPorPagina);
+    this.projetoService.FiltrarBusca(this.filtro, this.paginaAtual, this.ItensPorPagina).subscribe(
+      (result) => {
+        this.Projetos = result
+        this.paginaAtual = result.paginaAtual
+        this.aguardandoDados = false
+        this.loading = false;      }
+    );
   }
   /** Final metodo para buscar status ou nome */
 

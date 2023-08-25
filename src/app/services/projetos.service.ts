@@ -52,6 +52,10 @@ export class ProjetosService {
     return this.http.put(`${this.urlProjetos}/update/${id}`, status, {params: parames});
   }
 
+  FiltrarBusca(filtro: string, pagina: number, resultado? : number) : Observable<Projetos> {
+    let parames = new HttpParams().append("filtro", filtro);
+    return this.http.get<Projetos>(`${this.urlProjetos}/pesquisar/${pagina}/${resultado}`, {params: parames});
+  }
   /** Criação de observable para disparo de eventos delete | error  */
   private _listerner = new Subject<any>();
   listen(): Observable<any> {
