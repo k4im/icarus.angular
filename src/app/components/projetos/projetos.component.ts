@@ -5,7 +5,7 @@ import { ProjetosService } from 'src/app/services/projetos.service';
 import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.component';
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { EMPTY, Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -96,30 +96,32 @@ export class ProjetosComponent implements OnInit, OnDestroy {
         (result: Projetos) => {
           this.Projetos = result
           this.paginaAtual = result.paginaAtual
-          this.aguardandoDados = false
-          this.loading = false;
         },
         (erro : HttpErrorResponse) => {
           this.validarResponse(erro)
         },
         () => {
           this.toast.success({ detail: "✔️ Sucesso", summary: 'Projetos carregados com sucesso!', duration: 750 })
+          this.aguardandoDados = false
+          this.loading = false;
         }
       );
     }
-    else if (this.filtro !== null){
-      console.log("Bateu")
+    else if (this.filtro !== null && this.filtro !== undefined && this.filtro !== ''){
+      console.log('Filtro é ' + this.filtro)
       this.projetoService.FiltrarBusca(this.filtro, pagina, resultado).subscribe(
         (result) => {
           this.Projetos = result
           this.paginaAtual = result.paginaAtual
           this.ItensPorPagina = resultado
-          this.aguardandoDados = false
-          this.loading = false;
         },
         (erro : HttpErrorResponse) => {
           this.validarResponse(erro)
         },
+        () => {
+          this.aguardandoDados = false
+          this.loading = false;
+        }
       )
     }
     else {
@@ -128,8 +130,6 @@ export class ProjetosComponent implements OnInit, OnDestroy {
           this.Projetos = result
           this.paginaAtual = result.paginaAtual
           this.ItensPorPagina = resultado
-          this.aguardandoDados = false
-          this.loading = false;
         },
         (erro : HttpErrorResponse) => {
           this.validarResponse(erro)
@@ -138,6 +138,8 @@ export class ProjetosComponent implements OnInit, OnDestroy {
           if (this.primeiraRequisicao) {
             this.toast.success({ detail: "✔️ Sucesso", summary: 'Projetos carregados com sucesso!', duration: 750 })
           }
+          this.aguardandoDados = false
+          this.loading = false;
         }
       );
     }
@@ -153,16 +155,30 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   /** Metodo utilizado para realizar consulta em status e nome */
   filtrarTabela() {
     this.filtro = this.searchFilter.value;
-    console.log('Filtro: ' + this.filtro);
-    console.log('Pagina:' + this.paginaAtual);
-    console.log('Itens por Pagina: ' + this.ItensPorPagina);
-    this.projetoService.FiltrarBusca(this.filtro, this.paginaAtual, this.ItensPorPagina).subscribe(
-      (result) => {
-        this.Projetos = result
-        this.paginaAtual = result.paginaAtual
-        this.aguardandoDados = false
-        this.loading = false;      }
-    );
+    if(this.filtro !== null) {
+      this.loading = true;
+      this.projetoService.FiltrarBusca(this.filtro, this.paginaAtual, this.ItensPorPagina).subscribe(
+        (result) => {
+          this.Projetos = result
+          this.paginaAtual = result.paginaAtual
+        },
+        (erro : HttpErrorResponse) => {
+          this.validarResponse(erro);
+        },
+        () => {
+          this.aguardandoDados = false
+          this.loading = false;
+        }
+      );
+    }
+  }
+
+  limparFiltro(){
+    this.filtro = "";
+    this.formSearch.reset();
+    document.getElementById("searchInput")
+    this.loading = true;
+    this.buscarProjetos(this.paginaAtual, this.ItensPorPagina);
   }
   /** Final metodo para buscar status ou nome */
 
@@ -172,19 +188,23 @@ export class ProjetosComponent implements OnInit, OnDestroy {
       case 0:
         this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
         console.log("Não foi possivel realizar a comunicação!")
+        this.loading = false;
         break;
       
       case 404:
         this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto foi encontrado!', duration: 2500 })
         console.log("Nenhum projeto foi encontrado!")
+        this.loading = false;
         break;
       case 500:
         this.toast.error({ detail: " ❌ Erro", summary: 'O servidor não conseguiu carregar os projetos!', duration: 2500 })
         console.log("Houve um erro no servidor!")
+        this.loading = false;
         break
       default:
         this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
         console.log("Não foi possivel realizar a comunicação!")
+        this.loading = false;
         break;
     }
   }
