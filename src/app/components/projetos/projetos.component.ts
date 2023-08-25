@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Projeto, Projetos } from 'src/app/Interfaces/IProjetos';
 import { ProjetosService } from 'src/app/services/projetos.service';
@@ -7,7 +7,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ThemePalette } from '@angular/material/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -52,27 +52,16 @@ export class ProjetosComponent implements OnInit, OnDestroy {
     })
   }
   /** Final Operações realizadas */
+
+  /** Metodo utilizado para atualizar quantidade de resultados por pagina */
   atualizarItensPorPagina(evento: any) {
     this.loading = true;
     this.buscarProjetos(this.paginaAtual, evento)
   }
-  /** Validar status do projeto para adicionar adequadamente as classes ao status */
-  validarStatus(projeto: Projeto): string {
-    switch (projeto.status) {
-      case "Pendente":
-        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300"
-      case "Produção":
-        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
-      case "Cancelado":
-        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
-      case "Atrasado":
-        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
-      default:
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
-    }
-  }
-  /** Final validação */
+  /** Final metodo que atualiza quantidade de itens por pagina */
+ 
 
+ 
   /** Chamada publica ao evento de click ao mudar de pagina */
   mudarDePagina(event: any) {
     this.paginaAtual = event;
@@ -87,7 +76,6 @@ export class ProjetosComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(RemoverProjetoComponent, {
       data: { id: eventoClick.id, nome: eventoClick.nome }
     });
-
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
     });
@@ -110,20 +98,8 @@ export class ProjetosComponent implements OnInit, OnDestroy {
           this.aguardandoDados = false
           this.loading = false;
         },
-        erro => {
-          if (erro.status === 0) {
-            this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
-            console.log("Não foi possivel realizar a comunicação!")
-          }
-
-          if (erro.status === 404) {
-            this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto foi encontrado!', duration: 2500 })
-            console.log("Nenhum projeto foi encontrado!")
-          }
-          if (erro.status === 500) {
-            this.toast.error({ detail: " ❌ Erro", summary: 'O servidor não conseguiu carregar os projetos!', duration: 2500 })
-            console.log("Houve um erro no servidor!")
-          }
+        (erro : HttpErrorResponse) => {
+          this.validarResponse(erro)
         },
         () => {
           this.toast.success({ detail: "✔️ Sucesso", summary: 'Projetos carregados com sucesso!', duration: 750 })
@@ -139,20 +115,8 @@ export class ProjetosComponent implements OnInit, OnDestroy {
           this.aguardandoDados = false
           this.loading = false;
         },
-        erro => {
-          if (erro.status === 0) {
-            this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
-            console.log("Não foi possivel realizar a comunicação!")
-          }
-
-          if (erro.status === 404) {
-            this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto foi encontrado!', duration: 2500 })
-            console.log("Nenhum projeto foi encontrado!")
-          }
-          if (erro.status === 500) {
-            this.toast.error({ detail: " ❌ Erro", summary: 'O servidor não conseguiu carregar os projetos!', duration: 2500 })
-            console.log("Houve um erro no servidor!")
-          }
+        (erro : HttpErrorResponse) => {
+          this.validarResponse(erro)
         },
         () => {
           if (this.primeiraRequisicao) {
@@ -161,7 +125,6 @@ export class ProjetosComponent implements OnInit, OnDestroy {
         }
       );
     }
-
   }
 
   private atualizarPagina(id: string) {
@@ -171,16 +134,60 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   }
   /** Final metodos de chamadas ao serviço */
 
+  /** Metodo utilizado para realizar consulta em status e nome */
   filtrarTabela() {
-    console.log(this.searchFilter.value);
-    let str = "2023-08-16T18:49:03.297";
-    let data = new Date(str);
-    console.log(data.toLocaleDateString('pt-br'));
+    console.log('Este é o valor inserido no searchbar' + this.searchFilter.value);
   }
+  /** Final metodo para buscar status ou nome */
 
+  /** Validadores de httpResponse */
+  private validarResponse(error : HttpErrorResponse){
+    switch (error.status) {
+      case 0:
+        this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
+        console.log("Não foi possivel realizar a comunicação!")
+        break;
+      
+      case 404:
+        this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto foi encontrado!', duration: 2500 })
+        console.log("Nenhum projeto foi encontrado!")
+        break;
+      case 500:
+        this.toast.error({ detail: " ❌ Erro", summary: 'O servidor não conseguiu carregar os projetos!', duration: 2500 })
+        console.log("Houve um erro no servidor!")
+        break
+      default:
+        this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
+        console.log("Não foi possivel realizar a comunicação!")
+        break;
+    }
+  }
+  /** Final http response */
+
+ /** Validar status do projeto para adicionar adequadamente as classes ao status */
+  validarStatus(projeto: Projeto): string {
+    switch (projeto.status) {
+      case "Pendente":
+        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300"
+      case "Produção":
+        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
+      case "Cancelado":
+        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
+      case "Atrasado":
+        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
+      default:
+        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
+    }
+  }
+  /** Final validação */
+
+
+  /** Getters para forms */
   get searchFilter() {
     return this.formSearch.get("searchInput")!
   }
+  /** Final Getters de forms */
+
   /** Metodo executado quando o componente é destruido */
   ngOnDestroy(): void {
     this.deleteSub.unsubscribe();
