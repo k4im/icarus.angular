@@ -96,6 +96,7 @@ export class NovoProjetoComponent implements OnInit {
     },
     () =>  {
       this.toast.success({ detail: "✔️ Sucesso", summary: 'Produto criado com sucesso!', duration: 5000 });
+      this.router.navigate(["/projetos"])
     }
     );
   }
