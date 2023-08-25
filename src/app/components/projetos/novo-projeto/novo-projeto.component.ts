@@ -45,8 +45,8 @@ export class NovoProjetoComponent implements OnInit {
   submitProjeto() {
     let projeto: CriarProjetoDTO = {
       nome: this.nomeGetter.value,
-      dataEntrega: this.pipe.transform(this.dataInicioGetter.value, "yyyy-MM-ddThh:mm:ss.SSS"),
-      dataInicio: this.pipe.transform(this.dataEntregaGetter.value, "yyyy-MM-ddThh:mm:ss.SSS"),
+      dataEntrega: this.pipe.transform(this.dataEntregaGetter.value, "yyyy-MM-ddThh:mm:ss.SSS"),
+      dataInicio: this.pipe.transform(this.dataInicioGetter.value, "yyyy-MM-ddThh:mm:ss.SSS"),
       descricao: this.descricaoGetter.value,
       produtoUtilizadoId: this.produtoGetter.value,
       status: this.statusGetter.value,
