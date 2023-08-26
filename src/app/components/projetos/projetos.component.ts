@@ -19,6 +19,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
 
   /** Variaveis mutaveis pelos dados da api */
   filtro!: string;
+  filtroSelect: string = 'Filtrar por status';
   deleteSub!: Subscription;
   paginaAtual: number = 1;
   ItensPorPagina: number = 5;
@@ -107,6 +108,23 @@ export class ProjetosComponent implements OnInit, OnDestroy {
         }
       );
     }
+    else if (this.filtroSelect !== null && this.filtroSelect !== undefined && this.filtroSelect !== 'Filtrar por status') {
+      console.log('FiltroSelect é ' + this.filtroSelect)
+      this.projetoService.FiltrarBusca(this.filtroSelect, pagina, resultado).subscribe(
+        (result) => {
+          this.Projetos = result
+          this.paginaAtual = result.paginaAtual
+          this.ItensPorPagina = resultado
+        },
+        (erro: HttpErrorResponse) => {
+          this.validarResponse(erro)
+        },
+        () => {
+          this.aguardandoDados = false
+          this.loading = false;
+        }
+      )
+    }
     else if (this.filtro !== null && this.filtro !== undefined && this.filtro !== '') {
       console.log('Filtro é ' + this.filtro)
       this.projetoService.FiltrarBusca(this.filtro, pagina, resultado).subscribe(
@@ -182,6 +200,31 @@ export class ProjetosComponent implements OnInit, OnDestroy {
     document.getElementById("searchInput")
     this.loading = true;
     this.buscarProjetos(this.paginaAtual, this.ItensPorPagina);
+  }
+
+  filtrarPorStatus(evento: any) {
+    if (evento === "Filtrar por status") {
+      this.loading = true;
+      this.buscarProjetos(this.paginaAtual, this.ItensPorPagina);
+    }
+    else {
+      console.log(evento);
+      this.filtroSelect = evento
+      this.loading = true;
+      this.projetoService.FiltrarBusca(this.filtroSelect, this.paginaAtual, this.ItensPorPagina).subscribe(
+        (result) => {
+          this.Projetos = result
+          this.paginaAtual = result.paginaAtual
+        },
+        (erro: HttpErrorResponse) => {
+          this.validarResponse(erro);
+        },
+        () => {
+          this.aguardandoDados = false
+          this.loading = false;
+        }
+      );
+    }
   }
   /** Final metodo para buscar status ou nome */
 
