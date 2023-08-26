@@ -60,9 +60,9 @@ export class ProjetosComponent implements OnInit, OnDestroy {
     this.buscarProjetos(this.paginaAtual, evento)
   }
   /** Final metodo que atualiza quantidade de itens por pagina */
- 
 
- 
+
+
   /** Chamada publica ao evento de click ao mudar de pagina */
   mudarDePagina(event: any) {
     this.paginaAtual = event;
@@ -97,7 +97,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
           this.Projetos = result
           this.paginaAtual = result.paginaAtual
         },
-        (erro : HttpErrorResponse) => {
+        (erro: HttpErrorResponse) => {
           this.validarResponse(erro)
         },
         () => {
@@ -107,7 +107,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
         }
       );
     }
-    else if (this.filtro !== null && this.filtro !== undefined && this.filtro !== ''){
+    else if (this.filtro !== null && this.filtro !== undefined && this.filtro !== '') {
       console.log('Filtro é ' + this.filtro)
       this.projetoService.FiltrarBusca(this.filtro, pagina, resultado).subscribe(
         (result) => {
@@ -115,7 +115,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
           this.paginaAtual = result.paginaAtual
           this.ItensPorPagina = resultado
         },
-        (erro : HttpErrorResponse) => {
+        (erro: HttpErrorResponse) => {
           this.validarResponse(erro)
         },
         () => {
@@ -131,7 +131,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
           this.paginaAtual = result.paginaAtual
           this.ItensPorPagina = resultado
         },
-        (erro : HttpErrorResponse) => {
+        (erro: HttpErrorResponse) => {
           this.validarResponse(erro)
         },
         () => {
@@ -155,14 +155,14 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   /** Metodo utilizado para realizar consulta em status e nome */
   filtrarTabela() {
     this.filtro = this.searchFilter.value;
-    if(this.filtro !== null) {
+    if (this.filtro !== null && this.filtro !== '') {
       this.loading = true;
       this.projetoService.FiltrarBusca(this.filtro, this.paginaAtual, this.ItensPorPagina).subscribe(
         (result) => {
           this.Projetos = result
           this.paginaAtual = result.paginaAtual
         },
-        (erro : HttpErrorResponse) => {
+        (erro: HttpErrorResponse) => {
           this.validarResponse(erro);
         },
         () => {
@@ -171,9 +171,12 @@ export class ProjetosComponent implements OnInit, OnDestroy {
         }
       );
     }
+    if (this.filtro === '') {
+      this.limparFiltro();
+    }
   }
 
-  limparFiltro(){
+  limparFiltro() {
     this.filtro = "";
     this.formSearch.reset();
     document.getElementById("searchInput")
@@ -183,14 +186,14 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   /** Final metodo para buscar status ou nome */
 
   /** Validadores de httpResponse */
-  private validarResponse(error : HttpErrorResponse){
+  private validarResponse(error: HttpErrorResponse) {
     switch (error.status) {
       case 0:
         this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
         console.log("Não foi possivel realizar a comunicação!")
         this.loading = false;
         break;
-      
+
       case 404:
         this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto foi encontrado!', duration: 2500 })
         console.log("Nenhum projeto foi encontrado!")
@@ -210,7 +213,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   }
   /** Final http response */
 
- /** Validar status do projeto para adicionar adequadamente as classes ao status */
+  /** Validar status do projeto para adicionar adequadamente as classes ao status */
   validarStatus(projeto: Projeto): string {
     switch (projeto.status) {
       case "Pendente":
