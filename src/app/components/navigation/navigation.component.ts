@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
 export class NavigationComponent {
   
   @Input()
-  estaLogado: boolean = false;
+  usuarioLogado: boolean = false;
 }

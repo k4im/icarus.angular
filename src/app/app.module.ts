@@ -16,8 +16,9 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ProjetosService } from './services/projetos.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthGuard } from './services/Guards/AuthGuard.guard';
 import { NotFoundComponent } from './layouts/not-found/not-found.component';
+import { AuthService } from './services/Auth/auth.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -38,10 +39,11 @@ import { NotFoundComponent } from './layouts/not-found/not-found.component';
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     NgToastModule,
     NgxPaginationModule
   ],
-  providers: [ProjetosService, AuthGuard],
+  providers: [ProjetosService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

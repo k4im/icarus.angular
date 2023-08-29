@@ -5,14 +5,17 @@
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-zinc-600 md:text-2xl">
                     Realize login com sua conta
                 </h1>
-                <form class="space-y-4 md:space-y-6" action="#">
+                <form class="space-y-4 md:space-y-6" 
+                [formGroup]="formGroupLogin" 
+                formDir="ngForm"
+                (ngSubmit)="logar()">
                     <div>
                         <label for="chave" class="block mb-1 text-sm font-medium text-zinc-600">Chave de acesso</label>
-                        <input type="text" name="chave" id="chave" class="border text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  " placeholder="Chave de acesso" required="">
+                        <input formControlName="chave" type="text" name="chave" id="chave" class="border text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  " placeholder="Chave de acesso" required="">
                     </div>
                     <div>
                         <label for="password" class="block mb-1 text-sm font-medium text-zinc-600">Senha</label>
-                        <input type="password" name="password" id="password" placeholder="••••••••" class=" border text-zinc-600 sm:text-sm rounded-lg block w-full p-2.5" required="">
+                        <input formControlName="password" type="password" name="password" id="password" placeholder="••••••••" class=" border text-zinc-600 sm:text-sm rounded-lg block w-full p-2.5" required="">
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="flex items-start">
@@ -30,4 +33,4 @@
             </div>
         </div>
     </div>
-  </section>
+</section>

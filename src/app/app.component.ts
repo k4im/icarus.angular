@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthGuard } from './services/Guards/AuthGuard.guard';
+import { AuthService } from './services/Auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'icarus-front';
   estaAutenticado!: boolean;
 
-  constructor(private auth : AuthGuard){
-    this.estaAutenticado = this.auth.estaLogado;
+  constructor(private auth : AuthService){
+    this.estaAutenticado = this.auth.usuarioLogado;
   }
 }
