@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { CriarProjetoDTO, Produto, Projeto, ProjetoUnico, Projetos } from '../Interfaces/IProjetos';
-import { Observable, Subject, catchError, throwError } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Observable, Subject, catchError, throwError } from 'rxjs';
 })
 export class ProjetosService {
   
-  private urlProjetos = "http://localhost:5086/api";
+  private readonly urlProjetos: string  = '';
 
   /** Definiando header padrão para requisições */
   httpHeader = new HttpHeaders({
@@ -19,7 +20,12 @@ export class ProjetosService {
   /** Final header options */
 
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    if(environment.production) {
+      this.urlProjetos = environment.apiUrlRoot
+    }
+    this.urlProjetos = environment.apiUrlRoot;
+  }
 
   buscarProjetos(pagina: number, resultado?: number): Observable<Projetos> {
     if(resultado === undefined) {
