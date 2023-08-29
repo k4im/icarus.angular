@@ -109,7 +109,6 @@ export class ProjetosComponent implements OnInit, OnDestroy {
       );
     }
     else if (this.filtroSelect !== null && this.filtroSelect !== undefined && this.filtroSelect !== 'Filtrar por status') {
-      console.log('FiltroSelect é ' + this.filtroSelect)
       this.projetoService.FiltrarBusca(this.filtroSelect, pagina, resultado).subscribe(
         (result) => {
           this.Projetos = result
@@ -126,7 +125,6 @@ export class ProjetosComponent implements OnInit, OnDestroy {
       )
     }
     else if (this.filtro !== null && this.filtro !== undefined && this.filtro !== '') {
-      console.log('Filtro é ' + this.filtro)
       this.projetoService.FiltrarBusca(this.filtro, pagina, resultado).subscribe(
         (result) => {
           this.Projetos = result
