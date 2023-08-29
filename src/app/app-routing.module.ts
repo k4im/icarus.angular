@@ -11,6 +11,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   { path: 'editar/:id', loadChildren: () => import('./components/projetos/edit-projeto/edit-projeto.module').then(m => m.EditProjetoModule) },
+  { path: 'login', loadChildren: () => import('./layouts/login/login.module').then(m => m.LoginModule) },
 
 ];
 
