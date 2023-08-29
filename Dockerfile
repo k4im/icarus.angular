@@ -1,4 +1,4 @@
-FROM node as node
+FROM node:alpine as node
 WORKDIR /app
 COPY package.json /app/
 RUN npm i npm@latest -g
