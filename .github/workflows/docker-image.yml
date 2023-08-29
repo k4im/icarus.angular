@@ -23,6 +23,8 @@ jobs:
       
       - name: Set up Docker Buildx  
         uses: docker/setup-buildx-action@v2
+
+      - name: Building Image
         run: docker build -f Dockerfile -t ${{ secrets.DOCKERHUB_USERNAME }}/front:v0.1 .
 
       - name: Pushing image on DockerHub
