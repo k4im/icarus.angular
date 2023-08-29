@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-navigation',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent {
-
+  
+  @Input()
+  estaLogado: boolean = false;
 }

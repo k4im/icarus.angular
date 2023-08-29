@@ -16,12 +16,15 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ProjetosService } from './services/projetos.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from './services/Guards/AuthGuard.guard';
+import { NotFoundComponent } from './layouts/not-found/not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgToastModule,
     NgxPaginationModule
   ],
-  providers: [ProjetosService],
+  providers: [ProjetosService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
