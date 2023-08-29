@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/Auth/auth.service';
 import { IAuthLogin, IToken } from 'src/app/Interfaces/IAuth';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   loginObj!: IAuthLogin;
   constructor(
     private builder: FormBuilder,
-    private AuthService : AuthService){}
+    private AuthService : AuthService,
+    private route: Router){}
   
   ngOnInit(): void {
     this.formGroupLogin = this.builder.group({
@@ -28,14 +30,11 @@ export class LoginComponent implements OnInit {
     this.loginObj = { chaveDeAcesso: this.chaveGetter.value, senha: this.pwdGetter.value}
     this.AuthService.realizarLogin(this.loginObj).subscribe(
       (result) => {
-        console.log("teste")
+        this.route.navigate(["/dashboard"])
       },
       (error: HttpErrorResponse) => {
         console.log("Deu erro: " + error.status)
       },
-      () => {
-        this.AuthService.usuarioLogado = true;
-      }
     )
   }
 

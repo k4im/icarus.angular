@@ -11,6 +11,6 @@ export class AppComponent {
   estaAutenticado!: boolean;
 
   constructor(private auth : AuthService){
-    this.estaAutenticado = this.auth.usuarioLogado;
+    this.estaAutenticado = this.auth.verificarTeste();
   }
 }

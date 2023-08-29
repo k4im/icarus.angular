@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { map, take } from 'rxjs/operators';
+import { AuthService } from '../Auth/auth.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,16 +9,15 @@ import { Observable } from 'rxjs';
 })
 export class AuthGuard implements CanActivate {
 
-  estaLogado: boolean = false;
-  constructor(private route: Router) { }
+  constructor(private route: Router,
+    private AuthServ: AuthService) { }
   
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    console.log("Chamado o Guard")
-    if (this.estaLogado === false){
-      this.route.navigate(['/login'])
-      return this.estaLogado;
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
+    if(this.AuthServ.verificarTeste()){
+      return this.AuthServ.verificarTeste();
     }
-    return this.estaLogado;
+    this.route.navigate(['/login'])
+    return this.AuthServ.verificarTeste();
   }
 
   
