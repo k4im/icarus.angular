@@ -36,8 +36,7 @@ export class AuthService {
   }
   salvarLogin(login: IAuthLogin) : Observable<IToken> {
     let time = new Date()
-    let ttl = time.getTime() + (60000 * 20);
-
+    let ttl = time.getTime() + (60 * 20);
     let item = {
       chave: login.chaveDeAcesso, 
       pwd: login.senha,
@@ -45,8 +44,8 @@ export class AuthService {
     
     return this.httpClient.post<IToken>(`${this.urlAuthApi}/login`, login).pipe(
       tap((response: IToken) => {
-        this.cookie.set("AccessToken", response.accessToken, {expires: ttl});
-        this.cookie.set("RefreshToken", response.refrehsToken);
+        this.cookie.set("AccessToken", response.accessToken);
+        this.cookie.set("RefreshToken", response.refrehsToken, .1);
 
         localStorage.setItem("lembrarLogin", JSON.stringify(item));
       })
@@ -65,7 +64,7 @@ export class AuthService {
     const isTokenExpired = this.helper.isTokenExpired(this.cookie.get("AccessToken"));
     
     if(isTokenExpired) {
-      console.log('Expirou')
+      let token = this.cookie.get("AccessToken")
       this.isLoggedIn = false;
     }else {
       this.isLoggedIn = true
