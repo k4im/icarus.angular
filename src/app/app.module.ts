@@ -24,7 +24,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
     NotFoundComponent,
   ],
   imports: [
@@ -37,10 +36,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
-    NgToastModule,
     NgxPaginationModule
   ],
   providers: [ProjetosService, AuthService],

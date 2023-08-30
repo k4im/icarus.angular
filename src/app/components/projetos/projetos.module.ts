@@ -17,6 +17,8 @@ import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.compo
 import { ProjetosService } from 'src/app/services/projetos.service';
 import { NgToastModule } from 'ng-angular-popup';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppModule } from 'src/app/app.module';
+import { SharedModule } from 'src/app/commons/shared.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     NgxSkeletonLoaderModule,
-    NgxPaginationModule
+    SharedModule,
+    NgxPaginationModule,
   ],
   providers: [ProjetosService]
 })
