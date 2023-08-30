@@ -5,7 +5,7 @@ import { NotFoundComponent } from './layouts/not-found/not-found.component';
 
 const routes: Routes = [
   { path: 'dashboard', canActivate: [AuthGuard], loadChildren: () => import('./components/dashboard/dashboard.module').then(m => m.DashboardModule) },
-  { path: 'projetos', loadChildren: () => import('./components/projetos/projetos.module').then(m => m.ProjetosModule) },
+  { path: 'projetos', canActivate: [AuthGuard], loadChildren: () => import('./components/projetos/projetos.module').then(m => m.ProjetosModule) },
   { path: 'projetos/novo', canActivate: [AuthGuard], loadChildren: () => import('./components/projetos/novo-projeto/novo-projeto.module').then(m => m.NovoProjetoModule) },
   {
     path: '',
