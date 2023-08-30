@@ -13,11 +13,11 @@ export class AuthGuard implements CanActivate {
     private AuthServ: AuthService) { }
   
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
-    if(this.AuthServ.verificarTeste()){
-      return this.AuthServ.verificarTeste();
+    if(this.AuthServ.verificarCookies()){
+      return this.AuthServ.verificarCookies();
     }
     this.route.navigate(['/login'])
-    return this.AuthServ.verificarTeste();
+    return this.AuthServ.verificarCookies();
   }
 
   

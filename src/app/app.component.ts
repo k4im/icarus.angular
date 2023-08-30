@@ -8,9 +8,5 @@ import { AuthService } from './services/Auth/auth.service';
 })
 export class AppComponent {
   title = 'icarus-front';
-  estaAutenticado!: boolean;
 
-  constructor(private auth : AuthService){
-    this.estaAutenticado = this.auth.verificarTeste();
-  }
 }

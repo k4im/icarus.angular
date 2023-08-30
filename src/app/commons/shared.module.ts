@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgToastModule } from 'ng-angular-popup';
 import { AppRoutingModule } from '../app-routing.module';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../services/Auth/auth.service';
 
 
 
@@ -17,6 +18,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule,
   ],
+  providers: [AuthService],
   exports: [CommonModule, NavigationComponent]
 })
 export class SharedModule { }

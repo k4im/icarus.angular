@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { EditProjetoRoutingModule } from './edit-projeto-routing.module';
 import { EditProjetoComponent } from './edit-projeto.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgToastModule } from 'ng-angular-popup';
+
 import { HttpClientModule } from '@angular/common/http';
 import { ProjetosService } from 'src/app/services/projetos.service';
+import { SharedCommonModule } from 'src/app/commons/sharedCommon.module';
+import { SharedModule } from 'src/app/commons/shared.module';
 
 
 @NgModule({
@@ -17,9 +18,8 @@ import { ProjetosService } from 'src/app/services/projetos.service';
     CommonModule,
     HttpClientModule,
     EditProjetoRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgToastModule,
+    SharedCommonModule,
+    SharedModule
   ],
   providers: [ProjetosService]
 })
