@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IAuthLogin, IToken } from 'src/app/Interfaces/IAuth';
 import { environment } from 'src/environments/environment.development';
 import { HttpClient } from '@angular/common/http';
@@ -13,6 +13,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
   
   isLoggedIn!: boolean;
+  isLoggedObservable!: BehaviorSubject<boolean>
   
   helper = new JwtHelperService();
 
@@ -62,7 +63,6 @@ export class AuthService {
   }
   verificarCookies() {
     const isTokenExpired = this.helper.isTokenExpired(this.cookie.get("AccessToken"));
-    
     if(isTokenExpired) {
       let token = this.cookie.get("AccessToken")
       this.isLoggedIn = false;
