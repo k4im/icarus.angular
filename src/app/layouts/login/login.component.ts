@@ -21,26 +21,24 @@ export class LoginComponent implements OnInit, AfterContentInit {
     private route: Router){}
   
   
-    ngAfterContentInit(): void {
-    let item = this.helperLocalStorage("lembrarLogin");
-    if(!item){
-      this.AuthService.realizarLoginAutomatico(item!).subscribe(
-        (result) => {
-          this.route.navigate(["/dashboard"])
-        }
-      );
-    }
-    }
+  ngAfterContentInit(): void {
+  let item = this.helperLocalStorage("lembrarLogin");
+  if(!item){
+    this.AuthService.realizarLoginAutomatico(item!).subscribe(
+      (result) => {
+        this.route.navigate(["/dashboard"])
+      }
+    );}
+  }
   
   ngOnInit(): void {
     this.formGroupLogin = this.builder.group({
       chave: [null, Validators.required],
       password: [null, Validators.required]
-    })
-
-    
+    })    
   }
 
+  
   logar() {
     let loginObj: IAuthLogin = {chaveDeAcesso: this.chaveGetter.value, senha: this.pwdGetter.value};
   
@@ -66,9 +64,10 @@ export class LoginComponent implements OnInit, AfterContentInit {
     }
     
   }
-  marcadoCheckBox(evento: any) {
-    
-  }
+  
+  /**
+   * Getters para buscar valores dos campos do formulario de login
+   */
   get chaveGetter() {
     return this.formGroupLogin.get('chave')!
   }
@@ -77,6 +76,13 @@ export class LoginComponent implements OnInit, AfterContentInit {
     return this.formGroupLogin.get('password')!
   }
 
+  /**
+   * 
+   * @param chave recebe valor to tipo string, onde o mesmo
+   * sera utilizado para realizar a busca através do localstorage e verificar se
+   * os dados armazenados no mesmo se encontram expirados.
+   * @returns void
+   */
   helperLocalStorage(chave: string) {
     const itemStr = localStorage.getItem(chave);
     if(!itemStr)

@@ -15,6 +15,8 @@ export class AuthService {
   isLoggedIn!: boolean;
   isLoggedObservable!: BehaviorSubject<boolean>
   
+  /** Helper de verificação de JWT.
+   */
   helper = new JwtHelperService();
 
   private readonly urlAuthApi: string = '';
@@ -27,6 +29,12 @@ export class AuthService {
     this.urlAuthApi = environment.apiUrlAuth;
   }
 
+    /**
+   * 
+   * @param login Recebe um valor do tipo IAuthLogin, onde sera passado {chave: string, pwd: string},
+   * para que seja possivel estar realizando login.
+   * @returns IToken {AccessToken: string, RefreshToken: string}
+   */
   realizarLogin(login: IAuthLogin): Observable<IToken> {
     return this.httpClient.post<IToken>(`${this.urlAuthApi}/login`, login).pipe(
       tap((response: IToken) => {
@@ -35,6 +43,14 @@ export class AuthService {
       })
     );
   }
+
+  /**
+   * 
+   * @param login Recebe um valor do tipo IAuthLogin, onde sera passado {chave: string, pwd: string},
+   * o mesmo sera salvo dentro de localstorage para que futuramente 
+   * possa ser possivel realizar login de forma automatica.
+   * @returns IToken {AccessToken: string, RefreshToken: string}
+   */
   salvarLogin(login: IAuthLogin) : Observable<IToken> {
     let time = new Date()
     let ttl = time.getTime() + (60 * 20);
@@ -42,7 +58,7 @@ export class AuthService {
       chave: login.chaveDeAcesso, 
       pwd: login.senha,
       expiry: ttl}
-    
+
     return this.httpClient.post<IToken>(`${this.urlAuthApi}/login`, login).pipe(
       tap((response: IToken) => {
         this.cookie.set("AccessToken", response.accessToken);
@@ -52,8 +68,17 @@ export class AuthService {
       })
     );
   }
+
+  /**
+   * 
+   * @param item recebe um item do tipo {chave: string, pwd: string, expiry: number};
+   * o mesmo deve ser encontrado através do localstorage, para que possa ser realizado login de forma automatica
+   * caso seja marcado a opção de lembrar login.
+   * @returns IToken {AccessToken: string, RefreshToken: string}
+   */
   realizarLoginAutomatico(item: {chave: string, pwd: string, expiry: number}) : Observable<IToken> {
     let login: IAuthLogin = {chaveDeAcesso: item.chave, senha: item.pwd}
+    
     return this.httpClient.post<IToken>(`${this.urlAuthApi}/login`, login).pipe(
       tap((response: IToken) => {
         this.cookie.set("AccessToken", response.accessToken);
@@ -61,16 +86,28 @@ export class AuthService {
       })
     )
   }
+  
+  
+  /** Função estará verificando se o token de acesso se encontra expirado
+   * em caso positivo será redirecionado para area de login para que seja possivel realizar
+   * novamente o a geração do token de acesso assim como  o token de refresh.
+   */
   verificarCookies() {
     const isTokenExpired = this.helper.isTokenExpired(this.cookie.get("AccessToken"));
     if(isTokenExpired) {
-      let token = this.cookie.get("AccessToken")
+      this.cookie.deleteAll();
       this.isLoggedIn = false;
     }else {
       this.isLoggedIn = true
     }
     return this.isLoggedIn
   }
+  
+  /**
+   * Estara realizando o logout do frontend
+   * realizando a remoção dos tokens que se encontram armazenados como 
+   * cookie no browser do client.
+   */
   logout() {
     this.isLoggedIn = false
     this.cookie.deleteAll();
