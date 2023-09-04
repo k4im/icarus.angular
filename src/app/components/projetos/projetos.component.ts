@@ -55,7 +55,11 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   }
   /** Final Operações realizadas */
 
-  /** Metodo utilizado para atualizar quantidade de resultados por pagina */
+  /**
+   * 
+   * @param evento recebe a quantidade de 
+   * projetos que serão exibidos na tela.
+   */
   atualizarItensPorPagina(evento: any) {
     this.loading = true;
     this.buscarProjetos(this.paginaAtual, evento)
@@ -64,7 +68,12 @@ export class ProjetosComponent implements OnInit, OnDestroy {
 
 
 
-  /** Chamada publica ao evento de click ao mudar de pagina */
+  /**
+   * 
+   * @param event recebe o click de mudança de pagina,
+   * para então realizar a requição de mudança de pagina, partindo
+   * com a quantidade de itens que estão selecionados no momento do click.
+   */
   mudarDePagina(event: any) {
     this.paginaAtual = event;
     this.primeiraRequisicao = false;
@@ -73,7 +82,12 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   }
   /** Final chamada publica */
 
-  /** Metodo para abrir modal de remoção do projeto */
+  /**
+   * 
+   * @param eventoClick receve data do tipo Projeto
+   * onde o mesmo será utilizado para recuperar o id do projeto em questão
+   * para que então seja possivel estar realizando a remoção do mesmo.
+   */
   abrirDialogDelete(eventoClick: Projeto): void {
     const dialogRef = this.dialog.open(RemoverProjetoComponent, {
       data: { id: eventoClick.id, nome: eventoClick.nome }
@@ -84,13 +98,23 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   }
   /** Final metodo de remoção ao projeto */
 
-  /** Metodo para abrir modal de Edição */
+  /**
+   * 
+   * @param eventoClick Recebe o eventoClick que neste caso será do tipo Projeto
+   * para que então sejá possivel estar realizando a mudança de pagina através de router com
+   * o id referente ao projeto desejado.
+   */
   editarProjeto(eventoClick: Projeto): void {
     this.route.navigate(["/editar", eventoClick.id])
   }
   /** Final abrir modal edit */
 
-  /** Metodos de chamadas ao serviço */
+  /**
+   * 
+   * @param pagina recebe o numero da pagina desejada.
+   * @param resultado Pode estar recebendo valor de quantidade de dados que serão 
+   * disponibilizados na tela.
+   */
   private buscarProjetos(pagina: number, resultado?: number) {
     if (resultado === undefined) {
       this.projetoService.buscarProjetos(pagina).subscribe(
@@ -160,7 +184,11 @@ export class ProjetosComponent implements OnInit, OnDestroy {
       );
     }
   }
-
+  /**
+   * 
+   * @param id recebe o {id:string} para que seja possivel realizar
+   * disparo da notificação referente ao produto que foi deletado.
+   */
   private atualizarPagina(id: string) {
     let param = parseInt(id);
     this.Projetos.data = this.Projetos.data.filter((p: Projeto) => p.id !== param)
@@ -199,7 +227,12 @@ export class ProjetosComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.buscarProjetos(this.paginaAtual, this.ItensPorPagina);
   }
-
+  /**
+   * 
+   * @param evento recebe um evento que neste caso 
+   * sera as options de um select onde o mesmo será utilizado para realizar a filtragem
+   * dos dados a partir do status solicitado.
+   */
   filtrarPorStatus(evento: any) {
     if (evento === "Filtrar por status") {
       this.loading = true;
@@ -226,7 +259,11 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   }
   /** Final metodo para buscar status ou nome */
 
-  /** Validadores de httpResponse */
+  /**
+   * 
+   * @param error recebe valor HttpErroResponse vindo das APIs utilizadas 
+   * verificado o retorno http response, é disparado uma notificação referente a resposta recebida.
+   */
   private validarResponse(error: HttpErrorResponse) {
     switch (error.status) {
       case 0:
@@ -254,7 +291,12 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   }
   /** Final http response */
 
-  /** Validar status do projeto para adicionar adequadamente as classes ao status */
+  /**
+   * 
+   * @param projeto recebe Projeto através de *ngFor para verificar qual status se encontra presente.
+   * Identificado o status presente é atribuido a classe referente a tal status.
+   * @returns Classes CSS referentes ao status especifico.
+   */
   validarStatus(projeto: Projeto): string {
     switch (projeto.status) {
       case "Pendente":

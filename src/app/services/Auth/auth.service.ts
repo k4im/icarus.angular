@@ -29,7 +29,7 @@ export class AuthService {
     this.urlAuthApi = environment.apiUrlAuth;
   }
 
-    /**
+  /**
    * 
    * @param login Recebe um valor do tipo IAuthLogin, onde sera passado {chave: string, pwd: string},
    * para que seja possivel estar realizando login.
