@@ -15,6 +15,7 @@ const routes: Routes = [
   },
   { path: 'editar/:id', canActivate: [AuthGuard], loadChildren: () => import('./components/projetos/edit-projeto/edit-projeto.module').then(m => m.EditProjetoModule) },
   { path: 'login', canActivate: [loginGuard], loadChildren: () => import('./layouts/login/login.module').then(m => m.LoginModule) },
+  { path: 'produtos', loadChildren: () => import('./components/produtos/produtos.module').then(m => m.ProdutosModule) },
   { path: "**", component: NotFoundComponent }
 ];
 
