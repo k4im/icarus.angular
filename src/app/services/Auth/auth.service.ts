@@ -108,9 +108,9 @@ export class AuthService {
     const dateNow = new Date();
     const dataExpToken = this.helper.getTokenExpirationDate(token)! 
     if( dataExpToken < dateNow) {
-      console.log('Token se encontra expirado: ' + dataExpToken)
+      // Implementar logica
     } else {
-      console.log('Data não se encontra expirada: ' + dataExpToken)
+      // Implementar lógica
     }
   }
   /**
