@@ -22,9 +22,9 @@ export class ProjetosService {
   
   constructor(private http: HttpClient) { 
     if(environment.production) {
-      this.urlProjetos = environment.apiUrlRoot
+      this.urlProjetos = environment.apiGateway
     }
-    this.urlProjetos = environment.apiUrlRoot;
+    this.urlProjetos = environment.apiGateway;
   }
 
   /**
@@ -82,7 +82,7 @@ export class ProjetosService {
    * @returns Observable<CriarProjetos>
    */
   novoProjeto(projeto: CriarProjetoDTO): Observable<CriarProjetoDTO> {
-    return this.http.post<CriarProjetoDTO>(`${this.urlProjetos}/Create`, projeto);
+    return this.http.post<CriarProjetoDTO>(`${this.urlProjetos}/novo`, projeto);
   }
 
   /**

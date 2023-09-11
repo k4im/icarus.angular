@@ -24,9 +24,9 @@ export class AuthService {
     private httpClient: HttpClient,
     private cookie: CookieService) {
     if (environment.production) {
-      this.urlAuthApi = environment.apiUrlAuth;
+      this.urlAuthApi = environment.apiGateway;
     }
-    this.urlAuthApi = environment.apiUrlAuth;
+    this.urlAuthApi = environment.apiGateway;
   }
 
   /**
@@ -36,7 +36,7 @@ export class AuthService {
    * @returns IToken {AccessToken: string, RefreshToken: string}
    */
   realizarLogin(login: IAuthLogin): Observable<IToken> {
-    return this.httpClient.post<IToken>(`${this.urlAuthApi}/login`, login).pipe(
+    return this.httpClient.post<IToken>(`${this.urlAuthApi}/auth/login`, login).pipe(
       tap((response: IToken) => {
         this.cookie.set("AccessToken", response.accessToken);
         this.cookie.set("RefreshToken", response.refrehsToken);
@@ -59,7 +59,7 @@ export class AuthService {
       pwd: login.senha,
       expiry: ttl}
 
-    return this.httpClient.post<IToken>(`${this.urlAuthApi}/login`, login).pipe(
+    return this.httpClient.post<IToken>(`${this.urlAuthApi}/auth/login`, login).pipe(
       tap((response: IToken) => {
         this.cookie.set("AccessToken", response.accessToken);
         this.cookie.set("RefreshToken", response.refrehsToken, .1);
@@ -79,7 +79,7 @@ export class AuthService {
   realizarLoginAutomatico(item: {chave: string, pwd: string, expiry: number}) : Observable<IToken> {
     let login: IAuthLogin = {chaveDeAcesso: item.chave, senha: item.pwd}
     
-    return this.httpClient.post<IToken>(`${this.urlAuthApi}/login`, login).pipe(
+    return this.httpClient.post<IToken>(`${this.urlAuthApi}/auth/login`, login).pipe(
       tap((response: IToken) => {
         this.cookie.set("AccessToken", response.accessToken);
         this.cookie.set("RefreshToken", response.refrehsToken);
