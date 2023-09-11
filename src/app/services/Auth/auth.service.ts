@@ -93,6 +93,7 @@ export class AuthService {
    * novamente o a geração do token de acesso assim como  o token de refresh.
    */
   verificarCookies() {
+    this.verificarDataDeExpiracaoToken(this.cookie.get("AccessToken"))
     const isTokenExpired = this.helper.isTokenExpired(this.cookie.get("AccessToken"));
     if(isTokenExpired) {
       this.cookie.deleteAll();
@@ -103,6 +104,15 @@ export class AuthService {
     return this.isLoggedIn
   }
   
+  verificarDataDeExpiracaoToken(token: string){
+    const dateNow = new Date();
+    const dataExpToken = this.helper.getTokenExpirationDate(token)! 
+    if( dataExpToken < dateNow) {
+      console.log('Token se encontra expirado: ' + dataExpToken)
+    } else {
+      console.log('Data não se encontra expirada: ' + dataExpToken)
+    }
+  }
   /**
    * Estara realizando o logout do frontend
    * realizando a remoção dos tokens que se encontram armazenados como 

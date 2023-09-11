@@ -39,7 +39,7 @@ export class ProjetosService {
     if(resultado === undefined) {
       return this.http.get<Projetos>(`${this.urlProjetos}/projetos/${pagina}`)
     }
-    return this.http.get<Projetos>(`${this.urlProjetos}/projetos/${pagina}/${resultado}`)
+    return this.http.get<Projetos>(`${this.urlProjetos}/projetos/${pagina}/${resultado}`, {headers: this.httpHeader})
   }
   /**
    * 
