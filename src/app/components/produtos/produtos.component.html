@@ -1,1 +1,153 @@
-<p>produtos works!</p>
+<app-navigation>
+    <ng-toast></ng-toast> <!-- NEW WAY -->
+    <div class="container_main">
+      <div class="container__header w-full">
+        <h4 class="text-black pt-1 text-[22px] header-name pl-10">Produtos</h4>
+      </div>
+      <div class="container_table bg-white shadow-md">
+        <!-- Button criar projetos -->
+        <div class=" container__header__table mb-3">
+          <div class="container_options flex content-center justify-center">
+            <div class="container_select flex gap-1">
+              <label for="itensPerPage" class="pt-1">Resultados por pagina:</label>
+              <select id="itensPerPage" [(ngModel)]="ItensPorPagina" (ngModelChange)="atualizarItensPorPagina($event)"
+                class="border text-black 
+            text-sm rounded-lg 
+            focus:ring-blue-500 
+            focus:border-blue-500 block 
+            w-15 h-8 p-1 
+            dark:placeholder-gray-400 
+            dark:text-white 
+            dark:focus:ring-blue-500 
+            dark:focus:border-blue-500">
+                <option [value]="5" selected>5</option>
+                <option value="10">10</option>
+                <option value="50">50</option>
+              </select>
+              <form formDir="ngForm" [formGroup]="formSearch" class="flex gap-2">
+                <input type="text" formControlName="searchInput" id="searchInput"
+                  placeholder="Pesquise por nome ou status" class="rounded border w-60 h-8 input-field">
+                <button type="submit" class="button bg-blue-500 rounded h-8 shadow-sm hover:shadow-md hover:bg-blue-600 ">
+                  <div class="container">
+                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                      viewBox="0 0 20 20">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                  </div>
+                </button>
+              </form>
+            </div>
+            <div class="contaier__filtro_status flex gap-2 ml-2">
+              <select id="filtroStatus" [(ngModel)]="filtroSelect" (ngModelChange)="filtrarPorStatus($event)" class="border text-black 
+            text-sm rounded-lg 
+            focus:ring-blue-500 
+            focus:border-blue-500 block 
+            w-15 h-8 p-1 
+            dark:placeholder-gray-400 
+            dark:text-white 
+            dark:focus:ring-blue-500 
+            dark:focus:border-blue-500">
+                <option [value]="'Filtrar por status'" selected>Filtrar por status</option>
+                <option [value]="'Pendente'">Pendente</option>
+                <option value="Produção">Produção</option>
+                <option value="Atrasado">Atrasado</option>
+                <option value="Cancelado">Cancelado</option>
+              </select>
+            </div>
+          </div>
+          <div class="container_button">
+            <button class="button bg-green-500 hover:bg-green-700 shadow-md hover:shadow-lg" [routerLink]="['novo']">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+              Adicionar produto
+            </button>
+          </div>
+        </div>
+        <!-- End button criar projetos -->
+  
+        <!-- Tabela -->
+        <div class="flex flex-col table__container table-auto h-96">
+          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8 container-table">
+              <div class="overflow-hidden rounded">
+                <table class="min-w-full text-left text-sm font-light table-auto">
+                  <thead class="border-b border-red-300 font-medium ">
+                    <tr>
+                      <th scope="col" class="px-3 py-1 bg-red-500 text-white">Nome</th>
+                      <th scope="col" class="px-3 py-1 bg-red-500 text-white">Quantidade em estoque</th>
+                      <th scope="col" class="px-3 py-1 bg-red-500 text-white">Valor</th>
+                      <th scope="col" class="px-3 py-1 bg-red-500 text-white"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-b transition duration-300 ease-in-out hover:bg-stone-50  hover:cursor-pointer"
+                      *ngFor="let produto of Produtos.data | paginate: { itemsPerPage: ItensPorPagina,
+                        currentPage: Produtos.paginaAtual,
+                        totalItems: Produtos.totalItens}">
+                      <td class="whitespace-nowrap px-3 py-3">{{produto.nome}}</td>
+                      <td class="whitespace-nowrap px-3 py-3">{{produto.quantidade}}</td>
+                      <td class="whitespace-nowrap px-3 py-3">R$ {{produto.valor}}</td>
+                      <td class="whitespace-nowrap px-3 py-3 flex gap-3">
+                        <button >
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6 stroke-red-600 cursor-pointer"
+                            data-modal-target="popup-modal" data-modal-toggle="popup-modal">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                        <button >
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6 stroke-yellow-600 cursor-pointer">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                          </svg>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <ngx-skeleton-loader *ngIf="aguardandoDados" count="9" appearance="line"></ngx-skeleton-loader>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End tabela -->
+  
+        <!-- Pagination -->
+        <div class="flex items-center justify-between 0 px-4 py-3 sm:px-6 ">
+  
+          <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between container-pagination">
+            <div>
+              <nav>
+                <pagination-controls class="paginator" nextLabel="" previousLabel=""
+                  (pageChange)="mudarDePagina($event)"></pagination-controls>
+              </nav>
+            </div>
+            <div class="flex gap-2 justify-center align-center">
+  
+              <p class="text-sm text-gray-700 block">
+                Total de paginas
+                <span class="font-medium">{{ Produtos.totalDePaginas }}</span>
+              </p>
+              <div role="status">
+                <svg aria-hidden="true" [ngClass]="{'hidden': !loading}"
+                  class="inline w-4 h-4 mb-2 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                  viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                    fill="currentColor" />
+                  <path
+                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                    fill="currentFill" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End pagination -->
+      </div>
+    </div>
+</app-navigation>
