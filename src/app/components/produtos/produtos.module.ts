@@ -6,8 +6,9 @@ import { ProdutosComponent } from './produtos.component';
 import { SharedCommonModule } from 'src/app/commons/sharedCommon.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { NgToastModule } from 'ng-angular-popup';
+import { NgToastModule, NgToastService } from 'ng-angular-popup';
 import { SharedModule } from "../../commons/shared.module";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,9 +20,12 @@ import { SharedModule } from "../../commons/shared.module";
         NgxPaginationModule,
         NgxSkeletonLoaderModule,
         NgToastModule,
+        FormsModule,
+        ReactiveFormsModule,
         SharedCommonModule,
         ProdutosRoutingModule,
         SharedModule
-    ]
+    ],
+    providers: [NgToastService]
 })
 export class ProdutosModule { }

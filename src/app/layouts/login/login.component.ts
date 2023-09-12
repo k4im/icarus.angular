@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/Auth/auth.service';
 import { IAuthLogin, IToken } from 'src/app/Interfaces/IAuth';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit, AfterContentInit {
   constructor(
     private builder: FormBuilder,
     private AuthService : AuthService,
-    private route: Router){}
+    private route: Router,
+    private toast: NgToastService){}
   
   
   ngAfterContentInit(): void {
@@ -48,7 +50,7 @@ export class LoginComponent implements OnInit, AfterContentInit {
           this.route.navigate(["/dashboard"])
         },
         (error: HttpErrorResponse) => {
-          console.log("Deu erro: " + error.status)
+          this.validarResponse(error)
         },
       )
     }
@@ -58,7 +60,7 @@ export class LoginComponent implements OnInit, AfterContentInit {
           this.route.navigate(["/dashboard"])
         },
         (error: HttpErrorResponse) => {
-          console.log("Deu erro: " + error.status)
+          this.validarResponse(error)
         },
       )
     }
@@ -98,4 +100,35 @@ export class LoginComponent implements OnInit, AfterContentInit {
     }
     return item
   }
+
+  /**
+   * 
+   * @param error recebe valor HttpErroResponse vindo das APIs utilizadas 
+   * verificado o retorno http response, é disparado uma notificação referente a resposta recebida.
+   */
+  private validarResponse(error: HttpErrorResponse) {
+    switch (error.status) {
+      case 0:
+        this.toast.error({ detail: "❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
+        console.log("Não foi possivel realizar a comunicação!")
+        break;
+      case 404:
+        this.toast.error({ detail: "❌ Erro", summary: 'Senha ou usuario invalidos!', duration: 2500 })
+        console.log("Nenhum projeto foi encontrado!")
+        break;
+      case 404:
+        this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Senha ou usuarios invalidos!', duration: 2500 })
+        console.log("Nenhum projeto foi encontrado!")
+        break;
+      case 500:
+        this.toast.error({ detail: " ❌ Erro", summary: 'O servidor não conseguiu processar sua requisição!', duration: 2500 })
+        console.log("Houve um erro no servidor!")
+        break
+      default:
+        this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
+        console.log("Não foi possivel realizar a comunicação!")
+        break;
+    }
+  }
+  /** Final http response */
 }
