@@ -47,21 +47,29 @@ export class LoginComponent implements OnInit, AfterContentInit {
     if(this.lembrarLogin) {
       this.AuthService.salvarLogin(loginObj).subscribe(
         (result) => {
-          this.route.navigate(["/dashboard"])
+          console.log("Realizado login!")
         },
         (error: HttpErrorResponse) => {
           this.validarResponse(error)
         },
+        () => {
+          this.toast.success({ detail: "✔️ Sucesso", summary: 'Login efetuado com sucesso!', duration: 750 })
+          this.route.navigate(["/dashboard"])
+        }
       )
     }
     else {
       this.AuthService.realizarLogin(loginObj).subscribe(
         (result) => {
-          this.route.navigate(["/dashboard"])
+          console.log("Realizado login!")
         },
         (error: HttpErrorResponse) => {
           this.validarResponse(error)
         },
+        () => {
+          this.toast.success({ detail: "✔️ Sucesso", summary: 'Login efetuado com sucesso!', duration: 750 })
+          this.route.navigate(["/dashboard"])
+        }
       )
     }
     
