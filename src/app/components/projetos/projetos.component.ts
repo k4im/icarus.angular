@@ -133,7 +133,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
       );
     }
     else if (this.filtroSelect !== null && this.filtroSelect !== undefined && this.filtroSelect !== 'Filtrar por status') {
-      this.projetoService.FiltrarBusca(this.filtroSelect, pagina, resultado).subscribe(
+      this.projetoService.FiltrarBuscaStatus(this.filtroSelect, pagina, resultado).subscribe(
         (result) => {
           this.Projetos = result
           this.paginaAtual = result.paginaAtual

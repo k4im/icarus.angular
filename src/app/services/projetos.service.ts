@@ -109,8 +109,23 @@ export class ProjetosService {
    */
   FiltrarBusca(filtro: string, pagina: number, resultado? : number) : Observable<Projetos> {
     let parames = new HttpParams().append("filtro", filtro);
-    return this.http.get<Projetos>(`${this.urlProjetos}/pesquisar/${pagina}/${resultado}`, {params: parames});
+    return this.http.get<Projetos>(`${this.urlProjetos}/projeto/pesquisar/${pagina}/${resultado}`, {params: parames});
   }
+
+   /**
+  * 
+  * @param filtro Recebe status/nome para realizar a filtragem no banco de dados 
+  * e retornar os dados para pagina.
+  * @param pagina Recebe o numero da pagina atual que se encontra selecionada pelo
+  * frontender.
+  * @param resultado Recebe o a quantidade de resultados que serão exibidos referente 
+  * a filtragem realizada. 
+  * @returns Observable<Projetos>
+  */
+   FiltrarBuscaStatus(filtro: string, pagina: number, resultado? : number) : Observable<Projetos> {
+     let parames = new HttpParams().append("filtro", filtro);
+     return this.http.get<Projetos>(`${this.urlProjetos}/projeto/pesquisar/status/${pagina}/${resultado}`, {params: parames});
+   }
   /** Criação de observable para disparo de eventos delete | error  */
   private _listerner = new Subject<any>();
   listen(): Observable<any> {
