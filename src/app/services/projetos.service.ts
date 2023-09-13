@@ -82,7 +82,7 @@ export class ProjetosService {
    * @returns Observable<CriarProjetos>
    */
   novoProjeto(projeto: CriarProjetoDTO): Observable<CriarProjetoDTO> {
-    return this.http.post<CriarProjetoDTO>(`${this.urlProjetos}/novo`, projeto);
+    return this.http.post<CriarProjetoDTO>(`${this.urlProjetos}/projeto/novo`, projeto);
   }
 
   /**
