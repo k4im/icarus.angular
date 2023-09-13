@@ -10,12 +10,14 @@ import { NgToastModule, NgToastService } from 'ng-angular-popup';
 import { SharedModule } from "../../commons/shared.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NovoprodutoComponent } from './novoproduto/novoproduto.component';
+import { RemoverProdutoComponent } from './remover-produto/remover-produto.component';
 
 
 @NgModule({
     declarations: [
         ProdutosComponent,
-        NovoprodutoComponent
+        NovoprodutoComponent,
+        RemoverProdutoComponent
     ],
     imports: [
         CommonModule,

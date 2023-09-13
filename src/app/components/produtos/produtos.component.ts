@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
 import { Subscription } from 'rxjs';
-import { IProdutosPaginados } from 'src/app/Interfaces/IProduto';
+import { IProdutos, IProdutosPaginados } from 'src/app/Interfaces/IProduto';
 import { ProdutosService } from 'src/app/services/produtos.service';
+import { RemoverProdutoComponent } from './remover-produto/remover-produto.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-produtos',
@@ -29,7 +31,13 @@ export class ProdutosComponent implements OnInit {
   constructor(
     private ProdutosService: ProdutosService,
     private toast: NgToastService,
-    private builder: FormBuilder) {}
+    private builder: FormBuilder,
+    public dialog: MatDialog) {
+      this.deleteSub = this.ProdutosService.listen().subscribe((m: any) => {
+        console.log("Removido projeto: " + m);
+        this.atualizarPagina(m);
+      })
+    }
 
   ngOnInit(): void {
     this.primeiraRequisicao = false;
@@ -38,6 +46,33 @@ export class ProdutosComponent implements OnInit {
       searchInput: [null, [Validators.required]]
     })  }
 
+
+
+  /**
+   * 
+   * @param id recebe o {id:string} para que seja possivel realizar
+   * disparo da notificação referente ao produto que foi deletado.
+   */
+  private atualizarPagina(id: string) {
+    this.Produtos.data = this.Produtos.data.filter((p: IProdutos) => p.id !== id)
+    this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Projeto deletado com sucesso!', duration: 750 })
+  }
+  /** Final metodos de chamadas ao serviço */    
+  /**
+   * 
+   * @param eventoClick receve data do tipo Projeto
+   * onde o mesmo será utilizado para recuperar o id do projeto em questão
+   * para que então seja possivel estar realizando a remoção do mesmo.
+   */
+  abrirDialogDelete(eventoClick: string): void {
+    const dialogRef = this.dialog.open(RemoverProdutoComponent, {
+      data: { id: eventoClick}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+  /** Final metodo de remoção ao projeto */
 
   /**
    * 

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { IProdutoNovo, IProdutos, IProdutosPaginados } from '../Interfaces/IProduto';
 
@@ -49,8 +49,18 @@ export class ProdutosService{
     return this.httpclient.post<IProdutoNovo>(`${this.urlProdutos}/produtos/novo`, produto);
   }
 
-  deletarProduto(id: number) {
-    return this.httpclient.delete(`${this.urlProdutos}/${id}`);
+  deletarProduto(id: string) {
+    return this.httpclient.delete(`${this.urlProdutos}/produtos/delete/${id}`);
   }
+
+    /** Criação de observable para disparo de eventos delete | error  */
+    private _listerner = new Subject<any>();
+    listen(): Observable<any> {
+      return this._listerner.asObservable();
+    }
+    filterSub(filter: string) {
+      this._listerner.next(filter);
+   }
+   /** Final Criação de observable */ 
 
 }
