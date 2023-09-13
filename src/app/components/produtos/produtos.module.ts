@@ -9,11 +9,13 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { NgToastModule, NgToastService } from 'ng-angular-popup';
 import { SharedModule } from "../../commons/shared.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NovoprodutoComponent } from './novoproduto/novoproduto.component';
 
 
 @NgModule({
     declarations: [
-        ProdutosComponent
+        ProdutosComponent,
+        NovoprodutoComponent
     ],
     imports: [
         CommonModule,

@@ -26,7 +26,7 @@
               </select>
               <form formDir="ngForm" [formGroup]="formSearch" class="flex gap-2">
                 <input type="text" formControlName="searchInput" id="searchInput"
-                  placeholder="Pesquise por nome ou status" class="rounded border w-60 h-8 input-field">
+                  placeholder="Pesquise pelo nome do produto" class="rounded border w-60 h-8 input-field">
                 <button type="submit" class="button bg-blue-500 rounded h-8 shadow-sm hover:shadow-md hover:bg-blue-600 ">
                   <div class="container">
                     <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -40,7 +40,7 @@
             </div>
           </div>
           <div class="container_button">
-            <button class="button bg-green-500 hover:bg-green-700 shadow-md hover:shadow-lg" [routerLink]="['novo']">
+            <button class="button bg-green-500 hover:bg-green-700 shadow-md hover:shadow-lg" [routerLink]="['/novo_produto']">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
