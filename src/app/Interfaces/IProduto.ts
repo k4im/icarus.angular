@@ -11,3 +11,9 @@ export interface IProdutosPaginados {
     paginaAtual: number,
     totalItens: number
 }
+
+export interface IProdutoNovo {
+    nome: string,
+    valor: number    
+    quantidade: number,
+}

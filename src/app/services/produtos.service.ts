@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { IProdutos, IProdutosPaginados } from '../Interfaces/IProduto';
+import { IProdutoNovo, IProdutos, IProdutosPaginados } from '../Interfaces/IProduto';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +38,15 @@ export class ProdutosService{
    */
   buscarProduto(id: number): Observable<IProdutos> {
     return this.httpclient.get<IProdutos>(`${this.urlProdutos}/produtos/${id}`);
+  }
+
+  /**
+   * 
+   * @param produto recebe um objecto do tipo IProdutoNovo, onde o mesmo será enviado para api para que seja possivel estar realizando a criação do mesmo.
+   * @returns retorna um observavel.
+   */
+  criarProduto(produto: IProdutoNovo) {
+    return this.httpclient.post<IProdutoNovo>(`${this.urlProdutos}/produtos/novo`, produto);
   }
 
 }

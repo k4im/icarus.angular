@@ -118,6 +118,6 @@ export class ProjetosService {
   }
   filterSub(filter: string) {
     this._listerner.next(filter);
- 
- /** Final Criação de observable */ }
+ }
+ /** Final Criação de observable */ 
 }
