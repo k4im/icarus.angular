@@ -18,7 +18,7 @@ export class ProdutosComponent implements OnInit {
   deleteSub!: Subscription;
   paginaAtual: number = 1;
   ItensPorPagina: number = 5;
-  Produtos: IProdutosPaginados = { data: [], paginaAtual: 0, totalDePaginas: 0, totalItens: 0 };
+  Produtos: IProdutosPaginados = { data: [], paginaAtual: 0, totalDePaginas: 0, totaldeItens: 0 };
   aguardandoDados: boolean = true;
   loading: boolean = false;
   primeiraRequisicao: boolean = true;

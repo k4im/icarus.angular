@@ -69,7 +69,7 @@
                     <tr class="border-b transition duration-300 ease-in-out hover:bg-stone-50  hover:cursor-pointer"
                       *ngFor="let produto of Produtos.data | paginate: { itemsPerPage: ItensPorPagina,
                         currentPage: Produtos.paginaAtual,
-                        totalItems: Produtos.totalItens}">
+                        totalItems: Produtos.totaldeItens}">
                       <td class="whitespace-nowrap px-3 py-3">{{produto.nome}}</td>
                       <td class="whitespace-nowrap px-3 py-3">{{produto.quantidade}}</td>
                       <td class="whitespace-nowrap px-3 py-3">R$ {{produto.valor}}</td>

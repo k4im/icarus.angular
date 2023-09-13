@@ -9,7 +9,7 @@ export interface IProdutosPaginados {
     data: IProdutos[],
     totalDePaginas: number,
     paginaAtual: number,
-    totalItens: number
+    totaldeItens: number
 }
 
 export interface IProdutoNovo {
