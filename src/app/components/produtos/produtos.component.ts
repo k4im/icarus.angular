@@ -154,7 +154,7 @@ export class ProdutosComponent implements OnInit {
         this.loading = false;
         break;
 
-    case 404:
+      case 404:
         this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto foi encontrado!', duration: 2500 })
         console.log("Nenhum projeto foi encontrado!")
         this.loading = false;
