@@ -37,9 +37,9 @@ export class ProjetosService {
    */
   buscarProjetos(pagina: number, resultado?: number): Observable<Projetos> {
     if(resultado === undefined) {
-      return this.http.get<Projetos>(`${this.urlProjetos}/projetos/${pagina}`)
+      return this.http.get<Projetos>(`${this.urlProjetos}/projetos/${pagina}/5`)
     }
-    return this.http.get<Projetos>(`${this.urlProjetos}/projetos/${pagina}/${resultado}`, {headers: this.httpHeader})
+    return this.http.get<Projetos>(`${this.urlProjetos}/projetos/${pagina}/${resultado}`)
   }
   /**
    * 
