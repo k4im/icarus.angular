@@ -72,7 +72,7 @@ export class ProjetosService {
       'Content-type': 'application/Json',
       'Access-Control-Allow-Origin': '*'
     })
-    return this.http.get<Produto[]>(`${this.urlProjetos}/produtosEmEstoque`, { headers: httpHeader })
+    return this.http.get<Produto[]>(`${this.urlProjetos}/projetos/produtosEmEstoque`, { headers: httpHeader })
   }
 
   /**

@@ -28,7 +28,7 @@ export class ProdutosService{
     if(resultado !== null && resultado !== undefined) {
       return this.httpclient.get<IProdutosPaginados>(`${this.urlProdutos}/produtos/${pagina}/${resultado}`);    
     }
-    return this.httpclient.get<IProdutosPaginados>(`${this.urlProdutos}/produtos/${pagina}`);    
+    return this.httpclient.get<IProdutosPaginados>(`${this.urlProdutos}/produtos/${pagina}/5`);    
   }
 
 
@@ -47,6 +47,10 @@ export class ProdutosService{
    */
   criarProduto(produto: IProdutoNovo) {
     return this.httpclient.post<IProdutoNovo>(`${this.urlProdutos}/produtos/novo`, produto);
+  }
+
+  deletarProduto(id: number) {
+    return this.httpclient.delete(`${this.urlProdutos}/${id}`);
   }
 
 }

@@ -60,7 +60,9 @@ export class NovoprodutoComponent {
    */
   criarProduto(produto: IProdutoNovo) {
     this.produtoServices.criarProduto(produto).subscribe(
-      (result) => {},
+      (result) => {
+        this.redirecionar();
+      },
       (error: HttpErrorResponse) => {
         this.validarResponse(error);
       },
@@ -104,7 +106,11 @@ export class NovoprodutoComponent {
         console.log("Não foi possivel realizar a comunicação!")
         break;
 
-    case 404:
+      case 201:
+        this.redirecionar();
+        break;
+                
+      case 404:
         this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto foi encontrado!', duration: 2500 })
         console.log("Nenhum projeto foi encontrado!")
         break;
@@ -112,10 +118,11 @@ export class NovoprodutoComponent {
         this.toast.error({ detail: " ❌ Erro", summary: 'O servidor não conseguiu carregar os projetos!', duration: 2500 })
         console.log("Houve um erro no servidor!")
         break
+    
       default:
-        this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
-        console.log("Não foi possivel realizar a comunicação!")
-        break;
+      this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
+      console.log("Não foi possivel realizar a comunicação!")
+      break;
     }
   }
   /** Final http response */
