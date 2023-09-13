@@ -153,6 +153,9 @@ export class ProdutosComponent implements OnInit {
         console.log("Não foi possivel realizar a comunicação!")
         this.loading = false;
         break;
+      case 200:
+        this.loading = false;
+        break;
       case 404:
         this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto foi encontrado!', duration: 2500 })
         console.log("Nenhum projeto foi encontrado!")
