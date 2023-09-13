@@ -40,7 +40,6 @@ export class ProdutosComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.primeiraRequisicao = false;
     this.buscarItens(this.paginaAtual);
     this.formSearch = this.builder.group({
       searchInput: [null, [Validators.required]]
@@ -121,6 +120,7 @@ export class ProdutosComponent implements OnInit {
   * projetos que serão exibidos na tela.
   */
   atualizarItensPorPagina(evento: any) {
+    this.primeiraRequisicao = false;
     this.loading = true;
     this.buscarItens(this.paginaAtual, evento)
   }
@@ -153,7 +153,6 @@ export class ProdutosComponent implements OnInit {
         console.log("Não foi possivel realizar a comunicação!")
         this.loading = false;
         break;
-
       case 404:
         this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Nenhum projeto foi encontrado!', duration: 2500 })
         console.log("Nenhum projeto foi encontrado!")
