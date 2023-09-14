@@ -109,7 +109,7 @@ export class ProjetosService {
    */
   FiltrarBusca(filtro: string, pagina: number, resultado? : number) : Observable<Projetos> {
     let parames = new HttpParams().append("filtro", filtro);
-    return this.http.get<Projetos>(`${this.urlProjetos}/api/pesquisar/${pagina}/${resultado}`, {params: parames});
+    return this.http.get<Projetos>(`${this.urlProjetos}/api/pesquisar/nome/${pagina}/${resultado}`, {params: parames});
   }
 
    /**
