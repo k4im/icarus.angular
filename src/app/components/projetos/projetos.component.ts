@@ -242,7 +242,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
       console.log(evento);
       this.filtroSelect = evento
       this.loading = true;
-      this.projetoService.FiltrarBusca(this.filtroSelect, this.paginaAtual, this.ItensPorPagina).subscribe(
+      this.projetoService.FiltrarBuscaStatus(this.filtroSelect, this.paginaAtual, this.ItensPorPagina).subscribe(
         (result) => {
           this.Projetos = result
           this.paginaAtual = result.paginaAtual

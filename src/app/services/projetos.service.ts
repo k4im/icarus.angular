@@ -124,7 +124,7 @@ export class ProjetosService {
   */
    FiltrarBuscaStatus(filtro: string, pagina: number, resultado? : number) : Observable<Projetos> {
      let parames = new HttpParams().append("filtro", filtro);
-     return this.http.get<Projetos>(`${this.urlProjetos}/projeto/pesquisar/status/${pagina}/${resultado}`, {params: parames});
+     return this.http.get<Projetos>(`${this.urlProjetos}/api/pesquisar/status/${pagina}/${resultado}`, {params: parames});
    }
   /** Criação de observable para disparo de eventos delete | error  */
   private _listerner = new Subject<any>();
