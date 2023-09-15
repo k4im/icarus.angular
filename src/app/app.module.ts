@@ -10,6 +10,7 @@ import { ProjetosService } from './services/projetos.service';
 import { NotFoundComponent } from './layouts/not-found/not-found.component';
 import { AuthService } from './services/Auth/auth.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Interceptor } from './interceptors/request.interceptor';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { CookieService } from 'ngx-cookie-service';
     AppRoutingModule,
     BrowserAnimationsModule,
     JwtModule,
-    SharedCommonModule
+    SharedCommonModule,
+    Interceptor
   ],
   providers: [ProjetosService, CookieService],
   bootstrap: [AppComponent]

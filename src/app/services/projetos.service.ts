@@ -94,7 +94,7 @@ export class ProjetosService {
    */
   novoStatus(status: string, id: number){
     let parames = new HttpParams().append("model", status);
-    return this.http.put(`${this.urlProjetos}/update/${id}`, status, {params: parames});
+    return this.http.put(`${this.urlProjetos}/projeto/atualizar/${id}`, status, {params: parames});
   }
 
   /**
