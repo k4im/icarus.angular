@@ -58,7 +58,7 @@ export class ProjetosService {
    * @returns Observable<number>  
    */
   remover(id: string): Observable<number> {
-    return this.http.delete<number>(`${this.urlProjetos}/delete/${id}`, { headers: this.httpHeader })
+    return this.http.delete<number>(`${this.urlProjetos}/projeto/delete/${id}`, { headers: this.httpHeader })
   }
 
   /**
