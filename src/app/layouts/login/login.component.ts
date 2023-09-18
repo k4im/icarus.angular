@@ -5,6 +5,7 @@ import { IAuthLogin, IToken } from 'src/app/Interfaces/IAuth';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
+import { environment } from 'src/environments/environment.development';
 
 
 @Component({
@@ -52,7 +53,6 @@ export class LoginComponent implements OnInit, AfterContentInit {
 
     
   }
-  
   /**
    * Getters para buscar valores dos campos do formulario de login
    */

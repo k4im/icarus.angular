@@ -50,7 +50,9 @@ export class AuthService {
    * novamente o a geração do token de acesso assim como  o token de refresh.
    */
   verificarCookies() {
-    this.verificarDataDeExpiracaoToken(this.cookie.get("AccessToken"))
+    this.verificarDataDeExpiracaoToken(this.cookie.get("AccessToken"))?.subscribe((result) => {
+      console.log("Validando data de validade do token")
+    })
     const isTokenExpired = this.helper.isTokenExpired(this.cookie.get("AccessToken"));
     if(isTokenExpired) {
       this.cookie.deleteAll();
@@ -65,15 +67,17 @@ export class AuthService {
     const dateNow = new Date();
     const dataExpToken = this.helper.getTokenExpirationDate(token)! 
     if( dataExpToken === dateNow) {
-    const parames = new HttpParams().append("chave", localStorage.getItem("User")!).append("token", this.cookie.get("RefreshToken"))
-      this.httpClient.post<IToken>(`${this.urlAuthApi}/auth/refreshtoken`, {param: parames}).pipe(
-        tap((response: IToken) => {
-          this.cookie.deleteAll();
-          this.cookie.set("AccessToken", response.accessToken);
-          this.cookie.set("RefreshToken", response.refrehsToken);
-        })
-      )
+      const parames = new HttpParams().append("chave", localStorage.getItem("User")!).append("Token", this.cookie.get("RefreshToken"))
+        return this.httpClient.post<IToken>(`${this.urlAuthApi}/auth/refreshtoken`, null, {params: parames}).pipe(
+          tap((response: IToken) => {
+            this.cookie.deleteAll();
+            this.cookie.set("AccessToken", response.accessToken);
+            this.cookie.set("RefreshToken", response.refrehsToken);
+            console.log(response)
+          })
+        );
     }
+    return null;
   }
   /**
    * Estara realizando o logout do frontend
