@@ -11,6 +11,7 @@ import { SharedModule } from "../../commons/shared.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NovoprodutoComponent } from './novoproduto/novoproduto.component';
 import { RemoverProdutoComponent } from './remover-produto/remover-produto.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { RemoverProdutoComponent } from './remover-produto/remover-produto.compo
         FormsModule,
         ReactiveFormsModule,
         SharedCommonModule,
+        MatTooltipModule,
         ProdutosRoutingModule,
         SharedModule
     ],

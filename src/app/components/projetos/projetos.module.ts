@@ -9,6 +9,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ProjetosComponent } from './projetos.component';
 import { RemoverProjetoComponent } from './remover-projeto/remover-projeto.component';
 import { ProjetosService } from 'src/app/services/projetos.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ProjetosService } from 'src/app/services/projetos.service';
     CommonModule,
     ProjetosRoutingModule,
     SharedCommonModule,
+    MatTooltipModule,
     NgxSkeletonLoaderModule,
     SharedModule,
     NgxPaginationModule,
