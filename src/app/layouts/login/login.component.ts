@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit, AfterContentInit {
   if(!item){
     this.AuthService.realizarLoginAutomatico(item!).subscribe(
       (result) => {
-        this.route.navigate(["/dashboard"])
+        this.route.navigate(["/"])
       }
     );}
   }
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit, AfterContentInit {
         },
         () => {
           this.toast.success({ detail: "✔️ Sucesso", summary: 'Login efetuado com sucesso!', duration: 750 })
-          this.route.navigate(["/dashboard"])
+          this.route.navigate(["/"])
         }
       )
     }
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, AfterContentInit {
         },
         () => {
           this.toast.success({ detail: "✔️ Sucesso", summary: 'Login efetuado com sucesso!', duration: 750 })
-          this.route.navigate(["/dashboard"])
+          this.route.navigate(["/"])
         }
       )
     }
