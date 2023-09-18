@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IAuthLogin, IToken } from 'src/app/Interfaces/IAuth';
 import { environment } from 'src/environments/environment.development';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -108,13 +108,14 @@ export class AuthService {
     const dateNow = new Date();
     const dataExpToken = this.helper.getTokenExpirationDate(token)! 
     if( dataExpToken === dateNow) {
-      /** Implementar lógica de refresh token.
-       *  Necessário estar realizando a requisição para o endpoint de refresh para realizar
-       *  a solicitação de um novo token de acesso, portanto será removido o AccessToken antigo 
-       *  e adicionado o novo token de acesso requerido.
-       */
-    } else {
-      // Implementar lógica
+    const parames = new HttpParams().append("chave", localStorage.getItem("User")!).append("token", this.cookie.get("RefreshToken"))
+      this.httpClient.post<IToken>(`${this.urlAuthApi}/auth/refreshtoken`, {param: parames}).pipe(
+        tap((response: IToken) => {
+          this.cookie.deleteAll();
+          this.cookie.set("AccessToken", response.accessToken);
+          this.cookie.set("RefreshToken", response.refrehsToken);
+        })
+      )
     }
   }
   /**
