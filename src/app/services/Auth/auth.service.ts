@@ -107,8 +107,12 @@ export class AuthService {
   verificarDataDeExpiracaoToken(token: string){
     const dateNow = new Date();
     const dataExpToken = this.helper.getTokenExpirationDate(token)! 
-    if( dataExpToken < dateNow) {
-      // Implementar logica
+    if( dataExpToken === dateNow) {
+      /** Implementar lógica de refresh token.
+       *  Necessário estar realizando a requisição para o endpoint de refresh para realizar
+       *  a solicitação de um novo token de acesso, portanto será removido o AccessToken antigo 
+       *  e adicionado o novo token de acesso requerido.
+       */
     } else {
       // Implementar lógica
     }
