@@ -40,54 +40,11 @@ export class AuthService {
       tap((response: IToken) => {
         this.cookie.set("AccessToken", response.accessToken);
         this.cookie.set("RefreshToken", response.refrehsToken);
+        localStorage.setItem("User", login.chaveDeAcesso)
       })
     );
   }
-
-  /**
-   * 
-   * @param login Recebe um valor do tipo IAuthLogin, onde sera passado {chave: string, pwd: string},
-   * o mesmo sera salvo dentro de localstorage para que futuramente 
-   * possa ser possivel realizar login de forma automatica.
-   * @returns IToken {AccessToken: string, RefreshToken: string}
-   */
-  salvarLogin(login: IAuthLogin) : Observable<IToken> {
-    let time = new Date()
-    let ttl = time.getTime() + (60 * 20);
-    let item = {
-      chave: login.chaveDeAcesso, 
-      pwd: login.senha,
-      expiry: ttl}
-
-    return this.httpClient.post<IToken>(`${this.urlAuthApi}/auth/login`, login).pipe(
-      tap((response: IToken) => {
-        this.cookie.set("AccessToken", response.accessToken);
-        this.cookie.set("RefreshToken", response.refrehsToken, .1);
-
-        localStorage.setItem("lembrarLogin", JSON.stringify(item));
-      })
-    );
-  }
-
-  /**
-   * 
-   * @param item recebe um item do tipo {chave: string, pwd: string, expiry: number};
-   * o mesmo deve ser encontrado através do localstorage, para que possa ser realizado login de forma automatica
-   * caso seja marcado a opção de lembrar login.
-   * @returns IToken {AccessToken: string, RefreshToken: string}
-   */
-  realizarLoginAutomatico(item: {chave: string, pwd: string, expiry: number}) : Observable<IToken> {
-    let login: IAuthLogin = {chaveDeAcesso: item.chave, senha: item.pwd}
-    
-    return this.httpClient.post<IToken>(`${this.urlAuthApi}/auth/login`, login).pipe(
-      tap((response: IToken) => {
-        this.cookie.set("AccessToken", response.accessToken);
-        this.cookie.set("RefreshToken", response.refrehsToken);
-      })
-    )
-  }
-  
-  
+ 
   /** Função estará verificando se o token de acesso se encontra expirado
    * em caso positivo será redirecionado para area de login para que seja possivel realizar
    * novamente o a geração do token de acesso assim como  o token de refresh.

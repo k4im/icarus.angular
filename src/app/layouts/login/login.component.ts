@@ -24,13 +24,6 @@ export class LoginComponent implements OnInit, AfterContentInit {
   
   
   ngAfterContentInit(): void {
-  let item = this.helperLocalStorage("lembrarLogin");
-  if(!item){
-    this.AuthService.realizarLoginAutomatico(item!).subscribe(
-      (result) => {
-        this.route.navigate(["/"])
-      }
-    );}
   }
   
   ngOnInit(): void {
@@ -44,34 +37,19 @@ export class LoginComponent implements OnInit, AfterContentInit {
   logar() {
     let loginObj: IAuthLogin = {chaveDeAcesso: this.chaveGetter.value, senha: this.pwdGetter.value};
   
-    if(this.lembrarLogin) {
-      this.AuthService.salvarLogin(loginObj).subscribe(
-        (result) => {
-          console.log("Realizado login!")
-        },
-        (error: HttpErrorResponse) => {
-          this.validarResponse(error)
-        },
-        () => {
-          this.toast.success({ detail: "✔️ Sucesso", summary: 'Login efetuado com sucesso!', duration: 750 })
-          this.route.navigate(["/"])
-        }
-      )
-    }
-    else {
-      this.AuthService.realizarLogin(loginObj).subscribe(
-        (result) => {
-          console.log("Realizado login!")
-        },
-        (error: HttpErrorResponse) => {
-          this.validarResponse(error)
-        },
-        () => {
-          this.toast.success({ detail: "✔️ Sucesso", summary: 'Login efetuado com sucesso!', duration: 750 })
-          this.route.navigate(["/"])
-        }
-      )
-    }
+    this.AuthService.realizarLogin(loginObj).subscribe(
+      (result) => {
+        console.log("Realizado login!")
+      },
+      (error: HttpErrorResponse) => {
+        this.validarResponse(error)
+      },
+      () => {
+        this.toast.success({ detail: "✔️ Sucesso", summary: 'Login efetuado com sucesso!', duration: 750 })
+        this.route.navigate(["/"])
+      }
+    )
+
     
   }
   
@@ -86,30 +64,7 @@ export class LoginComponent implements OnInit, AfterContentInit {
     return this.formGroupLogin.get('password')!
   }
 
-  /**
-   * 
-   * @param chave recebe valor to tipo string, onde o mesmo
-   * sera utilizado para realizar a busca através do localstorage e verificar se
-   * os dados armazenados no mesmo se encontram expirados.
-   * @returns void
-   */
-  helperLocalStorage(chave: string) {
-    const itemStr = localStorage.getItem(chave);
-    if(!itemStr)
-      return null
-    const item: {
-      chave: string, 
-      pwd: string,
-      expiry: number} = JSON.parse(itemStr)
-    const agora = new Date();
-    if(agora.getTime() >= item.expiry) {
-      localStorage.removeItem(chave);
-      return null
-    }
-    return item
-  }
-
-  /**
+   /**
    * 
    * @param error recebe valor HttpErroResponse vindo das APIs utilizadas 
    * verificado o retorno http response, é disparado uma notificação referente a resposta recebida.
