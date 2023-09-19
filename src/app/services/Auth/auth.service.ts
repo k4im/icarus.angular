@@ -46,13 +46,15 @@ export class AuthService {
   }
  
   /** Função estará verificando se o token de acesso se encontra expirado
-   * em caso positivo será redirecionado para area de login para que seja possivel realizar
-   * novamente o a geração do token de acesso assim como  o token de refresh.
+   *  em caso positivo será redirecionado para area de login para que seja possivel realizar
+   *  novamente o a geração do token de acesso assim como  o token de refresh.
    */
   verificarCookies() {
     const isTokenExpired = this.helper.isTokenExpired(this.cookie.get("AccessToken"));
     if(isTokenExpired) {
-      const parames = new HttpParams().append("chave", localStorage.getItem("User")!).append("Token", this.cookie.get("RefreshToken"))
+      const parames = new HttpParams()
+        .append("chave", localStorage.getItem("User")!)
+        .append("Token", this.cookie.get("RefreshToken"))
       this.httpClient.post<IToken>(`${this.urlAuthApi}/auth/refreshtoken`, null, {params: parames}).pipe(
         tap((response: IToken) => {
           this.cookie.deleteAll();
