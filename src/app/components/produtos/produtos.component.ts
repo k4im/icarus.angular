@@ -53,7 +53,9 @@ export class ProdutosComponent implements OnInit {
    * disparo da notificação referente ao produto que foi deletado.
    */
   private atualizarPagina(id: string) {
-    this.Produtos.data = this.Produtos.data.filter((p: IProdutos) => p.id !== id)
+    const param = parseInt(id);
+    this.Produtos.data = this.Produtos.data.filter((p: IProdutos) => p.id !== param)
+    console.log(this.Produtos.data);
     this.toast.warning({ detail: " ⚠️ Aviso", summary: 'Projeto deletado com sucesso!', duration: 750 })
   }
   /** Final metodos de chamadas ao serviço */    
@@ -63,7 +65,7 @@ export class ProdutosComponent implements OnInit {
    * onde o mesmo será utilizado para recuperar o id do projeto em questão
    * para que então seja possivel estar realizando a remoção do mesmo.
    */
-  abrirDialogDelete(eventoClick: string): void {
+  abrirDialogDelete(eventoClick: any): void {
     const dialogRef = this.dialog.open(RemoverProdutoComponent, {
       data: { id: eventoClick}
     });

@@ -54,7 +54,7 @@ export class NovoprodutoComponent {
       }
       this.criarProduto(produto);
     }
-    console.log("Por favor insira os valores corretos nos campos")
+    console.log("Por favor insira os valores corretos nos campos");
   }
 
   /**
@@ -64,7 +64,7 @@ export class NovoprodutoComponent {
   criarProduto(produto: IProdutoNovo) {
     this.produtoServices.criarProduto(produto).subscribe(
       (result) => {
-        this.redirecionar();
+        console.log("produto criado com sucesso!");
       },
       (error: HttpErrorResponse) => {
         this.validarResponse(error);

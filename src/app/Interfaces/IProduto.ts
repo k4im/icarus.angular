@@ -1,5 +1,5 @@
 export interface IProdutos {
-    id: string,
+    id: number,
     nome: string,
     quantidade: number,
     valor: number

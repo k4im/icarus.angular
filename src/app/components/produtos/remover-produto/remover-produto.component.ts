@@ -27,6 +27,7 @@ export class RemoverProdutoComponent {
   }
 
   deletarProduto(id: string) {
+    let param = id.toString();
     this.projetosService.deletarProduto(id).subscribe(
       (result) => {
         console.log("produto removido")
@@ -35,6 +36,7 @@ export class RemoverProdutoComponent {
         this.validarResponse(error);
       }
     );
+    this.projetosService.filterSub(param);
     this.fecharDialog();
   }
 
