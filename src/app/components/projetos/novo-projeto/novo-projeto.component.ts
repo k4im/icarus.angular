@@ -66,16 +66,17 @@ export class NovoProjetoComponent implements OnInit {
   buscarProdutos() {
     this.projetoService.buscarTodosProdutos().subscribe(
       (result) => {
-        this.ProdutosEmEstoque = result
-        this.aguardandoDados = false
+        if(result.length !== 0) {
+          this.ProdutosEmEstoque = result
+          this.aguardandoDados = false
+          this.toast.success({ detail: "✔️ Sucesso", summary: 'Produtos carregados com sucesso!', duration: 760 })
+        }
+        this.toast.warning({ detail: "Aviso", summary: 'Nenhum produto foi encontrado', duration: 2500 })
       },
       erro => {
         this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel carregar os produtos', duration: 2500 })
       },
-      () => {
-        this.toast.success({ detail: "✔️ Sucesso", summary: 'Produtos carregados com sucesso!', duration: 760 })
-
-      }
+      
 
     )
   }
