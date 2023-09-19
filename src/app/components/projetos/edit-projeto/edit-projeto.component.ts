@@ -60,20 +60,7 @@ export class EditProjetoComponent implements OnInit {
         this.stats = result.status;
       },
       (Error: HttpErrorResponse) => {
-        switch (Error.status) {
-          case 404:
-            this.toast.error({ detail: " ❌ Erro", summary: 'Nenhum projeto foi encontrado!', duration: 950 })
-            break;
-          case 500:
-            this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel conseguir uma resposta do servidor!', duration: 950 })
-            break;
-          case 400:
-            this.toast.error({ detail: " ❌ Erro", summary: 'O valor enviado não supre os valores necessários!', duration: 950 })
-            break;
-          default:
-            this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel carregar os Projetos!', duration: 950 })
-            break;
-        }
+        this.validarResponse(Error);
       }
     );
   }
@@ -89,23 +76,7 @@ export class EditProjetoComponent implements OnInit {
         this.route.navigate(["/projetos"])
       },
       (Error: HttpErrorResponse) => {
-        switch (Error.status) {
-          case 404:
-            this.toast.error({ detail: " ❌ Erro", summary: 'Nenhum projeto foi encontrado!', duration: 950 })
-            break;
-          case 500:
-            this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel conseguir uma resposta do servidor!', duration: 950 })
-            break;
-          case 400:
-            this.toast.error({ detail: " ❌ Erro", summary: 'O valor enviado não supre os valores necessários!', duration: 950 })
-            break;
-          case 409:
-            this.toast.error({ detail: " ❌ Erro", summary: 'O projeto já foi edito por outro usuario!', duration: 950 })
-            break;
-          default:
-            this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel atualizar o status!', duration: 950 })
-            break;
-        }
+        this.validarResponse(Error);
       },
       () =>  {
         this.toast.success({ detail: "Sucesso", summary: "Status do projeto atualizado com sucesso!", duration: 950 })
@@ -143,4 +114,41 @@ export class EditProjetoComponent implements OnInit {
   }
   /** Final validar status */
 
+
+/**
+   * 
+   * @param error recebe valor HttpErroResponse vindo das APIs utilizadas 
+   * verificado o retorno http response, é disparado uma notificação referente a resposta recebida.
+   */
+private validarResponse(error: HttpErrorResponse) {
+  switch (error.status) {
+    case 0:
+      this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
+      console.log("Não foi possivel realizar a comunicação!")
+      break;
+    case 200:
+      break;
+    case 404:
+      this.toast.warning({ detail: "⚠️ Não foi possivel estar localizando o projeto", summary: 'Servidor repsondeu com status: 404!', duration: 2500 })
+      console.log("Nenhum projeto foi encontrado!")
+      break;
+    case 500:
+      this.toast.error({ detail: "❌ Não foi possivel atualizar o projeto, pois ocorreu um erro no servidor", summary: 'Servidor respondeu com status: 500!', duration: 2500 })
+      console.log("Houve um erro no servidor!")
+      break
+    case 400:
+      this.toast.error({ detail: "❌ Não foi possivel atualizar o projeto, pois o modelo é invalido", summary: 'Servidor respondeu com status: 400!', duration: 2500 })
+      console.log("Houve um erro no servidor!")
+      break
+    case 409:
+      this.toast.error({ detail: "❌ Não foi possivel estar atualizando o projeto!", summary: 'Servidor respondeu com status: 409', duration: 2500 })
+      console.log("Houve um erro no servidor!")
+      break
+    default:
+      this.toast.error({ detail: " ❌ Erro", summary: 'Não foi possivel se comunicar com o servidor!', duration: 2500 })
+      console.log("Não foi possivel realizar a comunicação!")
+      break;
+  }
+}
+/** Final http response */
 }
