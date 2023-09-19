@@ -46,12 +46,15 @@ export class NovoprodutoComponent {
   }
   
   submitProjeto() {
-    let produto: IProdutoNovo = {
-      nome: this.nomeGetter.value,
-      quantidade: this.quantidadeGetter.value,
-      valor: this.valorGetter.value
+    if(this.formGroupProjetos.valid){
+      let produto: IProdutoNovo = {
+        nome: this.nomeGetter.value,
+        quantidade: this.quantidadeGetter.value,
+        valor: this.valorGetter.value
+      }
+      this.criarProduto(produto);
     }
-    this.criarProduto(produto);
+    console.log("Por favor insira os valores corretos nos campos")
   }
 
   /**
