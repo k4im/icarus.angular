@@ -63,7 +63,8 @@ export class ProdutosService{
    }
    /** Final Criação de observable */ 
 
-  filtrarProdutos(pagina: number, resultado: number, filtro: string) {
-    return this.httpclient.get<IProdutosPaginados>(`${this.urlProdutos}/produtos/pesquisar/nome/${pagina}/${resultado}`, {params: new HttpParams().append("filtro", filtro)});
+  filtrarProdutos(pagina: number, resultado: number, filter: string) {
+    const parames = new HttpParams().append("filtro", filter);
+    return this.httpclient.get<IProdutosPaginados>(`${this.urlProdutos}/produtos/pesquisar/nome/${pagina}/${resultado}`, {params: parames});
   }
 }

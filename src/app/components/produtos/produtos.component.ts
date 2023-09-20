@@ -48,7 +48,7 @@ export class ProdutosComponent implements OnInit {
 
   buscarProduto() {
     let filtro = this.searchFilter.value;
-    this.ProdutosService.filtrarProdutos(this.paginaAtual, 5, filtro).subscribe(
+    this.ProdutosService.filtrarProdutos(this.paginaAtual, this.ItensPorPagina, filtro).subscribe(
       (result) => {
         this.Produtos = result;
         this.paginaAtual = result.paginaAtual;
