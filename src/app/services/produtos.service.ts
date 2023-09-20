@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
@@ -63,4 +63,7 @@ export class ProdutosService{
    }
    /** Final Criação de observable */ 
 
+  filtrarProdutos(pagina: number, resultado: number, filtro: string) {
+    return this.httpclient.get<IProdutosPaginados>(`${this.urlProdutos}/produtos/pesquisar/nome/${pagina}/${resultado}`, {params: new HttpParams().append("filtro", filtro)});
+  }
 }

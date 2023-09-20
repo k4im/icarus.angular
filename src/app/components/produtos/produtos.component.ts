@@ -46,7 +46,22 @@ export class ProdutosComponent implements OnInit {
     })  }
 
 
+  buscarProduto() {
+    let filtro = this.searchFilter.value;
+    this.ProdutosService.filtrarProdutos(this.paginaAtual, 5, filtro).subscribe(
+      (result) => {
+        this.Produtos = result;
+        this.paginaAtual = result.paginaAtual;
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error)
+        this.validarResponse(error);
+      },
+      () => {
 
+      }
+    );
+  }
   /**
    * 
    * @param id recebe o {id:string} para que seja possivel realizar
@@ -176,4 +191,10 @@ export class ProdutosComponent implements OnInit {
     }
   }
   /** Final http response */
+
+  /** Getters para forms */
+  get searchFilter() {
+    return this.formSearch.get("searchInput")!
+  }
+  /** Final Getters de forms */
 }
