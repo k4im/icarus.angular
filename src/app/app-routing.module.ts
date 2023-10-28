@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'login', canActivate: [loginGuard], loadChildren: () => import('./layouts/login/login.module').then(m => m.LoginModule) },
   { path: 'produtos', canActivate: [AuthGuard], loadChildren: () => import('./components/produtos/produtos.module').then(m => m.ProdutosModule) },
   {path: 'novo_produto', canActivate: [AuthGuard], component: NovoprodutoComponent},
+  { path: 'editar-produto/:id', loadChildren: () => import('./components/produtos/editar-produto/editar-produto.module').then(m => m.EditarProdutoModule) },
   { path: "**", component: NotFoundComponent }
 ];
 

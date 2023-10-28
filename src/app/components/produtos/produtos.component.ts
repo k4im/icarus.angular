@@ -7,6 +7,7 @@ import { IProdutos, IProdutosPaginados } from 'src/app/Interfaces/IProduto';
 import { ProdutosService } from 'src/app/services/produtos.service';
 import { RemoverProdutoComponent } from './remover-produto/remover-produto.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-produtos',
@@ -32,7 +33,8 @@ export class ProdutosComponent implements OnInit {
     private ProdutosService: ProdutosService,
     private toast: NgToastService,
     private builder: FormBuilder,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private route: Router) {
       this.deleteSub = this.ProdutosService.listen().subscribe((m: any) => {
         console.log("Removido projeto: " + m);
         this.atualizarPagina(m);
@@ -45,7 +47,9 @@ export class ProdutosComponent implements OnInit {
       searchInput: [null, [Validators.required]]
     })  }
 
-
+    editarProduto(eventoClick: IProdutos): void {
+      this.route.navigate(["/editar-produto", eventoClick.id])
+    }
   buscarProduto() {
     let filtro = this.searchFilter.value;
     this.ProdutosService.filtrarProdutos(this.paginaAtual, this.ItensPorPagina, filtro).subscribe(

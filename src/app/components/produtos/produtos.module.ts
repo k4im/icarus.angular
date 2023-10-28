@@ -18,7 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     declarations: [
         ProdutosComponent,
         NovoprodutoComponent,
-        RemoverProdutoComponent
+        RemoverProdutoComponent,
     ],
     imports: [
         CommonModule,
