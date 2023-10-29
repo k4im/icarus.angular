@@ -67,11 +67,28 @@ export class EditarProdutoComponent {
   /** Final metodos vinculados */
 
   submitProduto() {
+    const produto: IProdutos = {
+      id: parseInt(this.selectId),
+      nome: this.nomeGetter.value,
+      quantidade: this.Produto.quantidade,
+      valor: this.Produto.valor
+    }
+    this.produtoService.atualizarProduto(this.selectId, produto).subscribe(
+      (result) => {
+
+      },
+      (Error: HttpErrorResponse) => {
+        this.validarResponse(Error);
+      },
+      () => {
+         this.redirecionar()
+      }
+    )
   }
 
   /** Getters */
   get nomeGetter() {
-    return this.formProduto.get("novoStatus")!
+    return this.formProduto.get("nome")!
   }
   get valorGetter(){
     return this.formProduto.get("valor")!

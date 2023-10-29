@@ -53,6 +53,9 @@ export class ProdutosService{
     return this.httpclient.delete(`${this.urlProdutos}/produtos/delete/${id}`);
   }
 
+  atualizarProduto(id: string, model: IProdutos) {
+    return this.httpclient.put(`${this.urlProdutos}/produtos/atualizar/${id}`, model);
+  }
     /** Criação de observable para disparo de eventos delete | error  */
     private _listerner = new Subject<any>();
     listen(): Observable<any> {
