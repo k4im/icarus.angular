@@ -42,8 +42,8 @@ export class EditarProdutoComponent {
     
     this.formProduto = this.builder.group(
       { nome: [null, [Validators.required]],
-        valor: [null, [Validators.required]],
-        quantidade: [null, [Validators.required]],
+        valor: [],
+        quantidade: [],
       });
   }
   /** Finalizando chamada ao inicializar o component */
@@ -74,7 +74,8 @@ export class EditarProdutoComponent {
     }
     this.produtoService.atualizarProduto(this.selectId, produto).subscribe(
       (result) => {
-
+        console.log("Bateu")
+        this.route.navigate(["/produtos"])
       },
       (Error: HttpErrorResponse) => {
         this.validarResponse(Error);
@@ -109,6 +110,7 @@ private validarResponse(error: HttpErrorResponse) {
       console.log("Não foi possivel realizar a comunicação!")
       break;
     case 200:
+      console.log("Bateu erro 200")
       break;
     case 404:
       this.toast.warning({ detail: "⚠️ Não foi possivel estar localizando o projeto", summary: 'Servidor repsondeu com status: 404!', duration: 2500 })
