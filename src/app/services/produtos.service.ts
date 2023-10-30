@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { IProdutoNovo, IProdutos, IProdutosPaginados } from '../Interfaces/IProduto';
+import { IProdutoAtualizar, IProdutoNovo, IProdutos, IProdutosPaginados } from '../Interfaces/IProduto';
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +53,7 @@ export class ProdutosService{
     return this.httpclient.delete(`${this.urlProdutos}/produtos/delete/${id}`);
   }
 
-  atualizarProduto(id: string, model: IProdutos) {
+  atualizarProduto(id: string, model: IProdutoAtualizar) {
     return this.httpclient.put(`${this.urlProdutos}/produtos/atualizar/${id}`, model);
   }
     /** Criação de observable para disparo de eventos delete | error  */

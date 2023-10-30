@@ -5,6 +5,12 @@ export interface IProdutos {
     valor: number
 }
 
+export interface IProdutoAtualizar {
+    nome: string,
+    quantidade: number,
+    valor: number
+}
+
 export interface IProdutosPaginados {
     data: IProdutos[],
     totalDePaginas: number,

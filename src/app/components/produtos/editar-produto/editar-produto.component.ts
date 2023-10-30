@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { IProdutos } from 'src/app/Interfaces/IProduto';
+import { IProdutoAtualizar, IProdutos } from 'src/app/Interfaces/IProduto';
 import { ProdutosService } from 'src/app/services/produtos.service';
 
 @Component({
@@ -67,8 +67,7 @@ export class EditarProdutoComponent {
   /** Final metodos vinculados */
 
   submitProduto() {
-    const produto: IProdutos = {
-      id: parseInt(this.selectId),
+    const produto: IProdutoAtualizar = {
       nome: this.nomeGetter.value,
       quantidade: this.Produto.quantidade,
       valor: this.Produto.valor
