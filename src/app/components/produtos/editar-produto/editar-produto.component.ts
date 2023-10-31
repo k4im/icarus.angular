@@ -74,10 +74,10 @@ export class EditarProdutoComponent {
     }
     this.produtoService.atualizarProduto(this.selectId, produto).subscribe(
       (result) => {
-        console.log("Bateu")
         this.route.navigate(["/produtos"])
       },
       (Error: HttpErrorResponse) => {
+        if(Error.status === 200) this.route.navigate(["/produtos"])
         this.validarResponse(Error);
       },
       () => {
