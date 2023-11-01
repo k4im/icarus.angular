@@ -41,7 +41,7 @@ export class EditarProdutoComponent {
     this.buscarProduto(this.selectId);
     
     this.formProduto = this.builder.group(
-      { nome: [null, [Validators.required]],
+      { nome: [],
         valor: [],
         quantidade: [],
       });
@@ -68,20 +68,18 @@ export class EditarProdutoComponent {
 
   submitProduto() {
     const produto: IProdutoAtualizar = {
-      nome: this.nomeGetter.value,
-      quantidade: this.Produto.quantidade,
-      valor: this.Produto.valor
+      nome: (this.nomeGetter.value === null) ? this.Produto.nome : this.nomeGetter.value,
+      quantidade: (this.quantidadeGetter.value === null) ? this.Produto.quantidade : this.quantidadeGetter.value,
+      valor: (this.valorGetter.value === null) ? this.Produto.valor : this.valorGetter.value
     }
     this.produtoService.atualizarProduto(this.selectId, produto).subscribe(
       (result) => {
-        this.route.navigate(["/produtos"])
       },
       (Error: HttpErrorResponse) => {
         if(Error.status === 200) this.route.navigate(["/produtos"])
         this.validarResponse(Error);
       },
       () => {
-         this.redirecionar()
       }
     )
   }
@@ -110,7 +108,6 @@ private validarResponse(error: HttpErrorResponse) {
       console.log("Não foi possivel realizar a comunicação!")
       break;
     case 200:
-      console.log("Bateu erro 200")
       break;
     case 404:
       this.toast.warning({ detail: "⚠️ Não foi possivel estar localizando o projeto", summary: 'Servidor repsondeu com status: 404!', duration: 2500 })
